@@ -70,11 +70,10 @@ if [ -z "${TAILSCALE_AUTHKEY:-}" ]; then
 fi
 curl -fsSL https://tailscale.com/install.sh | sudo sh >/dev/null
 sudo tailscale up \
-  --authkey="${TAILSCALE_AUTHKEY}" \
+  --auth-key="${TAILSCALE_AUTHKEY}" \
   --hostname="${TS_HOSTNAME}" \
   --ssh \
-  --accept-dns=true \
-  --ephemeral
+  --accept-dns=true
 echo "Tailscale status:"
 sudo tailscale status || true
 echo "Tailscale IP:"
