@@ -1,0 +1,82 @@
+name: "VPS مؤقت (Tailscale + LXD + pm2)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "شحال من ساعة تبغي السيرفر يخدم (أقصى حد تقريبا 5.5 بسبب حدود GitHub)"
+        required: false
+        default: "5.5"
+      checkpoint_minutes:
+        description: "كل شحال من دقيقة نديرو نسخة احتياطية للحالة"
+        required: false
+        default: "15"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-vps
+  cancel-in-progress: false
+
+jobs:
+  vps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
+      SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+      TAILSCALE_HOSTNAME: "gh-vps"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: تصايب VPS (tailscale + lxd + pm2) وإرجاع آخر حالة محفوظة
+        run: bash scripts/vps/bootstrap.sh
+
+      - name: السيرفر خدام - انتظار + نسخ احتياطية دورية
+        run: |
+          set -euo pipefail
+          HOURS="${{ inputs.hours }}"
+          INTERVAL_MIN="${{ inputs.checkpoint_minutes }}"
+
+          SECONDS_TOTAL=$(awk "BEGIN{printf \"%d\", $HOURS*3600}")
+          END=$(( $(date +%s) + SECONDS_TOTAL ))
+
+          save() {
+            echo "==> checkpoint في $(date)"
+            bash scripts/vps/backup.sh || echo "تحذير: فشل الحفظ، غادي نعاود المرة الجاية"
+          }
+          on_term() {
+            echo "==> توصل أمر توقيف (cancel) - كندير حفظ أخير بسرعة"
+            save
+            exit 0
+          }
+          trap on_term SIGTERM SIGINT
+
+          echo "السيرفر غادي يخدم تقريبا $HOURS ساعة، وياخد نسخة احتياطية كل $INTERVAL_MIN دقيقة"
+          echo "إلا بغيتي توقفو قبل الوقت: دخل ليه ب Tailscale ودير: touch /tmp/stop-vps"
+
+          while [ "$(date +%s)" -lt "$END" ]; do
+            NOW=$(date +%s)
+            REMAIN=$(( END - NOW ))
+            SLEEP=$(( INTERVAL_MIN * 60 ))
+            if [ "$SLEEP" -gt "$REMAIN" ]; then
+              SLEEP=$REMAIN
+            fi
+            sleep "$SLEEP" &
+            wait $! || true
+
+            if [ -f /tmp/stop-vps ]; then
+              echo "==> لقيت /tmp/stop-vps ، كنوقف السيرفر بطلب منك"
+              save
+              break
+            fi
+
+            save
+          done
+
+      - name: نسخة احتياطية أخيرة (تحفظ فكل الأحوال)
+        if: always()
+        run: bash scripts/vps/backup.sh || true
