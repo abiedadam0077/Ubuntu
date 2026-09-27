@@ -55,12 +55,26 @@ jobs:
           name: Salam-Alaikum-APK
           path: out/Salam-Alaikum.apk
 
-      - name: Release on main
-        if: github.ref == 'refs/heads/main'
+      - name: Publish APK to the branch (dist/)
+        run: |
+          git config user.name "arena-ai-coding-agent[bot]"
+          git config user.email "arena-ai-coding-agent[bot]@users.noreply.github.com"
+          mkdir -p dist
+          cp out/Salam-Alaikum.apk dist/Salam-Alaikum.apk
+          git add dist/Salam-Alaikum.apk
+          if git diff --cached --quiet; then
+            echo "APK already up to date"
+          else
+            git commit -m "ci: تحديث Salam-Alaikum.apk"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Release (دائم)
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create salam-v1.0 out/Salam-Alaikum.apk \
             --title "السلام عليكم — APK v1.0" \
-            --notes "حمّل Salam-Alaikum.apk ونقلو للهاتف وثبّتو 🌙" --clobber \
+            --notes "حمّل **Salam-Alaikum.apk** ونقلو للهاتف وثبّتو 🌙" --clobber \
             || gh release upload salam-v1.0 out/Salam-Alaikum.apk --clobber
