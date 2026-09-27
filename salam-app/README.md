@@ -5,10 +5,15 @@
 السلامة مع شرارة دهبية وهدّة هاتف خفيفة.
 
 ## الحصول على APK
-1. دخل لتبويب **Actions** فهاد المستودع
+**الطريقة المباشرة:** حمّل `dist/Salam-Alaikum.apk` مباشرة من هاد المستودع:
+<https://github.com/abiedadam0077/Ubuntu/raw/arena/01a0e462-ubuntu/dist/Salam-Alaikum.apk>
+
+**ولا من CI:**
+1. دخل لتبويب **[Actions](https://github.com/abiedadam0077/Ubuntu/actions/workflows/build-apk.yml)** فالمستودع
 2. حل آخر تشغيلة ديال **«بناء تطبيق السلام (APK)»**
 3. حمّل **Salam-Alaikum.apk** من قسم **Artifacts**
-4. نقلو للهاتف وثبّتو (فعّل «التثبيت من مصادر غير معروفة» من الإعدادات)
+4. منبعد: كيدخل الـ APK أوتوماتيكيًا فالمستودع تحت `dist/` — وكتقدر تصايب **Release** دائم بزر
+   «Run workflow» (workflow_dispatch) فصفحة الـ workflow
 
 ## البناء يدويًا
 ```bash
