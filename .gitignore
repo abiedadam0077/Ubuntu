@@ -1,0 +1,14 @@
+# Gradle / Android build outputs
+.gradle/
+build/
+app/build/
+salam-app/.gradle/
+salam-app/build/
+salam-app/app/build/
+out/
+local.properties
+*.iml
+.DS_Store
+.cxx/
+.externalNativeBuild/
+captures/

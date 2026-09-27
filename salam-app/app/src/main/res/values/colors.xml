@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="night">#FF070B18</color>
+    <color name="night_top">#FF131B3F</color>
+    <color name="gold">#FFF7C65C</color>
+    <color name="gold_soft">#FFEDC08A</color>
+    <color name="ivory">#FFF3E9CF</color>
+    <color name="hint">#FF8EA0C9</color>
+</resources>
