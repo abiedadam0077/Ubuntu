@@ -1,0 +1,10 @@
+name: Build Salam APK
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hi
+        run: echo "salam from CI"
