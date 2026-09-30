@@ -2,7 +2,12 @@
 00:00 +0: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
 00:01 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/widget_test.dart: smoke test: التطبيق يُبنى دون رمي استثناء عند الإقلاع
 00:01 +2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
-DEBUG لم نصل لشاشة المحرر بعد. النصوص الظاهرة حالياً: [التعلّم والتحديات, محاكاة الأعطال, مشاريعي, استيراد مشروع من ملف, ElectroSim Pro, مشروع جديد]
+DEBUG بعد نبضة واحدة: AlertDialog=1
+DEBUG بعد 300ms: AlertDialog=0 exception=null
+DEBUG لم نصل لشاشة المحرر بعد.
+  النصوص: [التعلّم والتحديات, محاكاة الأعطال, مشاريعي, استيراد مشروع من ملف, ElectroSim Pro, مشروع جديد]
+  AlertDialog=0 SnackBar=0 Scaffold=1 Navigator=1
+  lastException=null
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
 Expected: at least one matching candidate
@@ -10,7 +15,7 @@ Expected: at least one matching candidate
    Which: means none were found but some were expected
 
 When the exception was thrown, this was the stack:
-#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:111:5)
+#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:125:5)
 <asynchronous suspension>
 #5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
 <asynchronous suspension>
@@ -20,7 +25,7 @@ When the exception was thrown, this was the stack:
 (elided one frame from package:stack_trace)
 
 This was caught by the test expectation on the following line:
-  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 111
+  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 125
 The test description was:
   إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
 ════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -28,7 +33,7 @@ The test description was:
   Test failed. See exception logs above.
   The test description was: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
   
-00:02 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
+00:01 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following StateError was thrown running a test:
 Bad state: No element
@@ -41,7 +46,7 @@ When the exception was thrown, this was the stack:
 #5      WidgetController.widgetList (package:flutter_test/src/controller.dart:848:19)
 #6      WidgetController._maybeViewOf (package:flutter_test/src/controller.dart:795:34)
 #7      WidgetController.tap (package:flutter_test/src/controller.dart:1078:31)
-#8      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:144:18)
+#8      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:158:18)
 <asynchronous suspension>
 #9      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
 <asynchronous suspension>
