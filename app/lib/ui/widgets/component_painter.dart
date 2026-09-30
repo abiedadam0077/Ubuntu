@@ -304,6 +304,41 @@ class ComponentPainter extends CustomPainter {
     tp.paint(canvas, center - Offset(tp.width / 2, tp.height / 2));
   }
 
+  /// صفيحة توصيل فضّية (قفص برغي) — الجزء المعدني الذي يُثبَّت فيه السلك
+  /// فعلياً في أجهزة سكة DIN الحقيقية (قاطع/فيوز/RCD). تُرسم خلف نقاط
+  /// التوصيل (Terminals) لتعطي إحساساً بأن الطرف مُثبَّت في قفص برغي حقيقي
+  /// وليس مجرد نقطة ملوّنة عائمة.
+  void _terminalCage(Canvas canvas, Rect rect) {
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect, const Radius.circular(2)),
+      Paint()..shader = const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFECEFF1), Color(0xFF90A4AE)]).createShader(rect),
+    );
+    canvas.drawRRect(RRect.fromRectAndRadius(rect, const Radius.circular(2)), Paint()..color = Colors.black38..style = PaintingStyle.stroke..strokeWidth = 0.8);
+  }
+
+  /// مسنّنات تثبيت سكة DIN السفلية (أسنان صغيرة رمادية) — تُكمِّل
+  /// [_dinRailClip] العلوي حتى يبدو الجهاز "مُركَّباً" فعلياً على القضيب.
+  void _dinFeet(Canvas canvas, Size size) {
+    final w = size.width, h = size.height;
+    for (final fx in [w * 0.22, w * 0.5, w * 0.78]) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(fx, h - 1.5), width: w * 0.12, height: 3), const Radius.circular(1)),
+        Paint()..color = const Color(0xFF5C6670),
+      );
+    }
+  }
+
+  /// رافعة تبديل واقعية بلمعان علوي (تُستخدم فعلياً في MCB/RCD/قاطع الحماية)
+  void _rockerLever(Canvas canvas, Rect rect, Color color) {
+    final rr = RRect.fromRectAndRadius(rect, const Radius.circular(3));
+    canvas.drawRRect(rr, Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color.lerp(color, Colors.white, 0.25)!, color, Color.lerp(color, Colors.black, 0.25)!]).createShader(rect));
+    canvas.drawRRect(rr, Paint()..color = Colors.black54..style = PaintingStyle.stroke..strokeWidth = 1);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(Rect.fromLTWH(rect.left + 1.5, rect.top + 1.5, rect.width - 3, rect.height * 0.22), const Radius.circular(2)),
+      Paint()..color = Colors.white.withOpacity(0.35),
+    );
+  }
+
   // ===================================================================
   // رسم واقعي (Realistic Mode)
   // ===================================================================
@@ -327,14 +362,48 @@ class ComponentPainter extends CustomPainter {
         }
         canvas.drawPath(path, _strokePaint(Colors.white, 2));
         break;
+      case 'pilot_lamp':
+        {
+          // لمبة إشارة صناعية (Pilot Lamp): جسم أسطواني أسود + قبّة ملوّنة
+          // مضيئة أعلاه + سلكا تغذية خارجان من القاعدة — تصميم مختلف تماماً
+          // عن مصباح الإضاءة العادي (زجاجة شفافة) لأنه جهاز مختلف فعلياً.
+          final brightness = ((_rt<num>('brightness')) ?? 0).toDouble().clamp(0.0, 1.4);
+          const lensColor = Color(0xFFFFA726);
+          final domeCenter = Offset(w / 2, h * 0.3);
+          final domeR = w * 0.32;
+
+          if (brightness > 0.02) {
+            canvas.drawCircle(
+              domeCenter,
+              domeR * 2.3,
+              Paint()
+                ..color = lensColor.withOpacity((0.15 + brightness * 0.4).clamp(0.0, 0.7).toDouble())
+                ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 13),
+            );
+          }
+
+          final bodyRect = Rect.fromLTWH(w * 0.22, h * 0.42, w * 0.56, h * 0.4);
+          canvas.drawRRect(
+            RRect.fromRectAndRadius(bodyRect, const Radius.circular(4)),
+            Paint()..shader = const LinearGradient(colors: [Color(0xFF3A3F44), Color(0xFF17191B)]).createShader(bodyRect),
+          );
+          canvas.drawRRect(RRect.fromRectAndRadius(bodyRect, const Radius.circular(4)), _strokePaint(Colors.black87, 1));
+
+          canvas.drawCircle(domeCenter, domeR, Paint()..color = Color.lerp(lensColor.withOpacity(0.35), lensColor, brightness.clamp(0.0, 1.0).toDouble())!);
+          canvas.drawCircle(domeCenter, domeR, _strokePaint(Colors.black54, 1));
+          canvas.drawCircle(domeCenter + Offset(-domeR * 0.3, -domeR * 0.3), domeR * 0.24, Paint()..color = Colors.white.withOpacity(0.4 + brightness * 0.3));
+
+          canvas.drawLine(Offset(w * 0.32, bodyRect.bottom), Offset(w * 0.32, h * 0.92), Paint()..color = const Color(0xFFB0855A)..strokeWidth = 2);
+          canvas.drawLine(Offset(w * 0.68, bodyRect.bottom), Offset(w * 0.68, h * 0.92), Paint()..color = const Color(0xFF5A87B0)..strokeWidth = 2);
+          break;
+        }
       case 'lamp':
       case 'lamp_led':
-      case 'pilot_lamp':
         {
           final brightness = ((_rt<num>('brightness')) ?? 0).toDouble().clamp(0.0, 1.4);
           final bulbCenter = Offset(w / 2, h * 0.4);
           final bulbR = math.min(w, h) * 0.3;
-          final glowColor = key == 'pilot_lamp' ? const Color(0xFFFF5470) : Colors.amberAccent;
+          const glowColor = Colors.amberAccent;
 
           if (brightness > 0.02) {
             canvas.drawCircle(
@@ -395,72 +464,165 @@ class ComponentPainter extends CustomPainter {
           canvas.drawCircle(Offset(w / 2, h / 2), 6, _fillPaint(Colors.white70));
           break;
         }
-      case 'motor':
       case 'motor_3ph':
-      case 'motor_small':
         {
+          // محرك ثلاثي الطور واقعي بترتيب أفقي: صندوق توصيل U/V/W أعلى الجسم
+          // (عند نفس إحداثيات الأطراف الفعلية 0.2/0.5/0.8)، مروحة تبريد دوّارة
+          // عند الطرف الأيسر، وقاعدة/أرجل تثبيت أسفل الجسم كالمحرك الحقيقي.
           final rpmRatio = (_rt<num>('rpmRatio') ?? 0).toDouble();
           final running = rpmRatio > 0.02;
-          final bodyR = math.min(w, h) / 2 - 4;
-          final center = Offset(w / 2, h * 0.46);
 
-          // الجسم الأسطواني الرئيسي مع تدرّج معدني
-          canvas.drawCircle(center, bodyR, Paint()..shader = RadialGradient(colors: const [Color(0xFF546E7A), Color(0xFF2E3B44)], center: const Alignment(-0.3, -0.3)).createShader(Rect.fromCircle(center: center, radius: bodyR)));
-          canvas.drawCircle(center, bodyR, _strokePaint(const Color(0xFF9B6BFF), 2.2));
+          // القاعدة المعدنية السفلية (Mounting feet)
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.14, h * 0.86, w * 0.72, h * 0.07), const Radius.circular(2)), _fillPaint(const Color(0xFF78838C)));
+          canvas.drawRect(Rect.fromLTWH(w * 0.24, h * 0.8, w * 0.07, h * 0.09), _fillPaint(const Color(0xFF90A4AE)));
+          canvas.drawRect(Rect.fromLTWH(w * 0.7, h * 0.8, w * 0.07, h * 0.09), _fillPaint(const Color(0xFF90A4AE)));
 
-          // زعانف تبريد (Cooling fins) حول جسم المحرك
-          for (var i = 0; i < 10; i++) {
-            final ang = i * math.pi / 5;
-            final p1 = center + Offset(math.cos(ang), math.sin(ang)) * (bodyR * 0.72);
-            final p2 = center + Offset(math.cos(ang), math.sin(ang)) * (bodyR * 0.94);
-            canvas.drawLine(p1, p2, Paint()..color = Colors.black26..strokeWidth = 1.4);
+          // الجسم الأسطواني الرئيسي (يمتد أفقياً بعرض صندوق التوصيل تقريباً)
+          final bodyRect = Rect.fromLTWH(w * 0.14, h * 0.32, w * 0.72, h * 0.46);
+          final bodyRRect = RRect.fromRectAndRadius(bodyRect, Radius.circular(bodyRect.height / 2));
+          canvas.drawRRect(
+            bodyRRect,
+            Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: const [Color(0xFF90A4AE), Color(0xFF546E7A), Color(0xFF2E3B44)], stops: const [0, 0.5, 1]).createShader(bodyRect),
+          );
+          canvas.drawRRect(bodyRRect, _strokePaint(Colors.black38, 1));
+          for (var i = 0; i < 7; i++) {
+            final fx = bodyRect.left + bodyRect.width * (0.1 + i * 0.13);
+            canvas.drawLine(Offset(fx, bodyRect.top + 2), Offset(fx, bodyRect.bottom - 2), Paint()..color = Colors.black26..strokeWidth = 1.6);
           }
 
-          // صندوق التوصيل الكهربائي أعلى المحرك
-          final boxRect = Rect.fromCenter(center: Offset(w / 2, h * 0.12), width: w * 0.3, height: h * 0.16);
-          canvas.drawRRect(RRect.fromRectAndRadius(boxRect, const Radius.circular(3)), _fillPaint(const Color(0xFF37474F)));
-          canvas.drawRRect(RRect.fromRectAndRadius(boxRect, const Radius.circular(3)), _strokePaint(Colors.black45, 1));
+          // صندوق التوصيل الكهربائي أعلى الجسم عند مواضع U/V/W الفعلية
+          final boxRect = Rect.fromLTWH(w * 0.14, h * 0.06, w * 0.72, h * 0.2);
+          canvas.drawRRect(RRect.fromRectAndRadius(boxRect, const Radius.circular(4)), _fillPaint(const Color(0xFF263238)));
+          canvas.drawRRect(RRect.fromRectAndRadius(boxRect, const Radius.circular(4)), _strokePaint(Colors.black45, 1));
+          for (final e in const [MapEntry('U', 0.2), MapEntry('V', 0.5), MapEntry('W', 0.8)]) {
+            canvas.drawLine(Offset(w * e.value, 0), Offset(w * e.value, boxRect.top + 3), Paint()..color = const Color(0xFF8D6E63)..strokeWidth = 1.4);
+            _printedLabel(canvas, Offset(w * e.value, boxRect.bottom - boxRect.height * 0.28), e.key, fontSize: 6.5, color: Colors.white70);
+          }
 
-          // العمود الدوّار (Shaft) + مروحة تبريد خلفية تدور فعلياً أثناء التشغيل
+          // مروحة التبريد الدوّارة عند الطرف الأيسر (Non-drive end)
+          final fanCenter = Offset(w * 0.14, bodyRect.center.dy);
+          canvas.drawCircle(fanCenter, bodyRect.height * 0.34, _fillPaint(const Color(0xFF37474F)));
           canvas.save();
-          canvas.translate(center.dx, center.dy);
+          canvas.translate(fanCenter.dx, fanCenter.dy);
+          canvas.rotate(animPhase * math.pi * 2);
+          for (var i = 0; i < 5; i++) {
+            canvas.save();
+            canvas.rotate(i * (math.pi * 2 / 5));
+            final blade = Path()
+              ..moveTo(0, -1.5)
+              ..lineTo(bodyRect.height * 0.32, -bodyRect.height * 0.1)
+              ..lineTo(bodyRect.height * 0.32, bodyRect.height * 0.1)
+              ..lineTo(0, 1.5)
+              ..close();
+            canvas.drawPath(blade, _fillPaint(running ? const Color(0xFFFFA726) : const Color(0xFFBCAAA4)));
+            canvas.restore();
+          }
+          canvas.restore();
+          canvas.drawCircle(fanCenter, bodyRect.height * 0.09, _fillPaint(const Color(0xFF90A4AE)));
+
+          _printedLabel(canvas, Offset(w * 0.58, bodyRect.center.dy), '3~ M', fontSize: 9.5, color: Colors.white70);
+          break;
+        }
+      case 'motor':
+      case 'motor_small':
+        {
+          // محرك بسيط (أحادي الطور / DC) — جسم أسطواني أفقي بأسلاك يسار/يمين
+          // تطابق موضع الأطراف الفعلية بالضبط، ومروحة تبريد دوّارة داخلية.
+          final rpmRatio = (_rt<num>('rpmRatio') ?? 0).toDouble();
+          final running = rpmRatio > 0.02;
+          final accent = key == 'motor_small' ? const Color(0xFF3D9CFF) : const Color(0xFF9B6BFF);
+
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.22, h * 0.84, w * 0.56, h * 0.07), const Radius.circular(2)), _fillPaint(const Color(0xFF78838C)));
+
+          final bodyRect = Rect.fromLTWH(w * 0.1, h * 0.22, w * 0.8, h * 0.58);
+          final bodyRRect = RRect.fromRectAndRadius(bodyRect, Radius.circular(bodyRect.height / 2));
+          canvas.drawRRect(
+            bodyRRect,
+            Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [const Color(0xFF90A4AE), const Color(0xFF546E7A), const Color(0xFF2E3B44)]).createShader(bodyRect),
+          );
+          canvas.drawRRect(bodyRRect, _strokePaint(accent, 1.8));
+          for (var i = 0; i < 6; i++) {
+            final fx = bodyRect.left + bodyRect.width * (0.14 + i * 0.15);
+            canvas.drawLine(Offset(fx, bodyRect.top + 2), Offset(fx, bodyRect.bottom - 2), Paint()..color = Colors.black26..strokeWidth = 1.4);
+          }
+
+          // صندوق توصيل صغير زخرفي أعلى الجسم
+          final boxRect = Rect.fromCenter(center: Offset(w / 2, h * 0.14), width: w * 0.26, height: h * 0.14);
+          canvas.drawRRect(RRect.fromRectAndRadius(boxRect, const Radius.circular(3)), _fillPaint(const Color(0xFF37474F)));
+
+          // أسلاك التوصيل الفعلية من الجسم إلى الحافتين (تطابق الأطراف الحقيقية)
+          canvas.drawLine(Offset(0, h * 0.5), Offset(bodyRect.left, h * 0.5), Paint()..color = const Color(0xFFB0855A)..strokeWidth = 2.2);
+          canvas.drawLine(Offset(bodyRect.right, h * 0.5), Offset(w, h * 0.5), Paint()..color = const Color(0xFF5A87B0)..strokeWidth = 2.2);
+
+          // مروحة تبريد دوّارة قرب الطرف الأيمن الداخلي
+          final fanCenter = Offset(bodyRect.right - bodyRect.height * 0.42, bodyRect.center.dy);
+          canvas.drawCircle(fanCenter, bodyRect.height * 0.36, _fillPaint(const Color(0xFF263238)));
+          canvas.save();
+          canvas.translate(fanCenter.dx, fanCenter.dy);
           canvas.rotate(animPhase * math.pi * 2);
           for (var i = 0; i < 4; i++) {
             canvas.save();
             canvas.rotate(i * math.pi / 2);
-            canvas.drawOval(Rect.fromCenter(center: Offset(bodyR * 0.42, 0), width: bodyR * 0.62, height: bodyR * 0.22),
-                _fillPaint(running ? const Color(0xFFB0BEC5) : const Color(0xFF78909C)));
+            canvas.drawOval(Rect.fromCenter(center: Offset(bodyRect.height * 0.2, 0), width: bodyRect.height * 0.34, height: bodyRect.height * 0.14),
+                _fillPaint(running ? const Color(0xFFFFA726) : const Color(0xFF78909C)));
             canvas.restore();
           }
-          canvas.drawCircle(Offset.zero, bodyR * 0.16, _fillPaint(const Color(0xFFCFD8DC)));
           canvas.restore();
+          canvas.drawCircle(fanCenter, bodyRect.height * 0.09, _fillPaint(const Color(0xFFCFD8DC)));
 
-          _printedLabel(canvas, Offset(w / 2, h * 0.82), key == 'motor_3ph' ? 'M 3~' : 'M 1~', fontSize: 11, color: Colors.white);
+          _printedLabel(canvas, Offset(w / 2, h * 0.92), key == 'motor_small' ? 'DC M' : 'M 1~', fontSize: 8, color: const Color(0xFF37474F));
           break;
         }
       case 'switch':
         {
-          final on = _switchIsOn();
-          // لوحة تأطير بيضاء (Wall plate) بحواف مصقولة
-          _plasticBody(canvas, size, const Color(0xFFFAFBFC), const Color(0xFFE3E7EA), radius: 9);
-          for (final s in [
-            Offset(w * 0.14, h * 0.14),
-            Offset(w * 0.86, h * 0.14),
-            Offset(w * 0.14, h * 0.86),
-            Offset(w * 0.86, h * 0.86),
-          ]) {
-            _screw(canvas, s, r: 2.2);
-          }
+          // لوحة مفتاح بأسلوب "أشعة-سينية" احترافي: قاعدة نحاسية/وردية دافئة
+          // تُظهر مسار التلامس الداخلي فعلياً (مفيد تعليمياً ويطابق الهوية
+          // البصرية المرجعية)، مع دعم كامل للمفاتيح المتعددة الأقطاب
+          // (Multi-gang) والمفتاح التبادلي (SPDT) حسب موضعه الحقيقي.
+          final isSpdt = (comp.properties['isSpdt'] ?? 0) >= 1;
+          final poleCount = (comp.properties['poleCount'] ?? 1).toInt().clamp(1, 6);
+          const wire = Color(0xFF5B3A22);
+
+          final plate = RRect.fromRectAndRadius(Rect.fromLTWH(1.5, 1.5, w - 3, h - 3), const Radius.circular(10));
           canvas.drawRRect(
-            RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.25, h * 0.18, w * 0.5, h * 0.64), const Radius.circular(6)),
-            _fillPaint(const Color(0xFFCFD8DC)),
+            plate,
+            Paint()..shader = const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFE7B9A4), Color(0xFFD08D6E)]).createShader(Rect.fromLTWH(0, 0, w, h)),
           );
-          final leverY = on ? h * 0.32 : h * 0.6;
-          final leverRect = Rect.fromCenter(center: Offset(w / 2, leverY), width: w * 0.36, height: h * 0.3);
-          final leverColor = on ? AppColors.primary : const Color(0xFF607D8B);
-          canvas.drawRRect(RRect.fromRectAndRadius(leverRect, const Radius.circular(4)),
-              Paint()..shader = LinearGradient(colors: [leverColor.withOpacity(0.85), leverColor]).createShader(leverRect));
-          canvas.drawRRect(RRect.fromRectAndRadius(leverRect, const Radius.circular(4)), _strokePaint(Colors.black38, 1));
+          canvas.drawRRect(plate, Paint()..color = Colors.black.withOpacity(0.32)..style = PaintingStyle.stroke..strokeWidth = 1.2);
+          canvas.drawRRect(
+            RRect.fromRectAndRadius(Rect.fromLTWH(3, 2, w - 6, (h - 4) * 0.2), const Radius.circular(7)),
+            Paint()..color = Colors.white.withOpacity(0.22),
+          );
+
+          if (isSpdt) {
+            final position = _rt<int>('position') ?? 0;
+            final com = Offset(w * 0.5, h * 0.95);
+            final t0 = Offset(w * 0.22, h * 0.05);
+            final t1 = Offset(w * 0.78, h * 0.05);
+            final active = position == 0 ? t0 : t1;
+            final inactive = position == 0 ? t1 : t0;
+            canvas.drawLine(com, inactive, Paint()..color = wire.withOpacity(0.28)..strokeWidth = 2.2..strokeCap = StrokeCap.round);
+            canvas.drawLine(com, active, Paint()..color = wire..strokeWidth = 3.2..strokeCap = StrokeCap.round);
+            canvas.drawCircle(com, 3, _fillPaint(wire));
+            canvas.drawCircle(active, 2.4, _fillPaint(AppColors.primary));
+          } else {
+            for (var p = 0; p < poleCount; p++) {
+              final x = (p + 1) / (poleCount + 1) * w;
+              final on = (_rt<bool>('on_$p') ?? _rt<bool>('on')) ?? false;
+              final top = Offset(x, h * 0.05);
+              final bottom = Offset(x, h * 0.95);
+              if (on) {
+                canvas.drawLine(top, bottom, Paint()..color = wire..strokeWidth = 3..strokeCap = StrokeCap.round);
+              } else {
+                canvas.drawLine(top, Offset(x, h * 0.42), Paint()..color = wire.withOpacity(0.55)..strokeWidth = 2.6..strokeCap = StrokeCap.round);
+                canvas.drawLine(Offset(x, h * 0.58), bottom, Paint()..color = wire.withOpacity(0.55)..strokeWidth = 2.6..strokeCap = StrokeCap.round);
+              }
+              final knobR = (w / poleCount) * 0.2;
+              final knobY = on ? h * 0.28 : h * 0.72;
+              canvas.drawCircle(Offset(x, knobY), knobR, _fillPaint(on ? AppColors.primary : const Color(0xFF8C6A55)));
+              canvas.drawCircle(Offset(x, knobY), knobR, _strokePaint(Colors.black38, 1));
+            }
+          }
           break;
         }
       case 'socket':
@@ -490,115 +652,181 @@ class ComponentPainter extends CustomPainter {
           break;
         }
       case 'breaker':
-      case 'fuse':
         {
+          // قاطع MCB واقعي بترتيب رأسي (دخول من أعلى القضيب، خروج من الأسفل
+          // نحو الحمل) مطابق لشكل قواطع سكة DIN الحقيقية: جسم أبيض/رمادي
+          // فاتح + رافعة زرقاء بارزة تشغل معظم الارتفاع + قفصا برغي فضيان.
           final tripped = _rt<bool>('tripped') ?? false;
           final blown = _rt<bool>('blown') ?? false;
           final on = (_rt<bool>('on') ?? true) && !blown;
           final rated = (comp.properties['ratedCurrent'] ?? 10).toStringAsFixed(0);
 
-          _plasticBody(canvas, size, const Color(0xFFF5F7F8), const Color(0xFFD4DBDF));
+          _plasticBody(canvas, size, const Color(0xFFF9FBFC), const Color(0xFFDCE3E7), inset: 1.4, radius: 4);
           _dinRailClip(canvas, size);
+          _dinFeet(canvas, size);
 
-          // نافذة سوداء علوية (منطقة القوس الكهربائي كما في القواطع الحقيقية)
-          canvas.drawRRect(
-            RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.28, h * 0.1, w * 0.44, h * 0.16), const Radius.circular(2)),
-            _fillPaint(const Color(0xFF1B1F24)),
-          );
-          // شدة التيار المطبوعة
-          _printedLabel(canvas, Offset(w / 2, h * 0.18), '${rated}A', fontSize: 7.5, color: Colors.white);
+          // قفصا التوصيل الفضيان أعلى وأسفل (خلف نقاط التوصيل النحاسية)
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w / 2, h * 0.065), width: w * 0.56, height: h * 0.1));
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w / 2, h * 0.935), width: w * 0.56, height: h * 0.1));
 
-          // جسم الرافعة (Toggle lever) بحواف مصقولة
-          final leverRect = Rect.fromCenter(center: Offset(w / 2, on ? h * 0.42 : h * 0.66), width: w * 0.24, height: h * 0.42);
-          final leverColor = tripped ? const Color(0xFFFF7043) : (on ? const Color(0xFFEF5350) : const Color(0xFF37474F));
+          // شريط أسود علوي يحمل شدة التيار المقنن (كما تُطبع فعلياً على القواطع)
           canvas.drawRRect(
-            RRect.fromRectAndRadius(leverRect, const Radius.circular(4)),
-            Paint()..shader = LinearGradient(colors: [leverColor.withOpacity(0.85), leverColor]).createShader(leverRect),
+            RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(w / 2, h * 0.2), width: w * 0.7, height: h * 0.08), const Radius.circular(2)),
+            _fillPaint(const Color(0xFF20272D)),
           );
-          canvas.drawRRect(RRect.fromRectAndRadius(leverRect, const Radius.circular(4)), _strokePaint(Colors.black54, 1));
-          // خطوط ON/I و OFF/O صغيرة أعلى وأسفل مسار الرافعة
-          _printedLabel(canvas, Offset(w / 2, h * 0.28), 'I', fontSize: 8, color: on ? Colors.white : Colors.black38);
-          _printedLabel(canvas, Offset(w / 2, h * 0.86), 'O', fontSize: 8, color: !on ? Colors.black87 : Colors.black26);
+          _printedLabel(canvas, Offset(w / 2, h * 0.2), '${rated}A', fontSize: 6.6, color: Colors.white);
+          _printedLabel(canvas, Offset(w / 2, h * 0.29), 'MCB', fontSize: 5.6, color: const Color(0xFF607D8B), weight: FontWeight.w600);
+
+          // الرافعة الزرقاء المميزة — تنزلق فعلياً لأعلى (ON) أو لأسفل (OFF)،
+          // وتتحول للبرتقالي عند التريب (Trip) كما في الأجهزة الحقيقية
+          final leverColor = tripped ? const Color(0xFFFF7A45) : const Color(0xFF1B63D6);
+          final leverRect = Rect.fromCenter(center: Offset(w / 2, on ? h * 0.5 : h * 0.66), width: w * 0.4, height: h * 0.42);
+          _rockerLever(canvas, leverRect, leverColor);
+          _printedLabel(canvas, Offset(w / 2, leverRect.top + leverRect.height * 0.24), 'I', fontSize: 8.5, color: Colors.white);
+          _printedLabel(canvas, Offset(w / 2, leverRect.bottom - leverRect.height * 0.2), 'O', fontSize: 8, color: Colors.white70);
 
           if (tripped) {
-            // علم التنبيه الصغير (Trip flag) — يظهر مربع برتقالي بجانب القاطع
             canvas.drawRRect(
-              RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.06, h * 0.3, w * 0.14, h * 0.22), const Radius.circular(2)),
+              RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.04, h * 0.38, w * 0.16, h * 0.2), const Radius.circular(2)),
               _fillPaint(const Color(0xFFFF9800)),
             );
           }
-          // براغي التثبيت السفلية لأسلاك الدخول والخروج
-          _screw(canvas, Offset(w * 0.5, h * 0.94), r: 2.6);
+          break;
+        }
+      case 'fuse':
+        {
+          // فيوز واقعي: جسم بلاستيكي رمادي + أنبوب زجاجي شفاف في المنتصف
+          // يظهر بداخله السلك المنصهر — ينكسر بصرياً فعلياً عند الانصهار
+          final blown = _rt<bool>('blown') ?? false;
+          final rated = (comp.properties['ratedCurrent'] ?? 6).toStringAsFixed(0);
+
+          _plasticBody(canvas, size, const Color(0xFFEDEFF1), const Color(0xFFCBD3D8), inset: 1.4, radius: 4);
+          _dinRailClip(canvas, size);
+          _dinFeet(canvas, size);
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w / 2, h * 0.08), width: w * 0.6, height: h * 0.1));
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w / 2, h * 0.92), width: w * 0.6, height: h * 0.1));
+
+          // الأنبوب الزجاجي الشفاف لعنصر الفيوز
+          final tubeRect = Rect.fromCenter(center: Offset(w / 2, h * 0.5), width: w * 0.34, height: h * 0.56);
+          canvas.drawRRect(
+            RRect.fromRectAndRadius(tubeRect, const Radius.circular(8)),
+            Paint()..color = const Color(0xFFB0C4CE).withOpacity(0.5),
+          );
+          canvas.drawRRect(RRect.fromRectAndRadius(tubeRect, const Radius.circular(8)), _strokePaint(const Color(0xFF78909C), 1.2));
+          // غطاءان معدنيان طرفيان للأنبوب (كما في خرطوشة الفيوز الحقيقية)
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(tubeRect.left, tubeRect.top, tubeRect.width, tubeRect.height * 0.14), const Radius.circular(6)), _fillPaint(const Color(0xFFB0BEC5)));
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(tubeRect.left, tubeRect.bottom - tubeRect.height * 0.14, tubeRect.width, tubeRect.height * 0.14), const Radius.circular(6)), _fillPaint(const Color(0xFFB0BEC5)));
+
+          if (blown) {
+            // سلك منقطع (فيوز محترق) — خط متعرّج منكسر بلون داكن مع أثر احتراق خفيف
+            canvas.drawCircle(Offset(w / 2, h * 0.5), 3, Paint()..color = Colors.black45..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3));
+            final p1 = Path()
+              ..moveTo(w / 2, tubeRect.top + tubeRect.height * 0.18)
+              ..lineTo(w / 2 - 2, h * 0.46);
+            final p2 = Path()
+              ..moveTo(w / 2 + 2, h * 0.54)
+              ..lineTo(w / 2, tubeRect.bottom - tubeRect.height * 0.18);
+            canvas.drawPath(p1, _strokePaint(const Color(0xFF37474F), 1.6));
+            canvas.drawPath(p2, _strokePaint(const Color(0xFF37474F), 1.6));
+          } else {
+            // سلك سليم متصل (خط مستقيم رفيع لامع)
+            canvas.drawLine(
+              Offset(w / 2, tubeRect.top + tubeRect.height * 0.16),
+              Offset(w / 2, tubeRect.bottom - tubeRect.height * 0.16),
+              _strokePaint(const Color(0xFFC0A020), 1.6),
+            );
+          }
+          _printedLabel(canvas, Offset(w / 2, h * 0.5 + h * 0.32), '${rated}A', fontSize: 6.4, color: const Color(0xFF37474F));
           break;
         }
       case 'rcd':
         {
+          // قاطع تفاضلي RCD واقعي ذو قطبين جنباً إلى جنب (L يساراً، N يميناً)
+          // — يطابق ترتيب الأطراف الرأسي الجديد: دخول أعلى/خروج أسفل لكل عمود.
           final tripped = _rt<bool>('tripped') ?? false;
           final sensitivity = (comp.properties['sensitivityMa'] ?? 30).toStringAsFixed(0);
 
-          _plasticBody(canvas, size, const Color(0xFFF5F7F8), const Color(0xFFD4DBDF));
+          _plasticBody(canvas, size, const Color(0xFFF9FBFC), const Color(0xFFDCE3E7), inset: 1.4, radius: 4);
           _dinRailClip(canvas, size);
+          _dinFeet(canvas, size);
 
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w * 0.32, h * 0.06), width: w * 0.26, height: h * 0.08));
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w * 0.68, h * 0.06), width: w * 0.26, height: h * 0.08));
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w * 0.32, h * 0.94), width: w * 0.26, height: h * 0.08));
+          _terminalCage(canvas, Rect.fromCenter(center: Offset(w * 0.68, h * 0.94), width: w * 0.26, height: h * 0.08));
+
+          // نافذة سوداء لحساسية التسريب (مثل الطباعة الحقيقية على RCD)
           canvas.drawRRect(
-            RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.2, h * 0.08, w * 0.6, h * 0.14), const Radius.circular(2)),
-            _fillPaint(const Color(0xFF1B1F24)),
+            RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(w / 2, h * 0.17), width: w * 0.7, height: h * 0.08), const Radius.circular(2)),
+            _fillPaint(const Color(0xFF20272D)),
           );
-          _printedLabel(canvas, Offset(w / 2, h * 0.15), '${sensitivity}mA', fontSize: 7, color: Colors.white);
+          _printedLabel(canvas, Offset(w / 2, h * 0.17), '${sensitivity}mA', fontSize: 6.4, color: Colors.white);
 
-          final leverRect = Rect.fromCenter(center: Offset(w * 0.36, tripped ? h * 0.66 : h * 0.42), width: w * 0.2, height: h * 0.4);
-          final leverColor = tripped ? const Color(0xFF37474F) : AppColors.primary;
-          canvas.drawRRect(RRect.fromRectAndRadius(leverRect, const Radius.circular(4)),
-              Paint()..shader = LinearGradient(colors: [leverColor.withOpacity(0.85), leverColor]).createShader(leverRect));
-          canvas.drawRRect(RRect.fromRectAndRadius(leverRect, const Radius.circular(4)), _strokePaint(Colors.black54, 1));
+          // رافعة زرقاء عريضة تغطي القطبين معاً (كما في RCD الحقيقي ذي مفتاح موحّد)
+          final leverColor = tripped ? const Color(0xFF37474F) : const Color(0xFF1B63D6);
+          final leverRect = Rect.fromCenter(center: Offset(w / 2, tripped ? h * 0.7 : h * 0.5), width: w * 0.52, height: h * 0.34);
+          _rockerLever(canvas, leverRect, leverColor);
 
           // زر الاختبار (T) الأصفر المميّز لأجهزة RCD الحقيقية
-          canvas.drawCircle(Offset(w * 0.72, h * 0.4), w * 0.11, _fillPaint(const Color(0xFFFFC107)));
-          canvas.drawCircle(Offset(w * 0.72, h * 0.4), w * 0.11, _strokePaint(Colors.black38, 1));
-          _printedLabel(canvas, Offset(w * 0.72, h * 0.4), 'T', fontSize: 9, color: Colors.black87);
+          canvas.drawCircle(Offset(w / 2, h * 0.78), w * 0.1, _fillPaint(const Color(0xFFFFC107)));
+          canvas.drawCircle(Offset(w / 2, h * 0.78), w * 0.1, _strokePaint(Colors.black38, 1));
+          _printedLabel(canvas, Offset(w / 2, h * 0.78), 'T', fontSize: 8, color: Colors.black87);
 
           if (tripped) {
             canvas.drawRRect(
-              RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.03, h * 0.32, w * 0.12, h * 0.2), const Radius.circular(2)),
+              RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.02, h * 0.4, w * 0.14, h * 0.18), const Radius.circular(2)),
               _fillPaint(const Color(0xFFFF9800)),
             );
           }
-          _printedLabel(canvas, Offset(w / 2, h * 0.86), 'RCD', fontSize: 8, color: const Color(0xFF37474F));
           break;
         }
       case 'contactor':
         {
+          // كونتاكتور صناعي واقعي: جسم أبيض/رمادي فاتح (كما في Schneider/ABB
+          // الحقيقية) + كتلة ملف جانبية عند A1/A2 + نافذة زرقاء مركزية لحامل
+          // التلامسات + 3 أقطاب قدرة عند نفس إحداثيات الأطراف الفعلية تماماً
+          // (0.35 / 0.65 / 0.95) حتى تتطابق نقاط التوصيل مع الرسم بصرياً.
           final energized = _rt<bool>('energized') ?? false;
           final coilV = (comp.properties['coilVoltage'] ?? 230).toStringAsFixed(0);
 
-          _plasticBody(canvas, size, const Color(0xFF3E4A59), const Color(0xFF262E38), radius: 10);
+          _plasticBody(canvas, size, const Color(0xFFF4F6F7), const Color(0xFFD7DEE3), radius: 8, inset: 1.5);
           _dinRailClip(canvas, size);
 
-          // غطاء علوي بلون مختلف (نموذجي في الكونتاكتورات الصناعية)
+          // كتلة الملف الجانبية (حيث يقع A1 أعلى وA2 أسفل فعلياً على الحافة اليسرى)
           canvas.drawRRect(
-            RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.08, h * 0.05, w * 0.84, h * 0.18), const Radius.circular(5)),
-            _fillPaint(const Color(0xFF546575)),
+            RRect.fromRectAndRadius(Rect.fromLTWH(2, h * 0.05, w * 0.15, h * 0.9), const Radius.circular(4)),
+            Paint()..shader = const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFC7D0D6), Color(0xFFA6B3BC)]).createShader(Rect.fromLTWH(0, 0, w, h)),
           );
-          _printedLabel(canvas, Offset(w / 2, h * 0.14), 'AC ${coilV}V', fontSize: 7.5, color: Colors.white70);
+          _printedLabel(canvas, Offset(w * 0.095, h * 0.12), 'A1', fontSize: 5.6, color: const Color(0xFF37474F));
+          _printedLabel(canvas, Offset(w * 0.095, h * 0.88), 'A2', fontSize: 5.6, color: const Color(0xFF37474F));
 
-          // ثلاثة أقطاب قدرة، كل قطب فيه تلامسان متحركان يقتربان عند التغذية
-          for (var i = 0; i < 3; i++) {
-            final cx = w * (0.22 + i * 0.28);
-            canvas.drawRect(Rect.fromLTWH(cx - 1.2, h * 0.26, 2.4, h * 0.14), _fillPaint(const Color(0xFF8D9AA8)));
-            canvas.drawRect(Rect.fromLTWH(cx - 1.2, h * 0.6, 2.4, h * 0.14), _fillPaint(const Color(0xFF8D9AA8)));
-            final gapY = energized ? h * 0.45 : h * 0.4;
+          // نافذة زرقاء مركزية (حجرة حامل التلامسات المتحركة) بعرض الأقطاب الثلاثة
+          final coilWindow = Rect.fromLTWH(w * 0.22, h * 0.36, w * 0.74, h * 0.3);
+          canvas.drawRRect(
+            RRect.fromRectAndRadius(coilWindow, const Radius.circular(4)),
+            Paint()..shader = LinearGradient(colors: [const Color(0xFF4A7BDE), const Color(0xFF1E3E82)]).createShader(coilWindow),
+          );
+          canvas.drawRRect(RRect.fromRectAndRadius(coilWindow, const Radius.circular(4)), _strokePaint(Colors.black38, 1));
+          _printedLabel(canvas, Offset(w * 0.6, h * 0.14), 'AC ${coilV}V', fontSize: 6.6, color: const Color(0xFF37474F));
+
+          // ثلاثة أقطاب قدرة عند إحداثيات الأطراف الحقيقية 1L1/3L2/5L3 و 2T1/4T2/6T3
+          for (final cx in [w * 0.35, w * 0.65, w * 0.95]) {
+            canvas.drawRect(Rect.fromLTWH(cx - 1.3, h * 0.06, 2.6, h * 0.3), _fillPaint(const Color(0xFF8D9AA8)));
+            canvas.drawRect(Rect.fromLTWH(cx - 1.3, h * 0.64, 2.6, h * 0.3), _fillPaint(const Color(0xFF8D9AA8)));
+            final gapY = energized ? h * 0.47 : h * 0.42;
             canvas.drawRRect(
-              RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, gapY), width: w * 0.1, height: h * 0.09), const Radius.circular(2)),
-              _fillPaint(energized ? AppColors.primary : const Color(0xFF78909C)),
+              RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, gapY), width: w * 0.08, height: h * 0.09), const Radius.circular(2)),
+              _fillPaint(energized ? AppColors.primary : const Color(0xFFCFD8DC)),
             );
           }
 
           // مؤشر LED صغير للحالة (يضيء أخضر عند التغذية)
-          canvas.drawCircle(Offset(w * 0.88, h * 0.14), 3.4, _fillPaint(energized ? const Color(0xFF00E676) : const Color(0xFF3A4550)));
+          canvas.drawCircle(Offset(w * 0.28, h * 0.14), 3.2, _fillPaint(energized ? const Color(0xFF00E676) : const Color(0xFFB0BEC5)));
           if (energized) {
-            canvas.drawCircle(Offset(w * 0.88, h * 0.14), 6, Paint()..color = const Color(0xFF00E676).withOpacity(0.35)..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4));
+            canvas.drawCircle(Offset(w * 0.28, h * 0.14), 6, Paint()..color = const Color(0xFF00E676).withOpacity(0.35)..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4));
           }
 
-          _printedLabel(canvas, Offset(w / 2, h * 0.9), energized ? 'ON' : 'OFF', fontSize: 9, color: energized ? AppColors.primary : Colors.white54);
+          _printedLabel(canvas, Offset(w / 2, h * 0.96), energized ? 'ON' : 'OFF', fontSize: 7.5, color: energized ? const Color(0xFF1B8E4E) : const Color(0xFF78909C));
           break;
         }
       case 'aux_contact':
@@ -687,39 +915,56 @@ class ComponentPainter extends CustomPainter {
       case 'push_button_green':
       case 'push_button_red':
         {
+          // كتلة زر ضغط صناعي واقعي 22مم: هيكل أسود مربّع + قبّة لامعة ملوّنة
+          // بارزة من الأعلى تنخفض فعلياً عند الضغط + منطقة طرفين سفلية
+          // (11/12) مطبوع عليها "Momentary" كما في الأجهزة الحقيقية.
           final pressed = _rt<bool>('pressed') ?? false;
-          final center = Offset(w / 2, h / 2);
-          final outerR = math.min(w, h) / 2 - 2;
           final color = key.contains('green') ? const Color(0xFF2E7D32) : const Color(0xFFC62828);
-          final capColor = key.contains('green') ? const Color(0xFF43A047) : const Color(0xFFE53935);
+          final capColor = key.contains('green') ? const Color(0xFF4CAF50) : const Color(0xFFE53935);
 
-          // إطار كروم معدني خارجي (Bezel)
-          canvas.drawCircle(center, outerR, Paint()..shader = const RadialGradient(colors: [Color(0xFFEDEFF1), Color(0xFF8B96A1)]).createShader(Rect.fromCircle(center: center, radius: outerR)));
-          canvas.drawCircle(center, outerR, _strokePaint(Colors.black38, 1));
+          final housing = RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.08, h * 0.06, w * 0.84, h * 0.9), const Radius.circular(6));
+          canvas.drawRRect(housing, Paint()..shader = const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFF2B2F33), Color(0xFF17191B)]).createShader(housing.outerRect));
+          canvas.drawRRect(housing, _strokePaint(Colors.black87, 1));
 
-          // زر الضغط نفسه (ينخفض قليلاً ويصبح أغمق عند الضغط)
-          final capR = outerR * (pressed ? 0.62 : 0.72);
-          canvas.drawCircle(center, capR, Paint()..shader = RadialGradient(colors: [capColor.withOpacity(pressed ? 0.75 : 1), color]).createShader(Rect.fromCircle(center: center, radius: capR)));
-          canvas.drawCircle(center, capR, _strokePaint(Colors.black45, 1.2));
-          // بريق لامع علوي
-          canvas.drawCircle(center + Offset(-capR * 0.32, -capR * 0.32), capR * 0.28, Paint()..color = Colors.white.withOpacity(pressed ? 0.18 : 0.38));
+          // بريق معدني خفيف على حافة الهيكل
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.1, h * 0.08, w * 0.8, h * 0.06), const Radius.circular(3)), Paint()..color = Colors.white.withOpacity(0.06));
+
+          // القبّة/الزر الملوّن البارز من أعلى الهيكل — ينخفض عند الضغط
+          final capCenter = Offset(w / 2, pressed ? h * 0.32 : h * 0.26);
+          final capR = w * (pressed ? 0.27 : 0.32);
+          canvas.drawCircle(capCenter, capR * 1.12, Paint()..color = Colors.black45);
+          canvas.drawCircle(capCenter, capR, Paint()..shader = RadialGradient(colors: [capColor.withOpacity(pressed ? 0.7 : 1), color]).createShader(Rect.fromCircle(center: capCenter, radius: capR)));
+          canvas.drawCircle(capCenter, capR, _strokePaint(Colors.black54, 1.1));
+          canvas.drawCircle(capCenter + Offset(-capR * 0.3, -capR * 0.3), capR * 0.26, Paint()..color = Colors.white.withOpacity(pressed ? 0.16 : 0.4));
+
+          _printedLabel(canvas, Offset(w / 2, h * 0.57), 'Momentary', fontSize: 5.6, color: Colors.white38);
+          // منطقة الطرفين السفلية (11/12)
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.18, h * 0.72, w * 0.64, h * 0.2), const Radius.circular(3)), _fillPaint(const Color(0xFF3A3F44)));
           break;
         }
       case 'emergency_stop':
         {
+          // زر توقف طارئ صناعي: نفس هيكل زر الضغط الأسود + رأس فطر أحمر كبير
+          // على قاعدة صفراء (المعيار العالمي لأزرار الطوارئ) — لا ينخفض
+          // بالكامل بل "يُقفل" (Latching) عند الضغط كما في الحقيقة.
           final pressed = _rt<bool>('pressed') ?? false;
-          final center = Offset(w / 2, h / 2);
-          final outerR = math.min(w, h) / 2 - 2;
+          final housing = RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.06, h * 0.08, w * 0.88, h * 0.86), const Radius.circular(6));
+          canvas.drawRRect(housing, Paint()..shader = const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFF2B2F33), Color(0xFF17191B)]).createShader(housing.outerRect));
+          canvas.drawRRect(housing, _strokePaint(Colors.black87, 1));
 
-          // القاعدة الصفراء القياسية لزر التوقف الطارئ
-          canvas.drawCircle(center, outerR, _fillPaint(const Color(0xFFFDD835)));
-          canvas.drawCircle(center, outerR, _strokePaint(Colors.black87, 2));
+          final center = Offset(w / 2, h * 0.32);
+          final ringR = w * 0.36;
+          canvas.drawCircle(center, ringR, _fillPaint(const Color(0xFFFDD835)));
+          canvas.drawCircle(center, ringR, _strokePaint(Colors.black87, 1.6));
 
-          // رأس الفطر الأحمر الكبير
-          final headR = outerR * (pressed ? 0.62 : 0.74);
-          canvas.drawCircle(center, headR, Paint()..shader = RadialGradient(colors: [const Color(0xFFEF5350).withOpacity(pressed ? 0.8 : 1), const Color(0xFFB71C1C)]).createShader(Rect.fromCircle(center: center, radius: headR)));
+          final headR = ringR * (pressed ? 0.72 : 0.84);
+          canvas.drawCircle(center, headR, Paint()..shader = RadialGradient(colors: [const Color(0xFFEF5350).withOpacity(pressed ? 0.82 : 1), const Color(0xFFB71C1C)]).createShader(Rect.fromCircle(center: center, radius: headR)));
           canvas.drawCircle(center, headR, _strokePaint(Colors.black54, 1.4));
           canvas.drawCircle(center + Offset(-headR * 0.3, -headR * 0.3), headR * 0.25, Paint()..color = Colors.white.withOpacity(0.3));
+          if (pressed) {
+            _printedLabel(canvas, Offset(w / 2, h * 0.6), '🔒', fontSize: 9, color: Colors.white70);
+          }
+          canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(w * 0.16, h * 0.72, w * 0.68, h * 0.2), const Radius.circular(3)), _fillPaint(const Color(0xFF3A3F44)));
           break;
         }
       case 'selector_switch':
@@ -987,12 +1232,6 @@ class ComponentPainter extends CustomPainter {
 
   void _drawGenericIcon(Canvas canvas, Size size, IconData icon) {
     _paintGenericBox(canvas, size, icon: icon);
-  }
-
-  bool _switchIsOn() {
-    final isSpdt = (comp.properties['isSpdt'] ?? 0) >= 1;
-    if (isSpdt) return true;
-    return (_rt<bool>('on_0') ?? _rt<bool>('on')) ?? false;
   }
 
   void _drawBox(Canvas canvas, Size size, Color color, {bool dark = true}) {

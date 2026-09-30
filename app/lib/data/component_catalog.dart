@@ -17,6 +17,38 @@ List<TerminalDef> _twoPin({TerminalKind left = TerminalKind.generic, TerminalKin
       TerminalDef(id: 'b', label: 'B', kind: right, anchor: const Offset(1, 0.5)),
     ];
 
+/// طرفان (دخول/خروج) بترتيب رأسي (أعلى/أسفل) — يطابق شكل التركيب الحقيقي
+/// لأجهزة سكة DIN (قاطع/فيوز): يدخل التيار من الأعلى (من القضيب المشترك)
+/// ويخرج من الأسفل نحو الحمل. الـid يبقى 'a'/'b' نفسه المستخدم فعلياً في
+/// محرك المحاكاة (node('a')/node('b')) — تغييرنا هنا شكلي بحت (الموضع
+/// فقط)، فلا يكسر أي منطق كهربائي أو مشروعاً محفوظاً سابقاً.
+List<TerminalDef> _dinPin({TerminalKind kind = TerminalKind.phase}) => [
+      TerminalDef(id: 'a', label: 'IN', kind: kind, anchor: const Offset(0.5, 0.045)),
+      TerminalDef(id: 'b', label: 'OUT', kind: kind, anchor: const Offset(0.5, 0.955)),
+    ];
+
+/// طرف علوي/سفلي لزر ضغط (بدل يسار/يمين) ليطابق شكل أزرار الضغط الصناعية
+/// الحقيقية (كتلة تلامس عمودية 22مم). الـids تبقى com0/t0 (نفسها المستخدمة
+/// من محرك المحاكاة عبر node('com0')/node('t0')).
+List<TerminalDef> _vertContactPins() => [
+      const TerminalDef(id: 'com0', label: '11', kind: TerminalKind.phase, anchor: Offset(0.5, 0.64)),
+      const TerminalDef(id: 't0', label: '12', kind: TerminalKind.phase, anchor: Offset(0.5, 0.9)),
+    ];
+
+/// طرفا كل قطب لمفتاح حائطي حقيقي: الطرف العلوي (دخول الطور) والسفلي
+/// (خروج نحو الحمل) بدل يسار/يمين — يطابق لوحة مفتاح فعلية ذات أعمدة
+/// جنباً إلى جنب (كل قطب = عمود واحد). الـids تبقى com$i/t$i (نفسها التي
+/// يقرأها محرك المحاكاة عبر node('com$p')/node('t$p')).
+List<TerminalDef> _switchPins(int poles) {
+  final list = <TerminalDef>[];
+  for (var i = 0; i < poles; i++) {
+    final x = (i + 1) / (poles + 1);
+    list.add(TerminalDef(id: 'com$i', label: 'L', kind: TerminalKind.phase, anchor: Offset(x, 0.05)));
+    list.add(TerminalDef(id: 't$i', label: 'L${i + 1}', kind: TerminalKind.phase, anchor: Offset(x, 0.95)));
+  }
+  return list;
+}
+
 List<TerminalDef> _polePins(int poles) {
   final list = <TerminalDef>[];
   for (var i = 0; i < poles; i++) {
@@ -154,7 +186,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Single Switch',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.switchToggle,
-    terminals: _polePins(1),
+    terminals: _switchPins(1),
+    defaultSize: const Size(58, 88),
     defaultProperties: const {'poleCount': 1},
     realisticPainterKey: 'switch',
     symbolPainterKey: 'switch',
@@ -165,8 +198,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Double Switch',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.switchToggle,
-    terminals: _polePins(2),
-    defaultSize: const Size(90, 110),
+    terminals: _switchPins(2),
+    defaultSize: const Size(90, 92),
     defaultProperties: const {'poleCount': 2},
     realisticPainterKey: 'switch',
     symbolPainterKey: 'switch',
@@ -177,8 +210,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Multi-gang Switch',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.switchToggle,
-    terminals: _polePins(4),
-    defaultSize: const Size(100, 150),
+    terminals: _switchPins(4),
+    defaultSize: const Size(150, 92),
     defaultProperties: const {'poleCount': 4},
     realisticPainterKey: 'switch',
     symbolPainterKey: 'switch',
@@ -190,10 +223,11 @@ final List<ComponentDefinition> componentCatalog = [
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.switchToggle,
     terminals: [
-      const TerminalDef(id: 'com', label: 'COM', kind: TerminalKind.phase, anchor: Offset(0, 0.5)),
-      const TerminalDef(id: 't0', label: 'L1', kind: TerminalKind.phase, anchor: Offset(1, 0.25)),
-      const TerminalDef(id: 't1', label: 'L2', kind: TerminalKind.phase, anchor: Offset(1, 0.75)),
+      const TerminalDef(id: 'com', label: 'COM', kind: TerminalKind.phase, anchor: Offset(0.5, 0.95)),
+      const TerminalDef(id: 't0', label: 'L1', kind: TerminalKind.phase, anchor: Offset(0.22, 0.05)),
+      const TerminalDef(id: 't1', label: 'L2', kind: TerminalKind.phase, anchor: Offset(0.78, 0.05)),
     ],
+    defaultSize: const Size(70, 88),
     defaultProperties: const {'isSpdt': 1},
     realisticPainterKey: 'switch',
     symbolPainterKey: 'switch',
@@ -206,10 +240,11 @@ final List<ComponentDefinition> componentCatalog = [
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.switchToggle,
     terminals: [
-      const TerminalDef(id: 'com', label: 'COM', kind: TerminalKind.phase, anchor: Offset(0, 0.5)),
-      const TerminalDef(id: 't0', label: 'L1', kind: TerminalKind.phase, anchor: Offset(1, 0.25)),
-      const TerminalDef(id: 't1', label: 'L2', kind: TerminalKind.phase, anchor: Offset(1, 0.75)),
+      const TerminalDef(id: 'com', label: 'COM', kind: TerminalKind.phase, anchor: Offset(0.5, 0.95)),
+      const TerminalDef(id: 't0', label: 'L1', kind: TerminalKind.phase, anchor: Offset(0.22, 0.05)),
+      const TerminalDef(id: 't1', label: 'L2', kind: TerminalKind.phase, anchor: Offset(0.78, 0.05)),
     ],
+    defaultSize: const Size(70, 88),
     defaultProperties: const {'isSpdt': 1},
     realisticPainterKey: 'switch',
     symbolPainterKey: 'switch',
@@ -270,7 +305,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Main Breaker',
     category: ComponentCategory.protection,
     behavior: BehaviorKind.breaker,
-    terminals: _twoPin(left: TerminalKind.phase, right: TerminalKind.phase),
+    terminals: _dinPin(),
+    defaultSize: const Size(64, 118),
     defaultProperties: const {'ratedCurrent': 63},
     realisticPainterKey: 'breaker',
     symbolPainterKey: 'breaker',
@@ -281,7 +317,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'MCB Breaker',
     category: ComponentCategory.protection,
     behavior: BehaviorKind.breaker,
-    terminals: _twoPin(left: TerminalKind.phase, right: TerminalKind.phase),
+    terminals: _dinPin(),
+    defaultSize: const Size(60, 110),
     defaultProperties: const {'ratedCurrent': 10},
     realisticPainterKey: 'breaker',
     symbolPainterKey: 'breaker',
@@ -292,7 +329,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Motor Breaker',
     category: ComponentCategory.protection,
     behavior: BehaviorKind.motorBreaker,
-    terminals: _twoPin(left: TerminalKind.phase, right: TerminalKind.phase),
+    terminals: _dinPin(),
+    defaultSize: const Size(60, 110),
     defaultProperties: const {'ratedCurrent': 16},
     realisticPainterKey: 'breaker',
     symbolPainterKey: 'breaker',
@@ -303,7 +341,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Fuse',
     category: ComponentCategory.protection,
     behavior: BehaviorKind.fuse,
-    terminals: _twoPin(left: TerminalKind.phase, right: TerminalKind.phase),
+    terminals: _dinPin(),
+    defaultSize: const Size(56, 100),
     defaultProperties: const {'ratedCurrent': 6},
     realisticPainterKey: 'fuse',
     symbolPainterKey: 'fuse',
@@ -315,12 +354,12 @@ final List<ComponentDefinition> componentCatalog = [
     category: ComponentCategory.protection,
     behavior: BehaviorKind.rcd,
     terminals: [
-      const TerminalDef(id: 'l_in', label: 'L-IN', kind: TerminalKind.phase, anchor: Offset(0, 0.3)),
-      const TerminalDef(id: 'n_in', label: 'N-IN', kind: TerminalKind.neutral, anchor: Offset(0, 0.7)),
-      const TerminalDef(id: 'l_out', label: 'L-OUT', kind: TerminalKind.phase, anchor: Offset(1, 0.3)),
-      const TerminalDef(id: 'n_out', label: 'N-OUT', kind: TerminalKind.neutral, anchor: Offset(1, 0.7)),
+      const TerminalDef(id: 'l_in', label: 'L', kind: TerminalKind.phase, anchor: Offset(0.32, 0.045)),
+      const TerminalDef(id: 'l_out', label: 'L', kind: TerminalKind.phase, anchor: Offset(0.32, 0.955)),
+      const TerminalDef(id: 'n_in', label: 'N', kind: TerminalKind.neutral, anchor: Offset(0.68, 0.045)),
+      const TerminalDef(id: 'n_out', label: 'N', kind: TerminalKind.neutral, anchor: Offset(0.68, 0.955)),
     ],
-    defaultSize: const Size(90, 100),
+    defaultSize: const Size(88, 118),
     defaultProperties: const {'sensitivityMa': 30},
     realisticPainterKey: 'rcd',
     symbolPainterKey: 'rcd',
@@ -481,8 +520,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Push Button NO',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.pushButtonNO,
-    terminals: _polePins(1),
-    defaultSize: const Size(70, 70),
+    terminals: _vertContactPins(),
+    defaultSize: const Size(64, 92),
     realisticPainterKey: 'push_button_green',
     symbolPainterKey: 'contact_no',
   ),
@@ -492,8 +531,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Push Button NC',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.pushButtonNC,
-    terminals: _polePins(1),
-    defaultSize: const Size(70, 70),
+    terminals: _vertContactPins(),
+    defaultSize: const Size(64, 92),
     realisticPainterKey: 'push_button_red',
     symbolPainterKey: 'contact_nc',
   ),
@@ -503,8 +542,8 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Emergency Stop',
     category: ComponentCategory.switchesButtons,
     behavior: BehaviorKind.emergencyStop,
-    terminals: _polePins(1),
-    defaultSize: const Size(80, 80),
+    terminals: _vertContactPins(),
+    defaultSize: const Size(74, 96),
     realisticPainterKey: 'emergency_stop',
     symbolPainterKey: 'contact_nc',
   ),
@@ -547,8 +586,13 @@ final List<ComponentDefinition> componentCatalog = [
     nameEn: 'Pilot Lamp',
     category: ComponentCategory.lighting,
     behavior: BehaviorKind.pilotLamp,
-    terminals: _twoPin(left: TerminalKind.phase, right: TerminalKind.neutral),
-    defaultSize: const Size(60, 60),
+    // طرفان أسفل الجسم الأسطواني (كما في لمبات الإشارة الصناعية الحقيقية
+    // ذات السلكين الخارجين من القاعدة) بدل يمين/يسار.
+    terminals: const [
+      TerminalDef(id: 'a', label: 'L', kind: TerminalKind.phase, anchor: Offset(0.32, 0.94)),
+      TerminalDef(id: 'b', label: 'N', kind: TerminalKind.neutral, anchor: Offset(0.68, 0.94)),
+    ],
+    defaultSize: const Size(52, 68),
     defaultProperties: const {'ratedVoltage': 230, 'ratedPower': 2},
     realisticPainterKey: 'pilot_lamp',
     symbolPainterKey: 'lamp',
