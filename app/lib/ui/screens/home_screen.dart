@@ -66,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-    debugPrint('DEBUG _createProject: showDialog returned name="$name"');
     if (name == null || name.trim().isEmpty) return;
     try {
       final project = await widget.repository.createNew(name.trim());

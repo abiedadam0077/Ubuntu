@@ -31,6 +31,9 @@ dependencies:
   intl: any
   # حفظ لقطة/تصدير صورة للمخطط
   path: any
+  # طبقة تجريد لنظام الملفات تسمح باختبارات Widget حقيقية (in-memory
+  # filesystem) دون ملامسة القرص الحقيقي أثناء flutter test
+  file: any
 
 dev_dependencies:
   flutter_test:

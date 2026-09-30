@@ -3,14 +3,19 @@
 // يعمل دون أي استثناء (Exception) أو شاشة بيضاء/رمادية عالقة، وذلك عبر
 // محرك اختبار Flutter الحقيقي (وليس مجرد قراءة الكود يدوياً).
 //
-// ملاحظة مهمة: نتجنّب عمداً استخدام tester.pumpAndSettle() مباشرة بعد
-// pumpWidget لأن الشاشة تحتوي CircularProgressIndicator (مؤشر تحميل غير
-// محدد المدة له Animation متكرر إلى الأبد) أثناء تحميل الإعدادات/المشاريع؛
-// وهذا معروف أنه يجعل pumpAndSettle() "لا يستقر أبداً" وينتهي بخطأ
-// "pumpAndSettle timed out" حتى لو لم يكن هناك أي خلل فعلي في التطبيق.
-// بدلاً من ذلك نستخدم عدداً محدوداً من النبضات الزمنية (bounded pumps).
-import 'dart:io';
-
+// ملاحظتان مهمتان حول تصميم هذا الملف:
+// 1) نتجنّب عمداً استخدام tester.pumpAndSettle() مباشرة بعد pumpWidget لأن
+//    الشاشة تحتوي CircularProgressIndicator (مؤشر تحميل له Animation متكرر
+//    إلى الأبد) أثناء تحميل الإعدادات/المشاريع؛ هذا معروف أنه يجعل
+//    pumpAndSettle() "لا يستقر أبداً" وينتهي بخطأ "pumpAndSettle timed out"
+//    حتى لو لم يكن هناك أي خلل فعلي في التطبيق. نستخدم بدلاً منه عدداً
+//    محدوداً من النبضات الزمنية (bounded pumps).
+// 2) نستخدم MemoryFileSystem (package:file) بدل القرص الحقيقي لأن
+//    flutter test يُشغّل الاختبارات تحت ساعة زمنية وهمية (fake async) لا
+//    يمكنها أبداً إنهاء عمليات I/O حقيقية على القرص (dart:io) — هذه مشكلة
+//    معروفة وموثّقة رسمياً في Flutter (raw File/Directory تُعلّق الاختبار
+//    إلى الأبد)، وليست خللاً في منطق حفظ المشاريع نفسه.
+import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,12 +24,16 @@ import 'package:electrosim_pro/main.dart';
 import 'package:electrosim_pro/state/app_settings.dart';
 import 'package:electrosim_pro/state/projects_repository.dart';
 
-/// ينشئ تطبيقاً جاهزاً للاختبار مع تخزين معزول (مجلد مؤقت + SharedPreferences وهمية)
-/// حتى لا تعتمد الاختبارات على قنوات المنصة الحقيقية (Android/iOS).
-Widget _buildTestApp(Directory tempDir) {
+/// ينشئ تطبيقاً جاهزاً للاختبار مع تخزين معزول تماماً (نظام ملفات وهمي في
+/// الذاكرة + SharedPreferences وهمية) حتى لا تعتمد الاختبارات على قنوات
+/// المنصة الحقيقية (Android/iOS) أو على القرص الفعلي.
+Widget _buildTestApp() {
   SharedPreferences.setMockInitialValues({});
   final settings = AppSettings();
-  final repository = ProjectsRepository(directoryProvider: () async => tempDir);
+  final repository = ProjectsRepository(
+    fileSystem: MemoryFileSystem(),
+    directoryPathProvider: () async => '/test_data',
+  );
   return ElectroSimApp(settings: settings, repository: repository);
 }
 
@@ -37,17 +46,6 @@ Future<void> _settle(WidgetTester tester, {int pumps = 20}) async {
   }
 }
 
-/// يُستخدم بعد أي تفاعل يُشغّل عملية I/O حقيقية على القرص (إنشاء/حفظ ملف
-/// مشروع عبر ProjectsRepository). اختبارات الـWidget تعمل تحت ساعة زمنية
-/// وهمية (fake async) لا "تُسرّع" عمليات dart:io الحقيقية تلقائياً؛
-/// runAsync() يسمح للحلقة الحقيقية للأحداث بإنهاء تلك العملية قبل أن
-/// نتابع الدفع الزمني الوهمي المعتاد.
-Future<void> _flushRealIo(WidgetTester tester) async {
-  await tester.runAsync(() async {
-    await Future<void>.delayed(const Duration(milliseconds: 150));
-  });
-}
-
 /// يغلق نافذة تنبيه السلامة إن ظهرت (تظهر تلقائياً أول مرة فقط لكل settings).
 Future<void> _dismissSafetyDialogIfShown(WidgetTester tester) async {
   final continueButton = find.text('فهمت، متابعة');
@@ -58,20 +56,8 @@ Future<void> _dismissSafetyDialogIfShown(WidgetTester tester) async {
 }
 
 void main() {
-  late Directory tempDir;
-
-  setUp(() async {
-    tempDir = await Directory.systemTemp.createTemp('electrosim_test_');
-  });
-
-  tearDown(() async {
-    if (await tempDir.exists()) {
-      await tempDir.delete(recursive: true);
-    }
-  });
-
   testWidgets('يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     expect(find.text('ElectroSim Pro'), findsWidgets);
@@ -80,7 +66,7 @@ void main() {
   });
 
   testWidgets('إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     // زر "مشروع جديد +"
@@ -90,48 +76,13 @@ void main() {
 
     // نافذة تسمية المشروع يجب أن تظهر
     expect(find.text('إنشاء'), findsOneWidget);
-    // تشخيص: ما محتوى TextField.controller.text فعلياً في هذه اللحظة؟
-    final tf = tester.widget<TextField>(find.byType(TextField));
-    // ignore: avoid_print
-    print('DEBUG نص حقل اسم المشروع عند الضغط على إنشاء: "${tf.controller?.text}"');
     await tester.tap(find.widgetWithText(ElevatedButton, 'إنشاء'));
-    // تشخيص خطوة بخطوة: نتحقق بعد كل نبضة مبكرة هل ما زال AlertDialog ظاهراً
-    await tester.pump();
-    // ignore: avoid_print
-    print('DEBUG بعد نبضة واحدة: AlertDialog=${find.byType(AlertDialog).evaluate().length}');
-    await tester.pump(const Duration(milliseconds: 300));
-    // ignore: avoid_print
-    print('DEBUG بعد 300ms: AlertDialog=${find.byType(AlertDialog).evaluate().length} exception=${tester.takeException()}');
-    await _flushRealIo(tester);
     await _settle(tester);
     expect(tester.takeException(), isNull);
 
     // نافذة تنبيه السلامة يجب أن تظهر أول مرة — نغلقها
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
-
-    // تشخيص: إن لم نصل لشاشة المحرر بعد، نطبع كل النصوص الظاهرة حالياً
-    // لمعرفة أين توقّف التنقّل فعلياً (بدل تخمين السبب بلا دليل).
-    if (find.byIcon(Icons.play_arrow).evaluate().isEmpty) {
-      final texts = tester.widgetList<Text>(find.byType(Text)).map((t) => t.data).toList();
-      final dialogs = find.byType(AlertDialog).evaluate().length;
-      final snackbars = find.byType(SnackBar).evaluate().length;
-      final scaffolds = find.byType(Scaffold).evaluate().length;
-      final navigators = find.byType(Navigator).evaluate().length;
-      List<String> diskFiles = [];
-      await tester.runAsync(() async {
-        final projectsDir = Directory('${tempDir.path}/electrosim_projects');
-        if (await projectsDir.exists()) {
-          diskFiles = projectsDir.listSync().map((f) => f.path).toList();
-        }
-      });
-      // ignore: avoid_print
-      print('DEBUG لم نصل لشاشة المحرر بعد.\n'
-          '  النصوص: $texts\n'
-          '  AlertDialog=$dialogs SnackBar=$snackbars Scaffold=$scaffolds Navigator=$navigators\n'
-          '  ملفات المشروع على القرص: $diskFiles\n'
-          '  lastException=${tester.takeException()}');
-    }
 
     // يجب أن نكون الآن داخل شاشة المحرر (شريط أدوات المحاكاة: تشغيل)
     expect(find.byIcon(Icons.play_arrow), findsWidgets);
@@ -144,16 +95,16 @@ void main() {
   });
 
   testWidgets('فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     await tester.tap(find.text('مشروع جديد'));
     await _settle(tester);
-    await tester.tap(find.text('إنشاء'));
-    await _flushRealIo(tester);
+    await tester.tap(find.widgetWithText(ElevatedButton, 'إنشاء'));
     await _settle(tester);
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
+    expect(find.byIcon(Icons.play_arrow), findsWidgets);
 
     // التبديل بين تبويبات الشريط السفلي في المحرر (Components / Wire / Tools / Measure)
     for (final icon in [Icons.widgets, Icons.cable, Icons.build, Icons.speed]) {
@@ -173,7 +124,7 @@ void main() {
   });
 
   testWidgets('شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     await tester.tap(find.text('التعلّم والتحديات'));
@@ -186,7 +137,7 @@ void main() {
   });
 
   testWidgets('شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     await tester.tap(find.text('محاكاة الأعطال'));
@@ -199,7 +150,7 @@ void main() {
   });
 
   testWidgets('شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     await tester.tap(find.byIcon(Icons.settings));
@@ -212,7 +163,7 @@ void main() {
   });
 
   testWidgets('استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)', (tester) async {
-    await tester.pumpWidget(_buildTestApp(tempDir));
+    await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
     // لا يمكن محاكاة منتقي الملفات الحقيقي في اختبار Widget، لكن نتأكد

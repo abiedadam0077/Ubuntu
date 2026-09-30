@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:file/file.dart';
+import 'package:file/local.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -26,16 +27,23 @@ class ProjectSummary {
 
 /// طبقة الوصول للتخزين المحلي لمشاريع ElectroSim Pro (ملفات .esp.json)
 class ProjectsRepository {
-  /// نقطة حقن لمجلد التخزين لأغراض الاختبار الآلي (widget tests) بحيث لا
-  /// تحتاج الاختبارات لتشغيل قنوات منصة Android/iOS الحقيقية لـ path_provider.
-  /// في الاستخدام الفعلي للتطبيق تُترك فارغة فيُستخدم المجلد الحقيقي دائماً.
-  final Future<Directory> Function()? directoryProvider;
+  /// طبقة تجريد نظام الملفات (package:file). في الاستخدام الفعلي للتطبيق
+  /// تكون دائماً LocalFileSystem (القرص الحقيقي). في اختبارات الـWidget
+  /// الآلية نحقن MemoryFileSystem بدلاً منها — لأن flutter test يُشغّل كل
+  /// شيء تحت ساعة زمنية وهمية (fake async) لا تستطيع إتمام عمليات I/O
+  /// حقيقية على القرص أبداً (مشكلة معروفة وموثّقة في Flutter نفسه، وليست
+  /// خللاً في منطق حفظ المشاريع).
+  final FileSystem fileSystem;
 
-  ProjectsRepository({this.directoryProvider});
+  /// نقطة حقن لمسار مجلد التخزين لأغراض الاختبار الآلي؛ في الاستخدام
+  /// الفعلي تُترك فارغة فيُستخدم مجلد المستندات الحقيقي عبر path_provider.
+  final Future<String> Function()? directoryPathProvider;
+
+  ProjectsRepository({FileSystem? fileSystem, this.directoryPathProvider}) : fileSystem = fileSystem ?? const LocalFileSystem();
 
   Future<Directory> _projectsDir() async {
-    final base = directoryProvider != null ? await directoryProvider!() : await getApplicationDocumentsDirectory();
-    final dir = Directory('${base.path}/electrosim_projects');
+    final basePath = directoryPathProvider != null ? await directoryPathProvider!() : (await getApplicationDocumentsDirectory()).path;
+    final dir = fileSystem.directory('$basePath/electrosim_projects');
     if (!await dir.exists()) {
       await dir.create(recursive: true);
     }
@@ -44,7 +52,7 @@ class ProjectsRepository {
 
   Future<File> _fileFor(String id) async {
     final dir = await _projectsDir();
-    return File('${dir.path}/$id.esp.json');
+    return fileSystem.file('${dir.path}/$id.esp.json');
   }
 
   Future<List<ProjectSummary>> listProjects() async {
@@ -109,15 +117,15 @@ class ProjectsRepository {
 
   /// يُصدّر المشروع كملف مستقل جاهز للمشاركة، ويعيد المسار الكامل للملف
   Future<File> exportToFile(ProjectModel project) async {
-    final dir = await getTemporaryDirectory();
+    final dirPath = directoryPathProvider != null ? await directoryPathProvider!() : (await getTemporaryDirectory()).path;
     final safeName = project.name.replaceAll(RegExp(r'[^\w\u0600-\u06FF ]'), '_');
-    final file = File('${dir.path}/$safeName.esp.json');
+    final file = fileSystem.file('$dirPath/$safeName.esp.json');
     await file.writeAsString(jsonEncode(project.toJson()));
     return file;
   }
 
   Future<ProjectModel> importFromFile(String path, {bool asNewId = true}) async {
-    final file = File(path);
+    final file = fileSystem.file(path);
     final json = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
     var project = ProjectModel.fromJson(json);
     if (asNewId) {
