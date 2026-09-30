@@ -123,3 +123,25 @@ realism/
 ---
 صنع بـ ❤️ فوق [`Mojang/bedrock-samples`](https://github.com/Mojang/bedrock-samples) و
 وثائق Microsoft الرسمية لـ [Vibrant Visuals](https://learn.microsoft.com/en-us/minecraft/creator/documents/vibrantvisuals/vvresourcepacks).
+
+---
+
+## ⬇️ التحميل المباشر
+
+### 1) سيرفر محلي (فوري، من الهاتف على نفس الشبكة)
+```bash
+cd minecraft/realism && python3 serve.py --port 8000
+```
+من بعد حل `http://<IP ديال الحاسوب>:8000` فالاستعمار — كتلقى أزرار تحميل لكل الباكات.
+إلا كنت فـ Arena: حل الـ **Live Preview** وكتحمّل من تما مباشرة.
+
+### 2) روابط GitHub (دايمة، على أي جهاز)
+الملفات موجودة فالـ tag `cinematic-realism-v1.0`:
+
+| الملف | رابط التحميل المباشر |
+|---|---|
+| Cinematic-Realism | `https://raw.githubusercontent.com/abiedadam0077/Ubuntu/cinematic-realism-v1.0/minecraft/realism/dist/Cinematic-Realism.mcpack` |
+| Cinematic-Realism-Lite | `https://raw.githubusercontent.com/abiedadam0077/Ubuntu/cinematic-realism-v1.0/minecraft/realism/dist/Cinematic-Realism-Lite.mcpack` |
+| LowEnd-Vibes | `https://raw.githubusercontent.com/abiedadam0077/Ubuntu/cinematic-realism-v1.0/minecraft/dist/LowEnd-Vibes.mcpack` |
+
+ولا من واجهة GitHub: `https://github.com/abiedadam0077/Ubuntu/tree/cinematic-realism-v1.0/minecraft/realism/dist` → اختار الملف → زر **Download raw file**.
