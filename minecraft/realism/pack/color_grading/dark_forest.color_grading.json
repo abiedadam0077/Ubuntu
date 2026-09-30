@@ -1,0 +1,103 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:color_grading_settings": {
+    "description": {
+      "identifier": "cinematic:dark_forest_color_grading"
+    },
+    "color_grading": {
+      "midtones": {
+        "contrast": [
+          1.28,
+          1.28,
+          1.26
+        ],
+        "gain": [
+          0.98,
+          0.99,
+          1.01
+        ],
+        "gamma": [
+          2.12,
+          2.16,
+          2.24
+        ],
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "saturation": [
+          1.06,
+          1.08,
+          1.06
+        ]
+      },
+      "highlights": {
+        "enabled": true,
+        "gain": [
+          1.0,
+          1.01,
+          1.0
+        ],
+        "contrast": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gamma": [
+          2.2,
+          2.2,
+          2.2
+        ],
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "highlightsMin": 1.55,
+        "saturation": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "shadows": {
+        "enabled": true,
+        "gain": [
+          0.95,
+          0.98,
+          1.06
+        ],
+        "contrast": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gamma": [
+          2.2,
+          2.2,
+          2.2
+        ],
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shadowsMax": 0.5,
+        "saturation": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "temperature": {
+        "enabled": true,
+        "temperature": 6600,
+        "type": "color_temperature"
+      }
+    },
+    "tone_mapping": {
+      "operator": "aces"
+    }
+  }
+}

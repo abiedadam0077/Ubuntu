@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.120",
+  "minecraft:water_settings": {
+    "description": {
+      "identifier": "cinematic:swamp_water"
+    },
+    "particle_concentrations": {
+      "chlorophyll": 3.2,
+      "suspended_sediment": 4.5,
+      "cdom": 6.5
+    },
+    "waves": {
+      "enabled": true,
+      "depth": 0.04,
+      "direction_increment": 30.0,
+      "frequency": 1.2,
+      "frequency_scaling": 1.05,
+      "mix": 0.12,
+      "octaves": 10,
+      "pull": 0.2,
+      "sampleWidth": 0.04,
+      "shape": 1.2,
+      "speed": 0.7,
+      "speed_scaling": 1.0
+    },
+    "caustics": {
+      "enabled": true,
+      "frame_length": 0.16,
+      "power": 1,
+      "scale": 0.65
+    }
+  }
+}

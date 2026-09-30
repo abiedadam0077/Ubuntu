@@ -1,0 +1,2977 @@
+{
+ "minecraft:bamboo_jungle": {
+  "file": "bamboo_jungle.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_bamboo_jungle"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#14A2C5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "bamboo_jungle"
+   }
+  }
+ },
+ "minecraft:bamboo_jungle_hills": {
+  "file": "bamboo_jungle_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_bamboo_jungle_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1B9ED8"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "bamboo_jungle_hills"
+   }
+  }
+ },
+ "minecraft:basalt_deltas": {
+  "file": "basalt_deltas.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_basalt_deltas"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#3f76e4"
+   },
+   "minecraft:ambient_sounds": {
+    "addition": {
+     "asset": "ambient.basalt_deltas.additions",
+     "chance": 0.0111
+    },
+    "loop": "ambient.basalt_deltas.loop",
+    "mood": "ambient.basalt_deltas.mood",
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:basalt_deltas_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:nether_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:precipitation": {
+    "white_ash": 2.0
+   },
+   "minecraft:biome_music": {
+    "music_definition": "basalt_deltas"
+   }
+  }
+ },
+ "minecraft:beach": {
+  "file": "beach.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_beach"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#157cab"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:birch_forest": {
+  "file": "birch_forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_birch_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0677ce"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "birch_forest"
+   }
+  }
+ },
+ "minecraft:birch_forest_hills": {
+  "file": "birch_forest_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_birch_forest_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0a74c4"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "birch_forest_hills"
+   }
+  }
+ },
+ "minecraft:birch_forest_hills_mutated": {
+  "file": "birch_forest_hills_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:birch_forest_mutated": {
+  "file": "birch_forest_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "birch_forest_mutated"
+   }
+  }
+ },
+ "minecraft:cherry_grove": {
+  "file": "cherry_grove.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cherry_grove"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#5db7ef"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#b6db61"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#b6db61"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "cherry_grove"
+   }
+  }
+ },
+ "minecraft:cold_beach": {
+  "file": "cold_beach.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cold_beach"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1463a5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:cold_ocean": {
+  "file": "cold_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cold_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2080C9"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:cold_taiga": {
+  "file": "cold_taiga.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cold_taiga"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#205e83"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:cold_taiga_hills": {
+  "file": "cold_taiga_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cold_taiga_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#245b78"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:cold_taiga_mutated": {
+  "file": "cold_taiga_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_cold_taiga_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#205e83"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:crimson_forest": {
+  "file": "crimson_forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_crimson_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#905957"
+   },
+   "minecraft:ambient_sounds": {
+    "addition": {
+     "asset": "ambient.crimson_forest.additions",
+     "chance": 0.0111
+    },
+    "loop": "ambient.crimson_forest.loop",
+    "mood": "ambient.crimson_forest.mood",
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:crimson_forest_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:nether_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:precipitation": {
+    "red_spores": 0.25
+   },
+   "minecraft:biome_music": {
+    "music_definition": "crimson_forest"
+   }
+  }
+ },
+ "minecraft:dappled_forest": {
+  "file": "dappled_forest.client_biome.json",
+  "components": {
+   "minecraft:grass_appearance": {
+    "color": "#df6827"
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#8c3a04"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#e68e30"
+   },
+   "minecraft:sky_color": {
+    "sky_color": "#7ca3ff"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#375154"
+   },
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dappled_forest"
+   }
+  }
+ },
+ "minecraft:deep_cold_ocean": {
+  "file": "deep_cold_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_deep_cold_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2080C9"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:deep_dark": {
+  "file": "deep_dark.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "deep_dark"
+   }
+  }
+ },
+ "minecraft:deep_frozen_ocean": {
+  "file": "deep_frozen_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_deep_frozen_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2570B5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:deep_lukewarm_ocean": {
+  "file": "deep_lukewarm_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_deep_lukewarm_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0D96DB"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:deep_ocean": {
+  "file": "deep_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_deep_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1787D4"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:deep_warm_ocean": {
+  "file": "deep_warm_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_deep_warm_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#02B0E5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:desert": {
+  "file": "desert.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_desert"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#32A598"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:desert_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:desert_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:desert_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "desert"
+   }
+  }
+ },
+ "minecraft:desert_hills": {
+  "file": "desert_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_desert_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1a7aa1"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:desert_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:desert_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:desert_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "desert_hills"
+   }
+  }
+ },
+ "minecraft:desert_mutated": {
+  "file": "desert_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:desert_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:desert_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:desert_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "desert_mutated"
+   }
+  }
+ },
+ "minecraft:dripstone_caves": {
+  "file": "dripstone_caves.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "dripstone_caves"
+   }
+  }
+ },
+ "minecraft:extreme_hills": {
+  "file": "extreme_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_extreme_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#007BF7"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:extreme_hills_edge": {
+  "file": "extreme_hills_edge.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_extreme_hills_edge"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#045cd5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:extreme_hills_mutated": {
+  "file": "extreme_hills_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_extreme_hills_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0E63AB"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:extreme_hills_plus_trees": {
+  "file": "extreme_hills_plus_trees.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_extreme_hills_plus_trees"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0E63AB"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:extreme_hills_plus_trees_mutated": {
+  "file": "extreme_hills_plus_trees_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_extreme_hills_plus_trees_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0E63AB"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:flower_forest": {
+  "file": "flower_forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_flower_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#20A3CC"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "flower_forest"
+   }
+  }
+ },
+ "minecraft:forest": {
+  "file": "forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1E97F2"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "forest"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:forest_hills": {
+  "file": "forest_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_forest_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#056bd1"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:frozen_ocean": {
+  "file": "frozen_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_frozen_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2570B5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:frozen_peaks": {
+  "file": "frozen_peaks.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "frozen_peaks"
+   }
+  }
+ },
+ "minecraft:frozen_river": {
+  "file": "frozen_river.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_frozen_river"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#185390"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:grove": {
+  "file": "grove.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "grove"
+   }
+  }
+ },
+ "minecraft:hell": {
+  "file": "hell.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_hell"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#905957"
+   },
+   "minecraft:ambient_sounds": {
+    "addition": {
+     "asset": "ambient.nether_wastes.additions",
+     "chance": 0.0111
+    },
+    "loop": "ambient.nether_wastes.loop",
+    "mood": "ambient.nether_wastes.mood",
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:hell_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:nether_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "hell"
+   }
+  }
+ },
+ "minecraft:ice_mountains": {
+  "file": "ice_mountains.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_ice_mountains"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1156a7"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:ice_plains": {
+  "file": "ice_plains.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_ice_plains"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#14559b"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:ice_plains_spikes": {
+  "file": "ice_plains_spikes.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_ice_plains_spikes"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#14559b"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:ice_plains_spikes_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:ice_plains_spikes_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:ice_plains_spikes_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:jagged_peaks": {
+  "file": "jagged_peaks.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "jagged_peaks"
+   }
+  }
+ },
+ "minecraft:jungle": {
+  "file": "jungle.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_jungle"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#14A2C5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "jungle"
+   }
+  }
+ },
+ "minecraft:jungle_edge": {
+  "file": "jungle_edge.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_jungle_edge"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0D8AE3"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "jungle_edge"
+   }
+  }
+ },
+ "minecraft:jungle_edge_mutated": {
+  "file": "jungle_edge_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_humid"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:jungle_hills": {
+  "file": "jungle_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_jungle_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1B9ED8"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "jungle_hills"
+   }
+  }
+ },
+ "minecraft:jungle_mutated": {
+  "file": "jungle_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_jungle_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1B9ED8"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "jungle_mutated"
+   }
+  }
+ },
+ "minecraft:legacy_frozen_ocean": {
+  "file": "legacy_frozen_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:cold_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:lukewarm_ocean": {
+  "file": "lukewarm_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_lukewarm_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0D96DB"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:lush_caves": {
+  "file": "lush_caves.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_lush_caves"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "lush_caves"
+   }
+  }
+ },
+ "minecraft:mangrove_swamp": {
+  "file": "mangrove_swamp.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mangrove_swamp"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#3a7a6a"
+   },
+   "minecraft:foliage_appearance": {
+    "color": {
+     "color_map": "mangrove_swamp_foliage"
+    }
+   },
+   "minecraft:grass_appearance": {
+    "color": {
+     "color_map": "swamp_grass"
+    }
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#7B5334"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mangrove_swamp_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mangrove_swamp_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mangrove_swamp_lighting"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "mangrove_swamp"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:meadow": {
+  "file": "meadow.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "meadow"
+   }
+  }
+ },
+ "minecraft:mega_taiga": {
+  "file": "mega_taiga.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mega_taiga"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2d6d77"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "mega_taiga"
+   }
+  }
+ },
+ "minecraft:mega_taiga_hills": {
+  "file": "mega_taiga_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mega_taiga_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#286378"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:mesa": {
+  "file": "mesa.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mesa"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#4E7F81"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#aea42a"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#90814d"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "mesa"
+   }
+  }
+ },
+ "minecraft:mesa_bryce": {
+  "file": "mesa_bryce.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mesa_bryce"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#497F99"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#aea42a"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#90814d"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:mesa_plateau": {
+  "file": "mesa_plateau.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mesa_plateau"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#55809E"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "mesa_plateau"
+   }
+  }
+ },
+ "minecraft:mesa_plateau_mutated": {
+  "file": "mesa_plateau_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#aea42a"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#90814d"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "mesa_plateau_mutated"
+   }
+  }
+ },
+ "minecraft:mesa_plateau_stone": {
+  "file": "mesa_plateau_stone.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mesa_plateau_stone"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#55809E"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#aea42a"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#90814d"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:mesa_plateau_stone_mutated": {
+  "file": "mesa_plateau_stone_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_dry"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#aea42a"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#90814d"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mesa_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mesa_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mesa_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:mushroom_island": {
+  "file": "mushroom_island.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mushroom_island"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#8a8997"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mushroom_island_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mushroom_island_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mushroom_island_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:mushroom_island_shore": {
+  "file": "mushroom_island_shore.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_mushroom_island_shore"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#818193"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:mushroom_island_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:mushroom_island_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:mushroom_island_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:ocean": {
+  "file": "ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1787D4"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:pale_garden": {
+  "file": "pale_garden.client_biome.json",
+  "components": {
+   "minecraft:sky_color": {
+    "sky_color": "#b9b9b9"
+   },
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_pale_garden"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#76889D"
+   },
+   "minecraft:biome_music": {
+    "volume_multiplier": 0
+   },
+   "minecraft:foliage_appearance": {
+    "color": "#878d76"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#778272"
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#A0A69C"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:pale_garden_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:pale_garden_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:plains": {
+  "file": "plains.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_plains"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:redwood_taiga_hills_mutated": {
+  "file": "redwood_taiga_hills_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_semi_humid"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "redwood_taiga_hills_mutated"
+   }
+  }
+ },
+ "minecraft:redwood_taiga_mutated": {
+  "file": "redwood_taiga_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_semi_humid"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "redwood_taiga_mutated"
+   }
+  }
+ },
+ "minecraft:river": {
+  "file": "river.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_river"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0084FF"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:roofed_forest": {
+  "file": "roofed_forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_roofed_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#3B6CD1"
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#7B5334"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:roofed_forest_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:roofed_forest_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:roofed_forest_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:grass_appearance": {
+    "grass_is_shaded": true
+   },
+   "minecraft:biome_music": {
+    "music_definition": "roofed_forest"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:roofed_forest_mutated": {
+  "file": "roofed_forest_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_roofed_forest_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#7B5334"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:roofed_forest_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:roofed_forest_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:roofed_forest_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "roofed_forest_mutated"
+   }
+  }
+ },
+ "minecraft:savanna": {
+  "file": "savanna.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_savanna"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2C8B9C"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:savanna_mutated": {
+  "file": "savanna_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_savanna_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2590A8"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:savanna_plateau": {
+  "file": "savanna_plateau.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_savanna_plateau"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#2590A8"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:savanna_plateau_mutated": {
+  "file": "savanna_plateau_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:snowy_slopes": {
+  "file": "snowy_slopes.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "snowy_slopes"
+   }
+  }
+ },
+ "minecraft:soulsand_valley": {
+  "file": "soulsand_valley.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_soulsand_valley"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#905957"
+   },
+   "minecraft:ambient_sounds": {
+    "addition": {
+     "asset": "ambient.soulsand_valley.additions",
+     "chance": 0.0111
+    },
+    "loop": "ambient.soulsand_valley.loop",
+    "mood": "ambient.soulsand_valley.mood",
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:soulsand_valley_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:nether_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:precipitation": {
+    "ash": 0.05
+   },
+   "minecraft:biome_music": {
+    "music_definition": "soulsand_valley"
+   }
+  }
+ },
+ "minecraft:stone_beach": {
+  "file": "stone_beach.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_stone_beach"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#0d67bb"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:stony_peaks": {
+  "file": "stony_peaks.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_default"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "stony_peaks"
+   }
+  }
+ },
+ "minecraft:sulfur_caves": {
+  "file": "sulfur_caves.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_sulfur_caves"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#34BF89"
+   },
+   "minecraft:grass_appearance": {
+    "color": "#ABA64F"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "sulfur_caves"
+   }
+  }
+ },
+ "minecraft:sunflower_plains": {
+  "file": "sunflower_plains.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_sunflower_plains"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#44AFF5"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:swampland": {
+  "file": "swampland.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_swampland"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#617b64",
+    "surface_opacity": 0.65
+   },
+   "minecraft:foliage_appearance": {
+    "color": {
+     "color_map": "swamp_foliage"
+    }
+   },
+   "minecraft:grass_appearance": {
+    "color": {
+     "color_map": "swamp_grass"
+    }
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#7B5334"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:swampland_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:swampland_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:swampland_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "swampland"
+   }
+  }
+ },
+ "minecraft:swampland_mutated": {
+  "file": "swampland_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_swampland_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#617b64",
+    "surface_opacity": 0.65
+   },
+   "minecraft:foliage_appearance": {
+    "color": {
+     "color_map": "swamp_foliage"
+    }
+   },
+   "minecraft:grass_appearance": {
+    "color": {
+     "color_map": "swamp_grass"
+    }
+   },
+   "minecraft:dry_foliage_color": {
+    "color": "#7B5334"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:swampland_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:swampland_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:swampland_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "swampland_mutated"
+   }
+  }
+ },
+ "minecraft:taiga": {
+  "file": "taiga.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_taiga"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#287082"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:taiga_hills": {
+  "file": "taiga_hills.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_taiga_hills"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#236583"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:taiga_mutated": {
+  "file": "taiga_mutated.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_taiga_mutated"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#1E6B82"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:default_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:coolish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:default_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:the_end": {
+  "file": "the_end.client_biome.json",
+  "components": {
+   "minecraft:sky_color": {
+    "sky_color": "#000000"
+   },
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_the_end"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#62529e"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:end_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:end_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:biome_music": {
+    "music_definition": "end"
+   }
+  }
+ },
+ "minecraft:warm_ocean": {
+  "file": "warm_ocean.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_warm_ocean"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#02B0E5",
+    "surface_opacity": 0.55
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warmish_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:warmish_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:warmish_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:biome_music": {
+    "underwater_music": true
+   },
+   "minecraft:ambient_sounds": {
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   }
+  }
+ },
+ "minecraft:warped_forest": {
+  "file": "warped_forest.client_biome.json",
+  "components": {
+   "minecraft:fog_appearance": {
+    "fog_identifier": "minecraft:fog_warped_forest"
+   },
+   "minecraft:water_appearance": {
+    "surface_color": "#905957"
+   },
+   "minecraft:ambient_sounds": {
+    "addition": {
+     "asset": "ambient.warped_forest.additions",
+     "chance": 0.0111
+    },
+    "loop": "ambient.warped_forest.loop",
+    "mood": "ambient.warped_forest.mood",
+    "underwater_addition": {
+     "asset": "ambient.underwater.additions",
+     "chance": 0.01
+    },
+    "underwater_loop": "ambient.underwater.loop"
+   },
+   "minecraft:atmosphere_identifier": {
+    "atmosphere_identifier": "minecraft:warped_forest_atmospherics"
+   },
+   "minecraft:color_grading_identifier": {
+    "color_grading_identifier": "minecraft:default_color_grading"
+   },
+   "minecraft:lighting_identifier": {
+    "lighting_identifier": "minecraft:nether_lighting"
+   },
+   "minecraft:water_identifier": {
+    "water_identifier": "minecraft:default_water"
+   },
+   "minecraft:precipitation": {
+    "blue_spores": 0.25
+   },
+   "minecraft:biome_music": {
+    "music_definition": ""
+   }
+  }
+ }
+}

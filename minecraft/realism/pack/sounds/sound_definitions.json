@@ -1,0 +1,92 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "ambient.weather.rain": {
+      "__use_legacy_max_distance": "true",
+      "category": "weather",
+      "min_distance": 100.0,
+      "sounds": [
+        {
+          "name": "sounds/cinematic/rain_1",
+          "volume": 0.022,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/cinematic/rain_2",
+          "volume": 0.021,
+          "pitch": 0.94,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/cinematic/rain_3",
+          "volume": 0.022,
+          "pitch": 1.06,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/cinematic/rain_4",
+          "volume": 0.02,
+          "pitch": 0.88,
+          "load_on_low_memory": true
+        }
+      ],
+      "subtitle": "subtitles.ambient.weather.rain"
+    },
+    "ambient.weather.thunder": {
+      "__use_legacy_max_distance": "true",
+      "category": "weather",
+      "min_distance": 100.0,
+      "sounds": [
+        {
+          "name": "sounds/cinematic/thunder_1",
+          "volume": 0.9,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/cinematic/thunder_2",
+          "volume": 0.85,
+          "pitch": 0.9
+        },
+        {
+          "name": "sounds/cinematic/thunder_3",
+          "volume": 0.9,
+          "pitch": 0.82
+        }
+      ],
+      "subtitle": "subtitles.entity.lightning_bolt.thunder"
+    },
+    "ambient.underwater.loop": {
+      "__use_legacy_max_distance": "true",
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/cinematic/underwater_loop",
+          "stream": true,
+          "is3D": false,
+          "allow_concurrent_streaming": false
+        }
+      ]
+    },
+    "liquid.water": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/cinematic/water_flow_1",
+          "volume": 0.9,
+          "pitch": 1.0
+        },
+        {
+          "name": "sounds/cinematic/water_flow_2",
+          "volume": 0.9,
+          "pitch": 0.92
+        },
+        {
+          "name": "sounds/cinematic/water_flow_3",
+          "volume": 0.85,
+          "pitch": 1.08
+        }
+      ]
+    }
+  }
+}
