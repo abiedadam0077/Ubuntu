@@ -6,9 +6,11 @@ import '../../models/enums.dart';
 import '../../state/project_controller.dart';
 import '../../state/simulation_controller.dart';
 
-enum EditorPanel { components, wire, tools, measure, simulation }
-
-/// الشريط العلوي: اسم المشروع + تراجع/إعادة + حفظ + تشغيل المحاكاة + وضع العرض
+/// الشريط العلوي: اسم المشروع + شريط أدوات مبسّط بحسب التصميم الاحترافي
+/// المطلوب: ← رجوع | 🔌 أسلاك | 🧩 مكونات | 🔧 أدوات | 💾 حفظ | ▶ تشغيل
+/// (باقي الأدوات: تراجع/إعادة/تكبير/تدوير/حذف/وضع العرض... داخل قائمة
+/// "أدوات" حتى يبقى الشريط بسيطاً ولا يُتعب الشاشة، والـCanvas يأخذ بقية
+/// المساحة كاملة).
 class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String projectName;
   final ProjectController controller;
@@ -18,6 +20,9 @@ class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onSave;
   final VoidCallback onToggleMode;
   final VoidCallback onBack;
+  final VoidCallback onOpenWirePanel;
+  final VoidCallback onOpenComponents;
+  final VoidCallback onOpenTools;
 
   const EditorTopBar({
     super.key,
@@ -29,6 +34,9 @@ class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
     required this.onSave,
     required this.onToggleMode,
     required this.onBack,
+    required this.onOpenWirePanel,
+    required this.onOpenComponents,
+    required this.onOpenTools,
   });
 
   @override
@@ -37,7 +45,7 @@ class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: onBack),
+      leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: onBack, tooltip: 'رجوع'),
       titleSpacing: 0,
       title: GestureDetector(
         onTap: onRename,
@@ -45,34 +53,18 @@ class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
-              child: Text(projectName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16)),
+              child: Text(projectName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 15)),
             ),
             const SizedBox(width: 4),
-            const Icon(Icons.edit, size: 14, color: AppColors.textSecondary),
+            const Icon(Icons.edit, size: 13, color: AppColors.textSecondary),
           ],
         ),
       ),
       actions: [
-        IconButton(
-          tooltip: realistic ? 'وضع واقعي' : 'رموز كهربائية',
-          icon: Icon(realistic ? Icons.photo_camera_back : Icons.schema),
-          onPressed: onToggleMode,
-        ),
-        AnimatedBuilder(
-          animation: controller,
-          builder: (context, _) => IconButton(
-            icon: const Icon(Icons.undo),
-            onPressed: controller.canUndo ? controller.undo : null,
-          ),
-        ),
-        AnimatedBuilder(
-          animation: controller,
-          builder: (context, _) => IconButton(
-            icon: const Icon(Icons.redo),
-            onPressed: controller.canRedo ? controller.redo : null,
-          ),
-        ),
-        IconButton(icon: const Icon(Icons.save), onPressed: onSave),
+        IconButton(tooltip: 'الأسلاك', icon: const Icon(Icons.cable), onPressed: onOpenWirePanel),
+        IconButton(tooltip: 'المكونات', icon: const Icon(Icons.widgets), onPressed: onOpenComponents),
+        IconButton(tooltip: 'أدوات', icon: const Icon(Icons.build), onPressed: onOpenTools),
+        IconButton(tooltip: 'حفظ', icon: const Icon(Icons.save), onPressed: onSave),
         AnimatedBuilder(
           animation: simController,
           builder: (context, _) {
@@ -89,34 +81,22 @@ class EditorTopBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class EditorBottomNav extends StatelessWidget {
-  final EditorPanel current;
-  final ValueChanged<EditorPanel> onChanged;
-
-  const EditorBottomNav({super.key, required this.current, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: EditorPanel.values.indexOf(current),
-      onTap: (i) => onChanged(EditorPanel.values[i]),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.widgets), label: 'المكونات'),
-        BottomNavigationBarItem(icon: Icon(Icons.cable), label: 'الأسلاك'),
-        BottomNavigationBarItem(icon: Icon(Icons.build), label: 'أدوات'),
-        BottomNavigationBarItem(icon: Icon(Icons.speed), label: 'القياس'),
-        BottomNavigationBarItem(icon: Icon(Icons.play_arrow), label: 'المحاكاة'),
-      ],
-    );
-  }
-}
-
-/// لوحة الأدوات: تكبير/تصغير، محاذاة، نسخ/لصق، تكرار، تدوير، حذف، قفل...
+/// لوحة الأدوات: تراجع/إعادة، تكبير/تصغير، محاذاة، نسخ/لصق، تكرار، تدوير،
+/// حذف، قفل، وضع العرض (واقعي/رمزي) — كل أدوات التحرير المتقدمة مجمّعة هنا
+/// بدل تشتيتها في شريط علوي مزدحم.
 class ToolsPanelBar extends StatelessWidget {
   final ProjectController controller;
   final TransformationController transformationController;
+  final bool realistic;
+  final VoidCallback onToggleMode;
 
-  const ToolsPanelBar({super.key, required this.controller, required this.transformationController});
+  const ToolsPanelBar({
+    super.key,
+    required this.controller,
+    required this.transformationController,
+    required this.realistic,
+    required this.onToggleMode,
+  });
 
   void _zoom(double factor) {
     final m = Matrix4.copy(transformationController.value)..scale(factor);
@@ -128,40 +108,47 @@ class ToolsPanelBar extends StatelessWidget {
     return Container(
       color: AppColors.surface,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 6,
-        runSpacing: 6,
-        children: [
-          _btn(Icons.zoom_in, 'تكبير', () => _zoom(1.2)),
-          _btn(Icons.zoom_out, 'تصغير', () => _zoom(0.8)),
-          _btn(Icons.center_focus_strong, 'إعادة ضبط العرض', () => transformationController.value = Matrix4.identity()),
-          _btn(Icons.content_copy, 'نسخ', controller.copySelected),
-          _btn(Icons.content_paste, 'لصق', controller.pasteClipboard),
-          _btn(Icons.copy_all, 'تكرار', controller.duplicateSelected),
-          _btn(Icons.rotate_90_degrees_ccw, 'تدوير', controller.rotateSelected),
-          _btn(Icons.lock, 'قفل/فتح', controller.toggleLockSelected),
-          _btn(Icons.delete, 'حذف', controller.deleteSelected, danger: true),
-        ],
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, _) => Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            _btn(Icons.undo, 'تراجع', controller.canUndo ? controller.undo : null),
+            _btn(Icons.redo, 'إعادة', controller.canRedo ? controller.redo : null),
+            _btn(realistic ? Icons.photo_camera_back : Icons.schema, realistic ? 'واقعي' : 'رمزي', onToggleMode),
+            _btn(Icons.zoom_in, 'تكبير', () => _zoom(1.2)),
+            _btn(Icons.zoom_out, 'تصغير', () => _zoom(0.8)),
+            _btn(Icons.center_focus_strong, 'إعادة ضبط العرض', () => transformationController.value = Matrix4.identity()),
+            _btn(Icons.content_copy, 'نسخ', controller.copySelected),
+            _btn(Icons.content_paste, 'لصق', controller.pasteClipboard),
+            _btn(Icons.copy_all, 'تكرار', controller.duplicateSelected),
+            _btn(Icons.rotate_90_degrees_ccw, 'تدوير', controller.rotateSelected),
+            _btn(Icons.lock, 'قفل/فتح', controller.toggleLockSelected),
+            _btn(Icons.delete, 'حذف', controller.deleteSelected, danger: true),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _btn(IconData icon, String label, VoidCallback onTap, {bool danger = false}) {
+  Widget _btn(IconData icon, String label, VoidCallback? onTap, {bool danger = false}) {
+    final disabled = onTap == null;
     return SizedBox(
       width: 78,
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          side: BorderSide(color: danger ? AppColors.danger.withOpacity(0.5) : Colors.white24),
+          side: BorderSide(color: disabled ? Colors.white12 : (danger ? AppColors.danger.withOpacity(0.5) : Colors.white24)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 20, color: danger ? AppColors.danger : AppColors.textPrimary),
+            Icon(icon, size: 20, color: disabled ? Colors.white24 : (danger ? AppColors.danger : AppColors.textPrimary)),
             const SizedBox(height: 4),
-            Text(label, style: const TextStyle(fontSize: 10)),
+            Text(label, style: TextStyle(fontSize: 10, color: disabled ? Colors.white24 : AppColors.textPrimary)),
           ],
         ),
       ),

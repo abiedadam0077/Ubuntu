@@ -3,17 +3,22 @@
 /// إضافة نوع جديد بسهولة دون كسر بقية النظام.
 library electrosim_enums;
 
-/// فئات مكتبة المكونات كما وردت في متطلبات المشروع
+/// فئات مكتبة المكونات — منظمة بنفس التصنيف المطلوب لمكتبة احترافية
+/// (بحث + تصنيفات واضحة بدل Grid عشوائي)
 enum ComponentCategory {
   power, // مصادر الطاقة
   lighting, // إنارة
+  switchesButtons, // مفاتيح وأزرار
   protection, // حماية (قواطع، فيوز، RCD)
-  industrial, // صناعية
   motors, // محركات
-  control, // تحكم (كونتاكتور، ريليه، تايمر)
+  industrial, // تحكم صناعي (محولات، بادئات تشغيل)
+  sensors, // حساسات ومفاتيح نهاية شوط
   measurement, // أجهزة قياس
+  sockets, // مقابس وعلب توصيل ولوحات
+  relaysContactors, // كونتاكتورات وريليهات وتايمر وعداد
+  plc, // وحدات تحكم مبرمجة
   electronics, // إلكترونيات أساسية
-  wiring, // علب توصيل / لوحات / مقابس
+  other, // أخرى
 }
 
 extension ComponentCategoryX on ComponentCategory {
@@ -22,44 +27,60 @@ extension ComponentCategoryX on ComponentCategory {
       case ComponentCategory.power:
         return 'مصادر الطاقة';
       case ComponentCategory.lighting:
-        return 'الإنارة';
+        return 'الإضاءة';
+      case ComponentCategory.switchesButtons:
+        return 'المفاتيح والأزرار';
       case ComponentCategory.protection:
         return 'الحماية';
-      case ComponentCategory.industrial:
-        return 'صناعية';
       case ComponentCategory.motors:
         return 'المحركات';
-      case ComponentCategory.control:
-        return 'التحكم';
+      case ComponentCategory.industrial:
+        return 'التحكم الصناعي';
+      case ComponentCategory.sensors:
+        return 'الحساسات';
       case ComponentCategory.measurement:
-        return 'أجهزة القياس';
+        return 'القياس';
+      case ComponentCategory.sockets:
+        return 'المقابس والتوصيل';
+      case ComponentCategory.relaysContactors:
+        return 'كونتاكتورات وريليهات';
+      case ComponentCategory.plc:
+        return 'PLC';
       case ComponentCategory.electronics:
         return 'الإلكترونيات';
-      case ComponentCategory.wiring:
-        return 'التوصيل واللوحات';
+      case ComponentCategory.other:
+        return 'أخرى';
     }
   }
 
   String get emoji {
     switch (this) {
       case ComponentCategory.power:
-        return '🔌';
+        return '⚡';
       case ComponentCategory.lighting:
         return '💡';
+      case ComponentCategory.switchesButtons:
+        return '🔘';
       case ComponentCategory.protection:
-        return '⚡';
-      case ComponentCategory.industrial:
-        return '🔧';
+        return '🛡️';
       case ComponentCategory.motors:
         return '⚙️';
-      case ComponentCategory.control:
-        return '🎛️';
+      case ComponentCategory.industrial:
+        return '🔧';
+      case ComponentCategory.sensors:
+        return '📡';
       case ComponentCategory.measurement:
         return '📏';
-      case ComponentCategory.electronics:
+      case ComponentCategory.sockets:
+        return '🔌';
+      case ComponentCategory.relaysContactors:
+        return '🔄';
+      case ComponentCategory.plc:
         return '🧠';
-      case ComponentCategory.wiring:
-        return '📦';
+      case ComponentCategory.electronics:
+        return '🔩';
+      case ComponentCategory.other:
+        return '🗂️';
     }
   }
 }

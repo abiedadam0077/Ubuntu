@@ -84,8 +84,8 @@ void main() {
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
 
-    // يجب أن نكون الآن داخل شاشة المحرر (شريط أدوات المحاكاة: تشغيل)
-    expect(find.byIcon(Icons.play_arrow), findsWidgets);
+    // يجب أن نكون الآن داخل شاشة المحرر (زر التشغيل في الشريط العلوي المبسّط)
+    expect(find.byIcon(Icons.play_circle), findsWidgets);
 
     // الرجوع للشاشة الرئيسية (زر الرجوع في المحرر أيقونة Icons.arrow_back عادية)
     await tester.tap(find.byIcon(Icons.arrow_back).first);
@@ -94,7 +94,7 @@ void main() {
     expect(find.widgetWithText(FloatingActionButton, 'مشروع جديد'), findsOneWidget);
   });
 
-  testWidgets('فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء', (tester) async {
+  testWidgets('فتح النوافذ المنزلقة الثلاثة (مكونات/أسلاك/أدوات) دون أخطاء', (tester) async {
     await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
@@ -104,16 +104,23 @@ void main() {
     await _settle(tester);
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
-    expect(find.byIcon(Icons.play_arrow), findsWidgets);
+    expect(find.byIcon(Icons.play_circle), findsWidgets);
 
-    // التبديل بين تبويبات الشريط السفلي في المحرر (Components / Wire / Tools / Measure)
-    for (final icon in [Icons.widgets, Icons.cable, Icons.build, Icons.speed]) {
+    // الشريط العلوي المبسّط الجديد: 🔌 أسلاك | 🧩 مكونات | 🔧 أدوات — كل زر
+    // يفتح نافذة منزلقة (Bottom Sheet) بدل شريط سفلي ثابت، ثم نغلقها عبر
+    // إسقاط أعلى المسارات في الـNavigator (نفس أثر زر الرجوع/سحب النافذة)
+    // قبل الانتقال للأيقونة التالية.
+    for (final icon in [Icons.widgets, Icons.cable, Icons.build]) {
       final finder = find.byIcon(icon);
-      if (finder.evaluate().isNotEmpty) {
-        await tester.tap(finder.first);
-        await _settle(tester);
-        expect(tester.takeException(), isNull);
-      }
+      expect(finder, findsWidgets);
+      await tester.tap(finder.first);
+      await _settle(tester);
+      expect(tester.takeException(), isNull);
+
+      final navigator = tester.state<NavigatorState>(find.byType(Navigator).first);
+      navigator.pop();
+      await _settle(tester);
+      expect(tester.takeException(), isNull);
     }
 
     // الرجوع قبل نهاية الاختبار حتى يتم استدعاء dispose() على المحرر بشكل

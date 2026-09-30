@@ -52,7 +52,6 @@ class _EditorScreenState extends State<EditorScreen> {
   late SimulationController simController;
   final TransformationController _tc = TransformationController();
 
-  EditorPanel _panel = EditorPanel.components;
   final List<String> _recentTypeIds = [];
   final Set<String> _favoriteTypeIds = {};
   Timer? _autoSaveTimer;
@@ -199,27 +198,29 @@ class _EditorScreenState extends State<EditorScreen> {
         onRename: _renameProject,
         onSave: () => _save(),
         onToggleMode: () => controller.toggleRealisticMode(),
+        onOpenWirePanel: _openWirePanel,
+        onOpenComponents: _openComponentLibrary,
+        onOpenTools: _openToolsSheet,
         onBack: () async {
           await _save(silent: true);
           if (mounted) Navigator.pop(context);
         },
       ),
+      // الـCanvas يأخذ كامل مساحة الشاشة الآن؛ لا توجد أي قائمة ثابتة أسفل
+      // الشاشة — المكونات/الأسلاك/الأدوات تُفتح كنوافذ منزلقة (Bottom Sheet)
+      // عند الحاجة فقط، وتختفي بالكامل بعد إغلاقها.
       body: Stack(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: CircuitCanvas(
-                  controller: controller,
-                  simController: simController,
-                  realistic: controller.project.realisticMode,
-                  transformationController: _tc,
-                  onWarning: _showWarning,
-                  onComponentLongPress: _openComponentProperties,
-                ),
-              ),
-              _buildBottomPanel(),
-            ],
+          Positioned.fill(
+            child: CircuitCanvas(
+              controller: controller,
+              simController: simController,
+              realistic: controller.project.realisticMode,
+              transformationController: _tc,
+              onWarning: _showWarning,
+              onComponentLongPress: _openComponentProperties,
+              onComponentDoubleTap: _openComponentProperties,
+            ),
           ),
           AnimatedBuilder(
             animation: simController,
@@ -227,7 +228,6 @@ class _EditorScreenState extends State<EditorScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: EditorBottomNav(current: _panel, onChanged: (p) => setState(() => _panel = p)),
       floatingActionButton: widget.missionId == null
           ? null
           : Column(
@@ -288,35 +288,133 @@ class _EditorScreenState extends State<EditorScreen> {
     );
   }
 
-  Widget _buildBottomPanel() {
-    switch (_panel) {
-      case EditorPanel.components:
-        return SizedBox(
-          height: 320,
-          child: ComponentLibraryPanel(
-            controller: controller,
-            recentTypeIds: _recentTypeIds,
-            favoriteTypeIds: _favoriteTypeIds,
-            onToggleFavorite: (id) => setState(() {
-              if (_favoriteTypeIds.contains(id)) {
-                _favoriteTypeIds.remove(id);
-              } else {
-                _favoriteTypeIds.add(id);
-              }
-            }),
-            onQuickAdd: _addComponentAtCenter,
-          ),
-        );
-      case EditorPanel.wire:
-        return SizedBox(height: 200, child: _WirePanel(controller: controller));
-      case EditorPanel.tools:
-        return ToolsPanelBar(controller: controller, transformationController: _tc);
-      case EditorPanel.measure:
-        return MeasurePanelBar(onAddMeter: _addComponentAtCenter);
-      case EditorPanel.simulation:
-        return SimulationPanelBar(simController: simController);
-    }
+  /// شريط سحب صغير أعلى أي Bottom Sheet — تفصيل بصري احترافي يدل أن
+  /// النافذة قابلة للسحب للإغلاق.
+  Widget _sheetHandle() => Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 4),
+        child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(4))),
+      );
+
+  /// يفتح مكتبة المكونات الاحترافية كنافذة منزلقة من الأسفل (Drawer) بدل
+  /// شريط ثابت يأكل مساحة الشاشة. الضغط على أي مكون يضيفه للّوحة ويُغلق
+  /// النافذة تلقائياً حتى يعود الـCanvas كاملاً على الفور.
+  void _openComponentLibrary() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (sheetContext) => SizedBox(
+        height: MediaQuery.of(sheetContext).size.height * 0.86,
+        child: Column(
+          children: [
+            _sheetHandle(),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: Text('🧩  مكتبة المكونات', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            ),
+            Expanded(
+              child: ComponentLibraryPanel(
+                controller: controller,
+                recentTypeIds: _recentTypeIds,
+                favoriteTypeIds: _favoriteTypeIds,
+                onToggleFavorite: (id) => setState(() {
+                  if (_favoriteTypeIds.contains(id)) {
+                    _favoriteTypeIds.remove(id);
+                  } else {
+                    _favoriteTypeIds.add(id);
+                  }
+                }),
+                onQuickAdd: (typeId) {
+                  _addComponentAtCenter(typeId);
+                  Navigator.of(sheetContext).pop();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
+
+  /// يفتح لائحة الأسلاك الحالية (عرض/تحديد/حذف) كنافذة منزلقة
+  void _openWirePanel() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (sheetContext) => SizedBox(
+        height: MediaQuery.of(sheetContext).size.height * 0.55,
+        child: Column(
+          children: [
+            _sheetHandle(),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: Text('🔌  الأسلاك في هذا المشروع', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              child: Text('اضغط على طرفين متتاليين في اللوحة لتوصيل سلك بينهما مباشرة.',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+            ),
+            Expanded(child: _WirePanel(controller: controller)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// يفتح قائمة "الأدوات" الموحّدة: تحرير (تراجع/تكبير/نسخ/تدوير/حذف...) +
+  /// وضع العرض + أجهزة القياس + التحكم بالمحاكاة — كل ما ليس من الأساسيات
+  /// الخمسة الظاهرة دائماً في الشريط العلوي.
+  void _openToolsSheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (sheetContext) => DraggableScrollableSheet(
+        initialChildSize: 0.62,
+        minChildSize: 0.35,
+        maxChildSize: 0.92,
+        expand: false,
+        builder: (context, scrollController) => SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(child: _sheetHandle()),
+              _toolsSectionTitle('أدوات التحرير'),
+              ToolsPanelBar(
+                controller: controller,
+                transformationController: _tc,
+                realistic: controller.project.realisticMode,
+                onToggleMode: () => controller.toggleRealisticMode(),
+              ),
+              const Divider(height: 20),
+              _toolsSectionTitle('أجهزة القياس (اضغط لإضافة)'),
+              MeasurePanelBar(
+                onAddMeter: (typeId) {
+                  _addComponentAtCenter(typeId);
+                  Navigator.of(sheetContext).pop();
+                },
+              ),
+              const Divider(height: 20),
+              _toolsSectionTitle('التحكم بالمحاكاة'),
+              SimulationPanelBar(simController: simController),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _toolsSectionTitle(String text) => Padding(
+        padding: const EdgeInsets.fromLTRB(16, 6, 16, 2),
+        child: Text(text, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.textSecondary)),
+      );
 }
 
 class _WirePanel extends StatelessWidget {
@@ -409,7 +507,14 @@ class _ComponentPropertiesSheetState extends State<_ComponentPropertiesSheet> {
                   width: 50,
                   height: 50,
                   child: CustomPaint(
-                    painter: ComponentPainter(def: def, comp: comp, realistic: widget.controller.project.realisticMode, selected: false, animPhase: 0),
+                    painter: ComponentPainter(
+                      def: def,
+                      comp: comp,
+                      realistic: widget.controller.project.realisticMode,
+                      selected: false,
+                      animPhase: 0,
+                      showTerminalLabels: false,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),

@@ -202,6 +202,7 @@ class _DraggableComponentThumb extends StatelessWidget {
               realistic: true,
               selected: false,
               animPhase: 0,
+              showTerminalLabels: false,
             ),
           ),
         ),
@@ -214,7 +215,9 @@ class _DraggableComponentThumb extends StatelessWidget {
       childWhenDragging: Opacity(opacity: 0.3, child: preview),
       onDragEnd: (_) {},
       child: GestureDetector(
-        onDoubleTap: () => onQuickAdd(def.id),
+        // ضغطة واحدة تكفي لإضافة المكون مباشرة لمنتصف اللوحة (أسهل على
+        // الهاتف من الاعتماد فقط على Drag & Drop) — والسحب يبقى متاحاً لمن يفضّله.
+        onTap: () => onQuickAdd(def.id),
         child: preview,
       ),
     );

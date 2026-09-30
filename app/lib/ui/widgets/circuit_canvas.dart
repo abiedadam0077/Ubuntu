@@ -27,6 +27,7 @@ class CircuitCanvas extends StatefulWidget {
   final ValueChanged<String>? onWarning;
   final TransformationController? transformationController;
   final ValueChanged<ComponentInstance>? onComponentLongPress;
+  final ValueChanged<ComponentInstance>? onComponentDoubleTap;
 
   const CircuitCanvas({
     super.key,
@@ -36,6 +37,7 @@ class CircuitCanvas extends StatefulWidget {
     this.onWarning,
     this.transformationController,
     this.onComponentLongPress,
+    this.onComponentDoubleTap,
   });
 
   @override
@@ -142,6 +144,10 @@ class _CircuitCanvasState extends State<CircuitCanvas> with SingleTickerProvider
         onLongPress: () {
           widget.controller.selectOnly(comp.id);
           widget.onComponentLongPress?.call(comp);
+        },
+        onDoubleTap: () {
+          widget.controller.selectOnly(comp.id);
+          widget.onComponentDoubleTap?.call(comp);
         },
         onPanStart: (_) => widget.controller.selectOnly(comp.id),
         onPanUpdate: (details) {
