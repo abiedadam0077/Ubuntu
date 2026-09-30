@@ -1,0 +1,87 @@
+name: "بناء APK لتطبيق ElectroSim Pro"
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - arena/01a0f004-ubuntu
+    paths:
+      - "app/**"
+      - ".github/workflows/build_apk.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: تثبيت Java (مطلوب لـ Android Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: تثبيت Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+
+      - name: معلومات Flutter/Dart
+        run: flutter --version
+
+      - name: توليد مجلدات المنصات (android) دون المساس بكود lib/ الحالي
+        working-directory: app
+        run: flutter create --platforms=android --org com.electrosimpro --project-name electrosim_pro .
+
+      - name: تنزيل الحزم (pub get)
+        working-directory: app
+        run: flutter pub get
+
+      - name: تحليل الكود (فحص أخطاء ثابت، غير مُعطِّل للبناء)
+        working-directory: app
+        run: flutter analyze || true
+
+      - name: توليد أيقونة التطبيق
+        working-directory: app
+        run: dart run flutter_launcher_icons
+
+      - name: بناء APK (نسخة إصدار Release)
+        working-directory: app
+        run: flutter build apk --release
+
+      - name: تجهيز ملف APK النهائي للتسليم
+        run: |
+          mkdir -p dist
+          cp app/build/app/outputs/flutter-apk/app-release.apk dist/ElectroSimPro.apk
+          cd dist
+          sha256sum ElectroSimPro.apk > ElectroSimPro.apk.sha256
+          ls -lh
+
+      - name: رفع APK كـ Artifact (نسخة احتياطية سريعة من نفس التشغيل)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ElectroSimPro-apk
+          path: dist/ElectroSimPro.apk
+          retention-days: 30
+
+      - name: حفظ APK داخل الفرع نفسه (dist/) ليتمكن المستخدم من تحميله عبر git pull
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dist/ElectroSimPro.apk dist/ElectroSimPro.apk.sha256
+          if git diff --cached --quiet; then
+            echo "لا تغييرات جديدة في ملف APK — تخطي الحفظ"
+          else
+            git commit -m "chore(apk): تحديث آلي لملف ElectroSimPro.apk [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

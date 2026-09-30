@@ -1,0 +1,20 @@
+# تُولَّد هذه المجلدات تلقائياً بواسطة "flutter create" أثناء عملية البناء على GitHub Actions
+# ولا حاجة لتخزينها في المستودع (تُنشأ دوماً متوافقة مع نسخة Flutter المستخدمة في البناء)
+/android/
+/ios/
+/web/
+/linux/
+/macos/
+/windows/
+
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+*.iml
+.idea/
+.metadata
+dist/
