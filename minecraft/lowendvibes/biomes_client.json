@@ -1,0 +1,523 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:biomes_client": {
+    "biomes": {
+      "minecraft:beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:birch_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "birch_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:birch_forest_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "birch_forest_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:birch_forest_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "birch_forest_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:birch_forest_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "birch_forest_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cherry_grove": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cherry_grove": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cold_beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cold_beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cold_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cold_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cold_taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cold_taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cold_taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cold_taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:cold_taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "cold_taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_cold_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_cold_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_dark": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_dark": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_lukewarm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_lukewarm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:deep_warm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "deep_warm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:desert": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "desert": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:desert_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "desert_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:desert_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "desert_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:dripstone_caves": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "dripstone_caves": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:extreme_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "extreme_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:extreme_hills_edge": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "extreme_hills_edge": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:extreme_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "extreme_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:extreme_hills_plus_trees": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "extreme_hills_plus_trees": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:extreme_hills_plus_trees_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "extreme_hills_plus_trees_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:flower_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "flower_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:forest_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "forest_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:frozen_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "frozen_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:frozen_river": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "frozen_river": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:grove": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "grove": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:ice_mountains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "ice_mountains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:ice_plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "ice_plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:ice_plains_spikes": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "ice_plains_spikes": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jagged_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jagged_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jungle": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jungle": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jungle_edge": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jungle_edge": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jungle_edge_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jungle_edge_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jungle_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jungle_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:jungle_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "jungle_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:legacy_frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "legacy_frozen_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:lukewarm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "lukewarm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:lush_caves": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "lush_caves": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:meadow": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "meadow": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mega_taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mega_taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mega_taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mega_taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa_bryce": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa_bryce": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa_plateau": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa_plateau": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa_plateau_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa_plateau_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa_plateau_stone": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa_plateau_stone": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mesa_plateau_stone_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mesa_plateau_stone_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mushroom_island": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mushroom_island": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:mushroom_island_shore": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "mushroom_island_shore": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:pale_garden": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "pale_garden": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:redwood_taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "redwood_taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:redwood_taiga_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "redwood_taiga_hills_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:river": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "river": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:roofed_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "roofed_forest": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:roofed_forest_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "roofed_forest_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:savanna": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "savanna": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:savanna_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "savanna_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:savanna_plateau": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "savanna_plateau": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:savanna_plateau_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "savanna_plateau_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:snowy_slopes": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "snowy_slopes": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:stony_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "stony_peaks": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:stone_beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "stone_beach": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:sunflower_plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "sunflower_plains": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:swampland": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "swampland": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:swampland_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "swampland_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "taiga": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "taiga_hills": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "taiga_mutated": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:the_void": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "the_void": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:warm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "warm_ocean": {
+        "fog_identifier": "lowendvibes:overworld"
+      },
+      "minecraft:hell": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "hell": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:nether_wastes": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "nether_wastes": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:soulsand_valley": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "soulsand_valley": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:crimson_forest": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "crimson_forest": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:warped_forest": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "warped_forest": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:basalt_deltas": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "basalt_deltas": {
+        "fog_identifier": "lowendvibes:nether"
+      },
+      "minecraft:the_end": {
+        "fog_identifier": "lowendvibes:end"
+      },
+      "the_end": {
+        "fog_identifier": "lowendvibes:end"
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "lowendvibes:overworld"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.78,
+        "fog_end": 1.0,
+        "fog_color": "#A9C6E8",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.12,
+        "fog_end": 0.75,
+        "fog_color": "#2C7EA8",
+        "render_distance_type": "render"
+      },
+      "weather": {
+        "rain": {
+          "fog_start": 0.62,
+          "fog_end": 1.0,
+          "fog_color": "#7C8CA0",
+          "render_distance_type": "render"
+        },
+        "thunder": {
+          "fog_start": 0.52,
+          "fog_end": 1.0,
+          "fog_color": "#5A6273",
+          "render_distance_type": "render"
+        }
+      },
+      "lava": {
+        "fog_start": 0.0,
+        "fog_end": 0.45,
+        "fog_color": "#E06A18",
+        "render_distance_type": "render"
+      },
+      "lava_resistance": {
+        "fog_start": 0.55,
+        "fog_end": 1.0,
+        "fog_color": "#C24A0A",
+        "render_distance_type": "render"
+      },
+      "powder_snow": {
+        "fog_start": 0.0,
+        "fog_end": 0.35,
+        "fog_color": "#C8D8E8",
+        "render_distance_type": "render"
+      }
+    }
+  }
+}

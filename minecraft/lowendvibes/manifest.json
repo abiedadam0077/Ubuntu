@@ -1,0 +1,22 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "6b1f4c02-7d51-4a63-b0a8-1f2c9d3e4a01",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "3c9a17be-52d4-46f1-9a77-8e0b5c6d7f02",
+      "version": [1, 0, 0]
+    }
+  ],
+  "metadata": {
+    "authors": ["Arena Agent Mode"],
+    "license": "MIT",
+    "url": "https://github.com/abiedadam0077/Ubuntu"
+  }
+}
