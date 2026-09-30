@@ -135,19 +135,32 @@ class ComponentPainter extends CustomPainter {
   void _paintTerminals(Canvas canvas, Size size) {
     for (final t in def.terminals) {
       final p = Offset(t.anchor.dx * size.width, t.anchor.dy * size.height);
-      // قاعدة معدنية صغيرة خلف كل طرف (برغي/مشبك توصيل واقعي)
-      canvas.drawCircle(p, 6, Paint()..color = const Color(0xFFB0BEC5));
-      canvas.drawCircle(p, 6, Paint()..color = Colors.black38..style = PaintingStyle.stroke..strokeWidth = 1);
-      final dot = Paint()..color = _terminalColor(t.kind);
-      canvas.drawCircle(p, 4.5, dot);
-      canvas.drawCircle(p, 4.5, Paint()..color = Colors.black45..style = PaintingStyle.stroke..strokeWidth = 1);
-      // بريق صغير يعطي إحساساً معدنياً لامعاً
-      canvas.drawCircle(p - const Offset(1.2, 1.2), 1.1, Paint()..color = Colors.white.withOpacity(0.55));
+      _paintTerminalStud(canvas, p, t.kind);
 
       if (showTerminalLabels && t.label.isNotEmpty) {
         _drawTerminalLabel(canvas, size, t, p);
       }
     }
+  }
+
+  /// طرف توصيل واقعي على هيئة "برغي نحاسي" حقيقي (كما في قفص التوصيل
+  /// الفعلي للأجهزة الكهربائية): قرص نحاسي/برونزي بتدرّج معدني شعاعي +
+  /// فتحة برغي (Slot) مطبوعة + حلقة داخلية صغيرة تحمل لون الدلالة
+  /// الكهربائية (طور أحمر/تعادل أزرق/أرضي أخضر...) بدل النقطة المسطحة
+  /// القديمة — يجعل نقاط التوصيل أوضح ودقيقة بصرياً وأكثر واقعية.
+  void _paintTerminalStud(Canvas canvas, Offset p, TerminalKind kind) {
+    final semantic = _terminalColor(kind);
+    canvas.drawCircle(p + const Offset(0.4, 0.7), 6.4, Paint()..color = Colors.black.withOpacity(0.35)..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.6));
+    canvas.drawCircle(
+      p,
+      6.2,
+      Paint()..shader = const RadialGradient(colors: [Color(0xFFF0C987), Color(0xFFB8823A), Color(0xFF7A551F)], stops: [0, 0.65, 1]).createShader(Rect.fromCircle(center: p, radius: 6.2)),
+    );
+    canvas.drawCircle(p, 6.2, Paint()..color = Colors.black45..style = PaintingStyle.stroke..strokeWidth = 0.8);
+    canvas.drawCircle(p, 3.3, Paint()..color = semantic);
+    canvas.drawCircle(p, 3.3, Paint()..color = Colors.black38..style = PaintingStyle.stroke..strokeWidth = 0.6);
+    canvas.drawLine(p - const Offset(4.3, 0), p + const Offset(4.3, 0), Paint()..color = Colors.black.withOpacity(0.55)..strokeWidth = 1.1);
+    canvas.drawCircle(p - const Offset(1.6, 1.6), 1.15, Paint()..color = Colors.white.withOpacity(0.65));
   }
 
   void _drawTerminalLabel(Canvas canvas, Size size, TerminalDef t, Offset p) {
