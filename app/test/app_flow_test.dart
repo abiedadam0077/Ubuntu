@@ -114,10 +114,18 @@ void main() {
       final snackbars = find.byType(SnackBar).evaluate().length;
       final scaffolds = find.byType(Scaffold).evaluate().length;
       final navigators = find.byType(Navigator).evaluate().length;
+      List<String> diskFiles = [];
+      await tester.runAsync(() async {
+        final projectsDir = Directory('${tempDir.path}/electrosim_projects');
+        if (await projectsDir.exists()) {
+          diskFiles = projectsDir.listSync().map((f) => f.path).toList();
+        }
+      });
       // ignore: avoid_print
       print('DEBUG لم نصل لشاشة المحرر بعد.\n'
           '  النصوص: $texts\n'
           '  AlertDialog=$dialogs SnackBar=$snackbars Scaffold=$scaffolds Navigator=$navigators\n'
+          '  ملفات المشروع على القرص: $diskFiles\n'
           '  lastException=${tester.takeException()}');
     }
 
