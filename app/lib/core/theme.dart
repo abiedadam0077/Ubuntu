@@ -25,7 +25,6 @@ ThemeData buildAppTheme() {
       surface: AppColors.surface,
       error: AppColors.danger,
     ),
-    fontFamily: 'Cairo',
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.surface,
       elevation: 0,
