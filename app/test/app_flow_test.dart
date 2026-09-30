@@ -91,6 +91,13 @@ void main() {
     // نافذة تسمية المشروع يجب أن تظهر
     expect(find.text('إنشاء'), findsOneWidget);
     await tester.tap(find.text('إنشاء'));
+    // تشخيص خطوة بخطوة: نتحقق بعد كل نبضة مبكرة هل ما زال AlertDialog ظاهراً
+    await tester.pump();
+    // ignore: avoid_print
+    print('DEBUG بعد نبضة واحدة: AlertDialog=${find.byType(AlertDialog).evaluate().length}');
+    await tester.pump(const Duration(milliseconds: 300));
+    // ignore: avoid_print
+    print('DEBUG بعد 300ms: AlertDialog=${find.byType(AlertDialog).evaluate().length} exception=${tester.takeException()}');
     await _flushRealIo(tester);
     await _settle(tester);
     expect(tester.takeException(), isNull);
@@ -103,8 +110,15 @@ void main() {
     // لمعرفة أين توقّف التنقّل فعلياً (بدل تخمين السبب بلا دليل).
     if (find.byIcon(Icons.play_arrow).evaluate().isEmpty) {
       final texts = tester.widgetList<Text>(find.byType(Text)).map((t) => t.data).toList();
+      final dialogs = find.byType(AlertDialog).evaluate().length;
+      final snackbars = find.byType(SnackBar).evaluate().length;
+      final scaffolds = find.byType(Scaffold).evaluate().length;
+      final navigators = find.byType(Navigator).evaluate().length;
       // ignore: avoid_print
-      print('DEBUG لم نصل لشاشة المحرر بعد. النصوص الظاهرة حالياً: $texts');
+      print('DEBUG لم نصل لشاشة المحرر بعد.\n'
+          '  النصوص: $texts\n'
+          '  AlertDialog=$dialogs SnackBar=$snackbars Scaffold=$scaffolds Navigator=$navigators\n'
+          '  lastException=${tester.takeException()}');
     }
 
     // يجب أن نكون الآن داخل شاشة المحرر (شريط أدوات المحاكاة: تشغيل)
