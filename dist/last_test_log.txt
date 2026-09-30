@@ -1,7 +1,9 @@
 00:00 +0: loading /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart
 00:00 +0: /home/runner/work/Ubuntu/Ubuntu/app/test/widget_test.dart: smoke test: التطبيق يُبنى دون رمي استثناء عند الإقلاع
-00:00 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
+00:01 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
 00:01 +2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
+DEBUG نص حقل اسم المشروع عند الضغط على إنشاء: "مشروع جديد"
+DEBUG _createProject: showDialog returned name="مشروع جديد"
 DEBUG بعد نبضة واحدة: AlertDialog=1
 DEBUG بعد 300ms: AlertDialog=0 exception=null
 DEBUG لم نصل لشاشة المحرر بعد.
@@ -16,7 +18,7 @@ Expected: at least one matching candidate
    Which: means none were found but some were expected
 
 When the exception was thrown, this was the stack:
-#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:133:5)
+#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:137:5)
 <asynchronous suspension>
 #5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
 <asynchronous suspension>
@@ -26,15 +28,16 @@ When the exception was thrown, this was the stack:
 (elided one frame from package:stack_trace)
 
 This was caught by the test expectation on the following line:
-  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 133
+  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 137
 The test description was:
   إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
 ════════════════════════════════════════════════════════════════════════════════════════════════════
-00:01 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل [E]
+00:02 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل [E]
   Test failed. See exception logs above.
   The test description was: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
   
-00:01 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
+00:02 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
+DEBUG _createProject: showDialog returned name="مشروع جديد"
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following StateError was thrown running a test:
 Bad state: No element
@@ -47,7 +50,7 @@ When the exception was thrown, this was the stack:
 #5      WidgetController.widgetList (package:flutter_test/src/controller.dart:848:19)
 #6      WidgetController._maybeViewOf (package:flutter_test/src/controller.dart:795:34)
 #7      WidgetController.tap (package:flutter_test/src/controller.dart:1078:31)
-#8      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:166:18)
+#8      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:170:18)
 <asynchronous suspension>
 #9      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
 <asynchronous suspension>
@@ -65,7 +68,7 @@ The test description was:
   
 00:02 +2 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء
 00:02 +3 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء
-00:02 +4 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
+00:03 +4 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
 00:03 +5 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)
 00:03 +6 -2: Some tests failed.
 
