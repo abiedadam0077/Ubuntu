@@ -2,23 +2,17 @@
 00:00 +0: /home/runner/work/Ubuntu/Ubuntu/app/test/widget_test.dart: smoke test: التطبيق يُبنى دون رمي استثناء عند الإقلاع
 00:01 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
 00:01 +2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
-DEBUG نص حقل اسم المشروع عند الضغط على إنشاء: "مشروع جديد"
-DEBUG _createProject: showDialog returned name="مشروع جديد"
-DEBUG بعد نبضة واحدة: AlertDialog=1
-DEBUG بعد 300ms: AlertDialog=0 exception=null
-DEBUG لم نصل لشاشة المحرر بعد.
-  النصوص: [التعلّم والتحديات, محاكاة الأعطال, مشاريعي, استيراد مشروع من ملف, ElectroSim Pro, مشروع جديد]
-  AlertDialog=0 SnackBar=0 Scaffold=1 Navigator=1
-  ملفات المشروع على القرص: []
-  lastException=null
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
-Expected: at least one matching candidate
-  Actual: _IconWidgetFinder:<Found 0 widgets with icon "IconData(U+0E4CB)": []>
-   Which: means none were found but some were expected
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 2 widgets with text "مشروع جديد": [
+            Text("مشروع جديد", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("مشروع جديد", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
 
 When the exception was thrown, this was the stack:
-#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:137:5)
+#4      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:94:5)
 <asynchronous suspension>
 #5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
 <asynchronous suspension>
@@ -28,7 +22,7 @@ When the exception was thrown, this was the stack:
 (elided one frame from package:stack_trace)
 
 This was caught by the test expectation on the following line:
-  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 137
+  file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart line 94
 The test description was:
   إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
 ════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -37,41 +31,11 @@ The test description was:
   The test description was: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
   
 00:02 +2 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
-DEBUG _createProject: showDialog returned name="مشروع جديد"
-══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
-The following StateError was thrown running a test:
-Bad state: No element
-
-When the exception was thrown, this was the stack:
-#0      Iterable.first (dart:core/iterable.dart:663:7)
-#1      _FirstFinderMixin.filter (package:flutter_test/src/finders.dart:1383:28)
-#3      _AncestorFinderMixin.allCandidates (package:flutter_test/src/finders.dart:1857:49)
-#4      FinderBase.evaluate (package:flutter_test/src/finders.dart:1030:76)
-#5      WidgetController.widgetList (package:flutter_test/src/controller.dart:848:19)
-#6      WidgetController._maybeViewOf (package:flutter_test/src/controller.dart:795:34)
-#7      WidgetController.tap (package:flutter_test/src/controller.dart:1078:31)
-#8      main.<anonymous closure> (file:///home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart:170:18)
-<asynchronous suspension>
-#9      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
-<asynchronous suspension>
-#10     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
-<asynchronous suspension>
-<asynchronous suspension>
-(elided 2 frames from dart:async-patch and package:stack_trace)
-
-The test description was:
-  فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
-════════════════════════════════════════════════════════════════════════════════════════════════════
-00:02 +2 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء [E]
-  Test failed. See exception logs above.
-  The test description was: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
-  
-00:02 +2 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء
-00:02 +3 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء
-00:03 +4 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
-00:03 +5 -2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)
-00:03 +6 -2: Some tests failed.
+00:02 +3 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء
+00:03 +4 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء
+00:03 +5 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
+00:03 +6 -1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)
+00:03 +7 -1: Some tests failed.
 
 Failing tests:
   /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
-  /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
