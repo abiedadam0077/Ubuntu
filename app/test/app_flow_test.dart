@@ -90,7 +90,11 @@ void main() {
 
     // نافذة تسمية المشروع يجب أن تظهر
     expect(find.text('إنشاء'), findsOneWidget);
-    await tester.tap(find.text('إنشاء'));
+    // تشخيص: ما محتوى TextField.controller.text فعلياً في هذه اللحظة؟
+    final tf = tester.widget<TextField>(find.byType(TextField));
+    // ignore: avoid_print
+    print('DEBUG نص حقل اسم المشروع عند الضغط على إنشاء: "${tf.controller?.text}"');
+    await tester.tap(find.widgetWithText(ElevatedButton, 'إنشاء'));
     // تشخيص خطوة بخطوة: نتحقق بعد كل نبضة مبكرة هل ما زال AlertDialog ظاهراً
     await tester.pump();
     // ignore: avoid_print
