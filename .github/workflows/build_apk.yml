@@ -72,9 +72,16 @@ jobs:
       - name: اختبارات الواجهة الآلية (flutter test) — لا تُعطِّل البناء، تُحفظ نتيجتها للتشخيص
         working-directory: app
         run: |
+          # ملاحظة: GitHub Actions تُشغّل خطوات run: عبر "bash -e" افتراضياً،
+          # لذا لو تركنا الأمر يفشل مباشرة فإن السطر التالي (تسجيل رمز
+          # الخروج) لن يُنفَّذ إطلاقاً. نعطّل -e مؤقتاً حول الأمر الحساس فقط.
           set -o pipefail
+          set +e
           flutter test --reporter expanded 2>&1 | tee test_log_full.txt
-          echo "TEST_EXIT_CODE=$?" >> "$GITHUB_ENV"
+          code=$?
+          set -e
+          echo "TEST_EXIT_CODE=$code" >> "$GITHUB_ENV"
+          exit 0
         continue-on-error: true
 
       - name: توليد أيقونة التطبيق

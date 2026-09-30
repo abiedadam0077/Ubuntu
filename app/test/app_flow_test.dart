@@ -2,6 +2,13 @@
 // الهدف: التأكد أن التنقل بين كل الشاشات الرئيسية والأزرار الأساسية
 // يعمل دون أي استثناء (Exception) أو شاشة بيضاء/رمادية عالقة، وذلك عبر
 // محرك اختبار Flutter الحقيقي (وليس مجرد قراءة الكود يدوياً).
+//
+// ملاحظة مهمة: نتجنّب عمداً استخدام tester.pumpAndSettle() مباشرة بعد
+// pumpWidget لأن الشاشة تحتوي CircularProgressIndicator (مؤشر تحميل غير
+// محدد المدة له Animation متكرر إلى الأبد) أثناء تحميل الإعدادات/المشاريع؛
+// وهذا معروف أنه يجعل pumpAndSettle() "لا يستقر أبداً" وينتهي بخطأ
+// "pumpAndSettle timed out" حتى لو لم يكن هناك أي خلل فعلي في التطبيق.
+// بدلاً من ذلك نستخدم عدداً محدوداً من النبضات الزمنية (bounded pumps).
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,20 +21,28 @@ import 'package:electrosim_pro/state/projects_repository.dart';
 
 /// ينشئ تطبيقاً جاهزاً للاختبار مع تخزين معزول (مجلد مؤقت + SharedPreferences وهمية)
 /// حتى لا تعتمد الاختبارات على قنوات المنصة الحقيقية (Android/iOS).
-Future<Widget> _buildTestApp(WidgetTester tester, Directory tempDir) async {
+Widget _buildTestApp(Directory tempDir) {
   SharedPreferences.setMockInitialValues({});
   final settings = AppSettings();
   final repository = ProjectsRepository(directoryProvider: () async => tempDir);
   return ElectroSimApp(settings: settings, repository: repository);
 }
 
+/// يدفع الزمن الافتراضي للاختبار بعدد محدود من النبضات (بدل pumpAndSettle
+/// غير المحدود) حتى تُنجَز كل الـFutures القصيرة (تحميل إعدادات/مشاريع) وكل
+/// تحريكات الانتقال بين الشاشات، دون الوقوع في فخ مؤشرات التحميل الدائرية.
+Future<void> _settle(WidgetTester tester, {int pumps = 20}) async {
+  for (var i = 0; i < pumps; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 /// يغلق نافذة تنبيه السلامة إن ظهرت (تظهر تلقائياً أول مرة فقط لكل settings).
 Future<void> _dismissSafetyDialogIfShown(WidgetTester tester) async {
-  await tester.pumpAndSettle();
   final continueButton = find.text('فهمت، متابعة');
   if (continueButton.evaluate().isNotEmpty) {
     await tester.tap(continueButton);
-    await tester.pumpAndSettle();
+    await _settle(tester);
   }
 }
 
@@ -45,8 +60,8 @@ void main() {
   });
 
   testWidgets('يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     expect(find.text('ElectroSim Pro'), findsWidgets);
     expect(find.text('مشروع جديد'), findsOneWidget);
@@ -54,18 +69,18 @@ void main() {
   });
 
   testWidgets('إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     // زر "مشروع جديد +"
     await tester.tap(find.text('مشروع جديد'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
 
     // نافذة تسمية المشروع يجب أن تظهر
     expect(find.text('إنشاء'), findsOneWidget);
     await tester.tap(find.text('إنشاء'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
 
     // نافذة تنبيه السلامة يجب أن تظهر أول مرة — نغلقها
@@ -77,19 +92,19 @@ void main() {
 
     // الرجوع للشاشة الرئيسية (زر الرجوع في المحرر أيقونة Icons.arrow_back عادية)
     await tester.tap(find.byIcon(Icons.arrow_back).first);
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
     expect(find.text('مشروع جديد'), findsOneWidget);
   });
 
   testWidgets('فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     await tester.tap(find.text('مشروع جديد'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     await tester.tap(find.text('إنشاء'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
 
@@ -98,7 +113,7 @@ void main() {
       final finder = find.byIcon(icon);
       if (finder.evaluate().isNotEmpty) {
         await tester.tap(finder.first);
-        await tester.pumpAndSettle();
+        await _settle(tester);
         expect(tester.takeException(), isNull);
       }
     }
@@ -106,52 +121,52 @@ void main() {
     // الرجوع قبل نهاية الاختبار حتى يتم استدعاء dispose() على المحرر بشكل
     // صحيح (يُلغي مؤقّت الحفظ التلقائي) بدل ترك Timer معلّق عند إغلاق الاختبار.
     await tester.tap(find.byIcon(Icons.arrow_back).first);
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
   });
 
   testWidgets('شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     await tester.tap(find.text('التعلّم والتحديات'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
 
     await tester.tap(find.byIcon(Icons.arrow_back).first);
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
   });
 
   testWidgets('شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     await tester.tap(find.text('محاكاة الأعطال'));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
 
     await tester.tap(find.byIcon(Icons.arrow_back).first);
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
   });
 
   testWidgets('شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     await tester.tap(find.byIcon(Icons.settings));
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
 
     await tester.tap(find.byIcon(Icons.arrow_back).first);
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(tester.takeException(), isNull);
   });
 
   testWidgets('استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)', (tester) async {
-    await tester.pumpWidget(await _buildTestApp(tester, tempDir));
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(_buildTestApp(tempDir));
+    await _settle(tester);
 
     // لا يمكن محاكاة منتقي الملفات الحقيقي في اختبار Widget، لكن نتأكد
     // على الأقل أن الشاشة الرئيسية تبقى مستقرة ولا تتجمد بعد بناء الواجهة.
