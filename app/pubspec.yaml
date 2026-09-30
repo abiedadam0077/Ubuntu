@@ -10,6 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # مطلوب لدعم locale عربي فعلي (GlobalMaterialLocalizations) — بدونها أي
+  # showDialog/showModalBottomSheet أو زر رجوع افتراضي يفشل بخطأ
+  # "No MaterialLocalizations found" لأن اللغة العربية مضبوطة دون تسجيل
+  # المكتبة التي تدعمها فعلياً.
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: any
   # تخزين محلي للمشاريع وإعدادات المستخدم (XP, Badges, ألوان الأسلاك...)
   shared_preferences: any

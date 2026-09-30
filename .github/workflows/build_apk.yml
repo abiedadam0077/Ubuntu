@@ -43,6 +43,24 @@ jobs:
         working-directory: app
         run: flutter create --platforms=android --org com.electrosimpro --project-name electrosim_pro .
 
+      - name: تصحيح لون شاشة الإقلاع الأصلية لأندرويد (ليطابق الخلفية الداكنة للتطبيق)
+        working-directory: app
+        run: |
+          set -e
+          # flutter create يولّد خلفية بيضاء افتراضية لشاشة الإقلاع الأصلية
+          # (عادة عبر @android:color/white داخل drawable/launch_background.xml
+          # و drawable-v21/launch_background.xml، وأحياناً أيضاً ?android:colorBackground
+          # في styles.xml) تُعرض لجزء من الثانية قبل أن يرسم Flutter أول إطار
+          # له — قد تُفسَّر كـ"ومضة بيضاء". نستبدل كل مرجع أبيض معروف بلون
+          # AppColors.bg الداكن (#0B1220) دفاعياً في كل الملفات ذات الصلة.
+          find android/app/src/main/res -iname "launch_background.xml" -o -iname "styles.xml" | while read -r f; do
+            if grep -q "white" "$f" 2>/dev/null; then
+              sed -i -E 's/@android:color\/white/#FF0B1220/g; s/#FFFFFFFF/#FF0B1220/gI; s/#FFFFFF/#0B1220/gI' "$f"
+              echo "تم تصحيح: $f"
+              cat "$f"
+            fi
+          done
+
       - name: تنزيل الحزم (pub get)
         working-directory: app
         run: flutter pub get
@@ -50,6 +68,14 @@ jobs:
       - name: تحليل الكود (فحص أخطاء ثابت، غير مُعطِّل للبناء)
         working-directory: app
         run: flutter analyze || true
+
+      - name: اختبارات الواجهة الآلية (flutter test) — لا تُعطِّل البناء، تُحفظ نتيجتها للتشخيص
+        working-directory: app
+        run: |
+          set -o pipefail
+          flutter test --reporter expanded 2>&1 | tee test_log_full.txt
+          echo "TEST_EXIT_CODE=$?" >> "$GITHUB_ENV"
+        continue-on-error: true
 
       - name: توليد أيقونة التطبيق
         working-directory: app
@@ -74,6 +100,10 @@ jobs:
           fi
           if [ -f app/build_log_full.txt ]; then
             tail -c 300000 app/build_log_full.txt > dist/last_build_log.txt
+          fi
+          if [ -f app/test_log_full.txt ]; then
+            cp app/test_log_full.txt dist/last_test_log.txt
+            echo "TEST_EXIT_CODE=${TEST_EXIT_CODE:-unknown}" > dist/last_test_result.txt
           fi
           ls -lh dist/ || true
 

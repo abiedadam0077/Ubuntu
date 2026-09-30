@@ -24,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<ProjectSummary> _projects = [];
   bool _loading = true;
+  String? _loadError;
 
   @override
   void initState() {
@@ -32,13 +33,24 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _refresh() async {
-    setState(() => _loading = true);
-    final list = await widget.repository.listProjects();
-    if (!mounted) return;
     setState(() {
-      _projects = list;
-      _loading = false;
+      _loading = true;
+      _loadError = null;
     });
+    try {
+      final list = await widget.repository.listProjects();
+      if (!mounted) return;
+      setState(() {
+        _projects = list;
+        _loading = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loadError = 'تعذّر تحميل قائمة المشاريع: $e';
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _createProject() async {
@@ -55,29 +67,39 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
     if (name == null || name.trim().isEmpty) return;
-    final project = await widget.repository.createNew(name.trim());
-    if (!mounted) return;
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => EditorScreen(project: project, repository: widget.repository, settings: widget.settings)),
-    );
-    _refresh();
+    try {
+      final project = await widget.repository.createNew(name.trim());
+      if (!mounted) return;
+      await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => EditorScreen(project: project, repository: widget.repository, settings: widget.settings)),
+      );
+      _refresh();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تعذّر إنشاء المشروع: $e')));
+    }
   }
 
   Future<void> _openProject(String id) async {
-    final project = await widget.repository.load(id);
-    if (project == null || !mounted) return;
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => EditorScreen(project: project, repository: widget.repository, settings: widget.settings)),
-    );
-    _refresh();
+    try {
+      final project = await widget.repository.load(id);
+      if (project == null || !mounted) return;
+      await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => EditorScreen(project: project, repository: widget.repository, settings: widget.settings)),
+      );
+      _refresh();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تعذّر فتح المشروع: $e')));
+    }
   }
 
   Future<void> _importProject() async {
-    final result = await FilePicker.pickFiles(type: FileType.any);
-    if (result.isEmpty || result.single.path == null) return;
     try {
+      final result = await FilePicker.pickFiles(type: FileType.any);
+      if (result.isEmpty || result.single.path == null) return;
       await widget.repository.importFromFile(result.single.path!);
       _refresh();
     } catch (e) {
@@ -86,33 +108,46 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _showError(Object e) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('حدث خطأ: $e')));
+  }
+
   void _showProjectMenu(ProjectSummary p) {
+    // نلتقط سياق الشاشة الرئيسية الثابت (وليس سياق الـbottom sheet العابر)
+    // لاستخدامه لاحقاً في أي showDialog/SnackBar بعد إغلاق القائمة، لتفادي
+    // أي استخدام لسياق تمّ تفكيكه (unmounted) بعد إغلاق الورقة السفلية.
+    final rootContext = context;
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
-      builder: (context) => SafeArea(
+      builder: (sheetContext) => SafeArea(
         child: Wrap(
           children: [
             ListTile(
               leading: const Icon(Icons.drive_file_rename_outline),
               title: const Text('إعادة تسمية'),
               onTap: () async {
-                Navigator.pop(context);
-                final controller = TextEditingController(text: p.name);
-                final name = await showDialog<String>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('إعادة تسمية المشروع'),
-                    content: TextField(controller: controller, autofocus: true),
-                    actions: [
-                      TextButton(onPressed: () => Navigator.pop(context), child: const Text('إلغاء')),
-                      ElevatedButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('حفظ')),
-                    ],
-                  ),
-                );
-                if (name != null && name.trim().isNotEmpty) {
-                  await widget.repository.rename(p.id, name.trim());
-                  _refresh();
+                Navigator.pop(sheetContext);
+                try {
+                  final controller = TextEditingController(text: p.name);
+                  final name = await showDialog<String>(
+                    context: rootContext,
+                    builder: (dialogContext) => AlertDialog(
+                      title: const Text('إعادة تسمية المشروع'),
+                      content: TextField(controller: controller, autofocus: true),
+                      actions: [
+                        TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text('إلغاء')),
+                        ElevatedButton(onPressed: () => Navigator.pop(dialogContext, controller.text), child: const Text('حفظ')),
+                      ],
+                    ),
+                  );
+                  if (name != null && name.trim().isNotEmpty) {
+                    await widget.repository.rename(p.id, name.trim());
+                    _refresh();
+                  }
+                } catch (e) {
+                  _showError(e);
                 }
               },
             ),
@@ -120,29 +155,41 @@ class _HomeScreenState extends State<HomeScreen> {
               leading: const Icon(Icons.copy),
               title: const Text('نسخ المشروع'),
               onTap: () async {
-                Navigator.pop(context);
-                await widget.repository.duplicate(p.id);
-                _refresh();
+                Navigator.pop(sheetContext);
+                try {
+                  await widget.repository.duplicate(p.id);
+                  _refresh();
+                } catch (e) {
+                  _showError(e);
+                }
               },
             ),
             ListTile(
               leading: const Icon(Icons.ios_share),
               title: const Text('تصدير / مشاركة'),
               onTap: () async {
-                Navigator.pop(context);
-                final project = await widget.repository.load(p.id);
-                if (project == null) return;
-                final file = await widget.repository.exportToFile(project);
-                await Share.shareXFiles([XFile(file.path)], text: 'مشروع ElectroSim Pro: ${project.name}');
+                Navigator.pop(sheetContext);
+                try {
+                  final project = await widget.repository.load(p.id);
+                  if (project == null) return;
+                  final file = await widget.repository.exportToFile(project);
+                  await Share.shareXFiles([XFile(file.path)], text: 'مشروع ElectroSim Pro: ${project.name}');
+                } catch (e) {
+                  _showError(e);
+                }
               },
             ),
             ListTile(
               leading: const Icon(Icons.delete, color: AppColors.danger),
               title: const Text('حذف', style: TextStyle(color: AppColors.danger)),
               onTap: () async {
-                Navigator.pop(context);
-                await widget.repository.delete(p.id);
-                _refresh();
+                Navigator.pop(sheetContext);
+                try {
+                  await widget.repository.delete(p.id);
+                  _refresh();
+                } catch (e) {
+                  _showError(e);
+                }
               },
             ),
           ],
@@ -179,6 +226,19 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 10),
             if (_loading)
               const Padding(padding: EdgeInsets.all(24), child: Center(child: CircularProgressIndicator()))
+            else if (_loadError != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: Column(
+                  children: [
+                    const Icon(Icons.error_outline, color: AppColors.danger, size: 40),
+                    const SizedBox(height: 10),
+                    Text(_loadError!, textAlign: TextAlign.center, style: const TextStyle(color: AppColors.textSecondary)),
+                    const SizedBox(height: 14),
+                    OutlinedButton.icon(onPressed: _refresh, icon: const Icon(Icons.refresh), label: const Text('أعد المحاولة')),
+                  ],
+                ),
+              )
             else if (_projects.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),

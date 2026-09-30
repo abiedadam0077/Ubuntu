@@ -26,8 +26,15 @@ class ProjectSummary {
 
 /// طبقة الوصول للتخزين المحلي لمشاريع ElectroSim Pro (ملفات .esp.json)
 class ProjectsRepository {
+  /// نقطة حقن لمجلد التخزين لأغراض الاختبار الآلي (widget tests) بحيث لا
+  /// تحتاج الاختبارات لتشغيل قنوات منصة Android/iOS الحقيقية لـ path_provider.
+  /// في الاستخدام الفعلي للتطبيق تُترك فارغة فيُستخدم المجلد الحقيقي دائماً.
+  final Future<Directory> Function()? directoryProvider;
+
+  ProjectsRepository({this.directoryProvider});
+
   Future<Directory> _projectsDir() async {
-    final base = await getApplicationDocumentsDirectory();
+    final base = directoryProvider != null ? await directoryProvider!() : await getApplicationDocumentsDirectory();
     final dir = Directory('${base.path}/electrosim_projects');
     if (!await dir.exists()) {
       await dir.create(recursive: true);

@@ -114,7 +114,14 @@ class _ComponentLibraryPanelState extends State<ComponentLibraryPanel> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: ChoiceChip(
-        label: Text(label, style: const TextStyle(fontSize: 12)),
+        label: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+            color: selected ? AppColors.primary : AppColors.textPrimary,
+          ),
+        ),
         selected: selected,
         onSelected: (_) {
           setState(() {
@@ -126,8 +133,10 @@ class _ComponentLibraryPanelState extends State<ComponentLibraryPanel> {
             }
           });
         },
-        selectedColor: AppColors.primary.withOpacity(0.25),
+        selectedColor: AppColors.primary.withOpacity(0.22),
         backgroundColor: AppColors.surfaceAlt,
+        side: BorderSide(color: selected ? AppColors.primary : Colors.white24),
+        checkmarkColor: AppColors.primary,
       ),
     );
   }
