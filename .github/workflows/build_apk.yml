@@ -57,31 +57,57 @@ jobs:
 
       - name: بناء APK (نسخة إصدار Release)
         working-directory: app
-        run: flutter build apk --release
+        run: |
+          set -o pipefail
+          flutter build apk --release --verbose 2>&1 | tee build_log_full.txt
 
-      - name: تجهيز ملف APK النهائي للتسليم
+      - name: تجهيز ملف APK والسجلات للتسليم (تعمل دائماً، حتى عند فشل البناء)
+        if: always()
         run: |
           mkdir -p dist
-          cp app/build/app/outputs/flutter-apk/app-release.apk dist/ElectroSimPro.apk
-          cd dist
-          sha256sum ElectroSimPro.apk > ElectroSimPro.apk.sha256
-          ls -lh
+          if [ -f app/build/app/outputs/flutter-apk/app-release.apk ]; then
+            cp app/build/app/outputs/flutter-apk/app-release.apk dist/ElectroSimPro.apk
+            sha256sum dist/ElectroSimPro.apk > dist/ElectroSimPro.apk.sha256
+            echo "BUILD_OK=1" >> "$GITHUB_ENV"
+          else
+            echo "BUILD_OK=0" >> "$GITHUB_ENV"
+          fi
+          if [ -f app/build_log_full.txt ]; then
+            tail -c 300000 app/build_log_full.txt > dist/last_build_log.txt
+          fi
+          ls -lh dist/ || true
 
       - name: رفع APK كـ Artifact (نسخة احتياطية سريعة من نفس التشغيل)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ElectroSimPro-apk
-          path: dist/ElectroSimPro.apk
+          name: ElectroSimPro-apk-and-logs
+          path: dist/
           retention-days: 30
+          if-no-files-found: warn
 
-      - name: حفظ APK داخل الفرع نفسه (dist/) ليتمكن المستخدم من تحميله عبر git pull
+      - name: حفظ APK وسجل البناء داخل الفرع نفسه (dist/) ليتمكن المستخدم/الوكيل من قراءتها عبر git pull
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f dist/ElectroSimPro.apk dist/ElectroSimPro.apk.sha256
+          git add -f dist/ || true
           if git diff --cached --quiet; then
-            echo "لا تغييرات جديدة في ملف APK — تخطي الحفظ"
+            echo "لا تغييرات جديدة — تخطي الحفظ"
           else
-            git commit -m "chore(apk): تحديث آلي لملف ElectroSimPro.apk [skip ci]"
+            if [ "${BUILD_OK:-0}" = "1" ]; then
+              MSG="chore(apk): تحديث آلي لملف ElectroSimPro.apk (نجح البناء) [skip ci]"
+            else
+              MSG="chore(apk): فشل بناء APK — تم حفظ سجل التشخيص last_build_log.txt [skip ci]"
+            fi
+            git commit -m "$MSG"
             git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: إنهاء الخطوة بالحالة الصحيحة (فشل الـjob فعلياً إن فشل البناء)
+        if: always()
+        run: |
+          if [ "${BUILD_OK:-0}" != "1" ]; then
+            echo "فشل بناء APK — راجع dist/last_build_log.txt في الفرع بعد انتهاء هذا التشغيل."
+            exit 1
           fi
