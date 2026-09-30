@@ -37,6 +37,17 @@ Future<void> _settle(WidgetTester tester, {int pumps = 20}) async {
   }
 }
 
+/// يُستخدم بعد أي تفاعل يُشغّل عملية I/O حقيقية على القرص (إنشاء/حفظ ملف
+/// مشروع عبر ProjectsRepository). اختبارات الـWidget تعمل تحت ساعة زمنية
+/// وهمية (fake async) لا "تُسرّع" عمليات dart:io الحقيقية تلقائياً؛
+/// runAsync() يسمح للحلقة الحقيقية للأحداث بإنهاء تلك العملية قبل أن
+/// نتابع الدفع الزمني الوهمي المعتاد.
+Future<void> _flushRealIo(WidgetTester tester) async {
+  await tester.runAsync(() async {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+  });
+}
+
 /// يغلق نافذة تنبيه السلامة إن ظهرت (تظهر تلقائياً أول مرة فقط لكل settings).
 Future<void> _dismissSafetyDialogIfShown(WidgetTester tester) async {
   final continueButton = find.text('فهمت، متابعة');
@@ -80,6 +91,7 @@ void main() {
     // نافذة تسمية المشروع يجب أن تظهر
     expect(find.text('إنشاء'), findsOneWidget);
     await tester.tap(find.text('إنشاء'));
+    await _flushRealIo(tester);
     await _settle(tester);
     expect(tester.takeException(), isNull);
 
@@ -104,6 +116,7 @@ void main() {
     await tester.tap(find.text('مشروع جديد'));
     await _settle(tester);
     await tester.tap(find.text('إنشاء'));
+    await _flushRealIo(tester);
     await _settle(tester);
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
