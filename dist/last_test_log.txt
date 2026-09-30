@@ -1,10 +1,10 @@
 00:00 +0: loading /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart
-00:00 +0: /home/runner/work/Ubuntu/Ubuntu/app/test/widget_test.dart: smoke test: التطبيق يُبنى دون رمي استثناء عند الإقلاع
-00:00 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
-00:01 +2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
-00:02 +3: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء
-00:02 +4: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء
-00:02 +5: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء
-00:03 +6: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
-00:03 +7: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)
-00:03 +8: All tests passed!
+00:00 +0: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: يُقلع التطبيق ويعرض الشاشة الرئيسية دون أخطاء
+00:00 +1: /home/runner/work/Ubuntu/Ubuntu/app/test/widget_test.dart: smoke test: التطبيق يُبنى دون رمي استثناء عند الإقلاع
+00:00 +2: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: إنشاء مشروع جديد يفتح محرر الدائرة دون أخطاء، وزر الرجوع يعمل
+00:01 +3: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: فتح النوافذ المنزلقة الثلاثة (مكونات/أسلاك/أدوات) دون أخطاء
+00:01 +4: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة التعلّم والتحديات تُفتح وتُغلق دون أخطاء
+00:01 +5: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة محاكاة الأعطال تُفتح وتُغلق دون أخطاء
+00:01 +6: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: شاشة الإعدادات تُفتح وتعرض خيارات ألوان الأسلاك دون أخطاء
+00:01 +7: /home/runner/work/Ubuntu/Ubuntu/app/test/app_flow_test.dart: استيراد ملف غير صالح لا يُسقط التطبيق (معالجة أخطاء دفاعية)
+00:01 +8: All tests passed!
