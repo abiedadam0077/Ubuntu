@@ -61,7 +61,7 @@ void main() {
     await _settle(tester);
 
     expect(find.text('ElectroSim Pro'), findsWidgets);
-    expect(find.text('مشروع جديد'), findsOneWidget);
+    expect(find.widgetWithText(FloatingActionButton, 'مشروع جديد'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -70,7 +70,7 @@ void main() {
     await _settle(tester);
 
     // زر "مشروع جديد +"
-    await tester.tap(find.text('مشروع جديد'));
+    await tester.tap(find.widgetWithText(FloatingActionButton, 'مشروع جديد'));
     await _settle(tester);
     expect(tester.takeException(), isNull);
 
@@ -91,14 +91,14 @@ void main() {
     await tester.tap(find.byIcon(Icons.arrow_back).first);
     await _settle(tester);
     expect(tester.takeException(), isNull);
-    expect(find.text('مشروع جديد'), findsOneWidget);
+    expect(find.widgetWithText(FloatingActionButton, 'مشروع جديد'), findsOneWidget);
   });
 
   testWidgets('فتح مكتبة المكونات داخل المحرر يرسم كل الكتالوج دون أخطاء', (tester) async {
     await tester.pumpWidget(_buildTestApp());
     await _settle(tester);
 
-    await tester.tap(find.text('مشروع جديد'));
+    await tester.tap(find.widgetWithText(FloatingActionButton, 'مشروع جديد'));
     await _settle(tester);
     await tester.tap(find.widgetWithText(ElevatedButton, 'إنشاء'));
     await _settle(tester);
