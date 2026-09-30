@@ -99,6 +99,14 @@ void main() {
     await _dismissSafetyDialogIfShown(tester);
     expect(tester.takeException(), isNull);
 
+    // تشخيص: إن لم نصل لشاشة المحرر بعد، نطبع كل النصوص الظاهرة حالياً
+    // لمعرفة أين توقّف التنقّل فعلياً (بدل تخمين السبب بلا دليل).
+    if (find.byIcon(Icons.play_arrow).evaluate().isEmpty) {
+      final texts = tester.widgetList<Text>(find.byType(Text)).map((t) => t.data).toList();
+      // ignore: avoid_print
+      print('DEBUG لم نصل لشاشة المحرر بعد. النصوص الظاهرة حالياً: $texts');
+    }
+
     // يجب أن نكون الآن داخل شاشة المحرر (شريط أدوات المحاكاة: تشغيل)
     expect(find.byIcon(Icons.play_arrow), findsWidgets);
 
