@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _importProject() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.any);
+    final result = await FilePicker.pickFiles(type: FileType.any);
     if (result == null || result.files.single.path == null) return;
     try {
       await widget.repository.importFromFile(result.files.single.path!);
