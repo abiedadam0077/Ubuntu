@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nexa_bg_deep">#FF060913</color>
+    <color name="nexa_bg_surface">#FF0B1022</color>
+    <color name="nexa_neon_blue">#FF00E5FF</color>
+    <color name="nexa_neon_purple">#FF8B5CF6</color>
+</resources>

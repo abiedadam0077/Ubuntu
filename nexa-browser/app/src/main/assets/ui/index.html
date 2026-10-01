@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#060913">
+  <meta name="color-scheme" content="dark">
+  <title>NexaBrowser</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/overlays.css">
+</head>
+<body data-wallpaper="cyber-neon">
+  <main id="app-viewport" class="app-viewport">
+    <!-- HOME -->
+    <section id="screen-home" class="screen-view active">
+      <header class="home-top-bar">
+        <div class="brand-cluster">
+          <div class="brand-logo-wrap"><img src="logo.png" alt="NexaBrowser"></div>
+          <div>
+            <div class="brand-title">NexaBrowser</div>
+            <div class="brand-subtitle"><span id="engine-status-dot" class="status-dot"></span><span data-i18n="tagline">متصفح الجيل القادم السريع والآمن</span></div>
+          </div>
+        </div>
+        <div class="status-pills">
+          <button id="home-incognito-btn" class="pill-btn incognito-pill" data-action="toggle-incognito" aria-label="Incognito">
+            <span data-icon="incognito"></span><span data-i18n="incognito">تصفح خفي</span>
+          </button>
+          <button class="icon-circle-btn" data-action="open-wallpaper" aria-label="Wallpaper" title="تخصيص الخلفية"><span data-icon="sparkles"></span></button>
+        </div>
+      </header>
+
+      <div class="omnibox-hero" role="search">
+        <button class="engine-selector-btn" data-action="choose-engine" aria-label="Search engine">G</button>
+        <input id="home-search-input" class="omnibox-input" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث أو أدخل عنوان موقع ويب...">
+        <div class="omnibox-actions">
+          <button class="icon-circle-btn" data-action="qr-scan" aria-label="QR Scanner" title="ماسح QR"><span data-icon="qr"></span></button>
+          <button class="icon-circle-btn" data-action="voice-search" aria-label="Voice Search" title="بحث صوتي"><span data-icon="mic"></span></button>
+          <button class="icon-circle-btn neon-accent" data-action="submit-home-search" aria-label="Go"><span data-icon="arrow-go"></span></button>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="quickShortcuts">الاختصارات السريعة</span></h2>
+        <button id="shortcuts-edit-btn" class="section-action-btn" data-action="toggle-edit-shortcuts"><span data-i18n="editShortcuts">ترتيب وتعديل</span></button>
+      </div>
+      <div id="shortcuts-grid" class="shortcuts-grid"></div>
+      <button class="add-shortcut-btn" data-action="add-shortcut"><span data-icon="plus"></span><span data-i18n="addShortcut">+ إضافة اختصار</span></button>
+
+      <section id="home-privacy-card" class="glass-card privacy-pulse-card">
+        <div><div class="pulse-stat-val" id="home-ads-blocked">0</div><div class="pulse-stat-lbl" data-i18n="adsBlocked">إعلان محجوب</div></div>
+        <div><div class="pulse-stat-val purple" id="home-trackers-blocked">0</div><div class="pulse-stat-lbl" data-i18n="trackersBlocked">متعقب موقوف</div></div>
+        <div><div class="pulse-stat-val green" id="home-data-saved">0 KB</div><div class="pulse-stat-lbl" data-i18n="dataSaved">بيانات تم توفيرها</div></div>
+      </section>
+
+      <div class="section-header">
+        <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="favoritesTitle">المفضلة Favorites</span></h2>
+        <button class="section-action-btn" data-action="navigate" data-screen="bookmarks"><span data-icon="arrow-left-small"></span></button>
+      </div>
+      <div id="favorites-strip" class="horizontal-scroll"></div>
+
+      <div class="section-header">
+        <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="recentSitesTitle">المواقع الأخيرة</span></h2>
+        <button class="section-action-btn" data-action="clear-recents"><span data-i18n="clearRecents">مسح السجل</span></button>
+      </div>
+      <div id="home-recents" class="recent-list"></div>
+      <div class="home-footer-note"><span data-icon="shield-check"></span><span id="home-privacy-note">بياناتك محفوظة على هذا الجهاز — دون مزامنة خفية</span></div>
+    </section>
+
+    <!-- SEARCH -->
+    <section id="screen-search" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">NEXA SEARCH</div><h1 data-i18n="navSearch">البحث</h1><p data-i18n="searchSubtitle">ابدأ بحثًا خاصًا أو افتح موقعًا مباشرة</p></div><div class="heading-icon"><span data-icon="search"></span></div></div>
+      <div class="omnibox-hero search-page-omnibox">
+        <button class="engine-selector-btn" data-action="choose-engine">G</button>
+        <input id="search-page-input" class="omnibox-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث أو أدخل عنوان موقع ويب...">
+        <div class="omnibox-actions"><button class="icon-circle-btn" data-action="voice-search"><span data-icon="mic"></span></button><button class="icon-circle-btn neon-accent" data-action="submit-search-page"><span data-icon="arrow-go"></span></button></div>
+      </div>
+      <div class="glass-card search-engine-card" id="search-engine-summary"></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="searchTools">بحث سريع</span></h2></div>
+      <div class="search-shortcut-grid">
+        <button class="search-shortcut" data-action="search-prefix" data-prefix="site:developer.mozilla.org"><span class="search-shortcut-icon">⌘</span><span>مراجع الويب</span></button>
+        <button class="search-shortcut" data-action="search-prefix" data-prefix=""><span class="search-shortcut-icon">🌐</span><span>بحث ويب</span></button>
+        <button class="search-shortcut" data-action="search-prefix" data-prefix="filetype:pdf"><span class="search-shortcut-icon">PDF</span><span>ملفات PDF</span></button>
+        <button class="search-shortcut" data-action="search-prefix" data-prefix="site:github.com"><span class="search-shortcut-icon">⌥</span><span>GitHub</span></button>
+      </div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="searchHistory">عمليات البحث الأخيرة</span></h2><button class="section-action-btn" data-action="clear-search-history">مسح</button></div>
+      <div id="search-history-list" class="recent-list"></div>
+    </section>
+
+    <!-- TABS -->
+    <section id="screen-tabs" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">SMART TAB SESSIONS</div><h1 data-i18n="tabsTitle">مدير التبويبات</h1><p id="tabs-subtitle">0 تبويب مفتوح · إدارة ذاكرة ذكية</p></div><button class="heading-icon heading-icon-button" data-action="new-tab"><span data-icon="plus"></span></button></div>
+      <div class="tabs-toolbar">
+        <div class="segmented-control"><button id="tab-filter-normal" class="segment active" data-action="tab-filter" data-filter="normal"><span data-i18n="normalTabs">التبويبات العادية</span><b id="normal-tab-count">0</b></button><button id="tab-filter-private" class="segment" data-action="tab-filter" data-filter="private"><span data-i18n="privateTabs">التبويبات الخاصة</span><b id="private-tab-count">0</b></button></div>
+        <div class="tabs-toolbar-actions"><button class="icon-circle-btn compact-btn" data-action="toggle-tabs-view" aria-label="Toggle grid/list"><span data-icon="list"></span></button><button class="text-action danger-action" data-action="close-all-tabs" data-i18n="closeAllTabs">إغلاق الكل</button></div>
+      </div>
+      <div class="ram-saver-banner"><span data-icon="memory"></span><span data-i18n="ramSaverBadge">مدير الذاكرة الذكي جاهز</span><span id="ram-stats" class="ram-stats">0 نشط</span></div>
+      <div id="tabs-grid" class="tabs-grid"></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="recentlyClosed">التبويبات المغلقة مؤخرًا</span></h2></div>
+      <div id="recently-closed-list" class="recent-list"></div>
+    </section>
+
+    <!-- DOWNLOADS -->
+    <section id="screen-downloads" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">NATIVE ANDROID DOWNLOAD MANAGER</div><h1 data-i18n="downloadsTitle">مدير التنزيلات</h1><p data-i18n="downloadsSubtitle">تنزيلات فعلية عبر Android DownloadManager</p></div><button class="heading-icon heading-icon-button" data-action="new-download"><span data-icon="plus"></span></button></div>
+      <div class="downloads-summary glass-card"><div><strong id="downloads-count">0</strong><span data-i18n="downloadedFiles">ملف</span></div><div><strong id="downloads-total-size">0 B</strong><span data-i18n="downloadedSize">إجمالي الحجم</span></div><div><strong id="downloads-active">0</strong><span data-i18n="activeDownloads">نشط</span></div></div>
+      <p class="fine-print download-note" data-i18n="downloadControlNote">الإيقاف المؤقت والاستئناف غير مدعومين من Android DownloadManager؛ يمكن الإلغاء وإعادة المحاولة.</p>
+      <div class="chips-row" id="downloads-filters"><button class="chip-pill active" data-action="download-filter" data-filter="all" data-i18n="dlAll">الكل</button><button class="chip-pill" data-action="download-filter" data-filter="apk" data-i18n="dlApk">APK</button><button class="chip-pill" data-action="download-filter" data-filter="zip" data-i18n="dlZip">ZIP</button><button class="chip-pill" data-action="download-filter" data-filter="images" data-i18n="dlImages">صور</button><button class="chip-pill" data-action="download-filter" data-filter="videos" data-i18n="dlVideos">فيديو</button><button class="chip-pill" data-action="download-filter" data-filter="documents" data-i18n="dlDocs">مستندات</button></div>
+      <div id="downloads-list" class="downloads-list"></div>
+    </section>
+
+    <!-- EXTENSIONS -->
+    <section id="screen-extensions" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">WEBEXTENSIONS · CONTENT SCRIPTS</div><h1 data-i18n="extensionsTitle">متجر الإضافات</h1><p data-i18n="extensionsSubtitle">إضافات محلية خفيفة تعمل داخل WebView</p></div><button class="heading-icon" data-action="show-extension-info"><span data-icon="puzzle"></span></button></div>
+      <div class="search-field-wrap"><span data-icon="search"></span><input id="extension-search" type="search" data-i18n-placeholder="extSearchPlaceholder" placeholder="ابحث في الإضافات..."></div>
+      <div id="extension-categories" class="chips-row"></div>
+      <div id="extension-featured-wrap"><div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="extFeatured">إضافات مميزة</span></h2></div><div id="extension-featured" class="ext-card-list"></div></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span id="extension-list-heading" data-i18n="extPopular">الأكثر شعبية</span></h2></div>
+      <div id="extension-list" class="ext-card-list"></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="customUserscriptTitle">سكربتات المستخدم</span></h2></div>
+      <div class="glass-card userscript-card"><div><strong data-i18n="userscriptRunner">مشغل Userscript محلي</strong><p data-i18n="userscriptHint">يعمل على صفحات الويب داخل NexaBrowser فقط</p></div><button class="btn-neon" data-action="edit-userscript"><span data-i18n="editScript">تحرير</span></button></div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section id="screen-privacy" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">ON-DEVICE PRIVACY CONTROLS</div><h1 data-i18n="privacyTitle">الخصوصية والأمان</h1><p data-i18n="privacySubtitle">حماية تعمل محليًا على هذا الجهاز</p></div><div class="heading-icon privacy-heading-icon"><span data-icon="shield-check"></span></div></div>
+      <div class="privacy-hero-card glass-card"><div class="privacy-hero-emblem"><span data-icon="shield-check"></span></div><div><strong data-i18n="privacyShield">درع الخصوصية نشط</strong><p data-i18n="privacyShieldSub">حظر طلبات إعلانات ومتعقبات معروفة محليًا</p></div></div>
+      <div class="privacy-metrics-grid"><div class="metric-card"><strong id="privacy-ads-stat">0</strong><span data-i18n="adsBlocked">إعلانات محجوبة</span></div><div class="metric-card purple-metric"><strong id="privacy-trackers-stat">0</strong><span data-i18n="trackersBlocked">متعقبات محجوبة</span></div><div class="metric-card green-metric"><strong id="privacy-saved-stat">0 KB</strong><span data-i18n="dataSaved">بيانات محفوظة</span></div></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="protectionControls">عناصر الحماية</span></h2></div>
+      <div class="settings-card glass-card">
+        <div class="setting-row"><div class="setting-icon blue-icon"><span data-icon="adblock"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="adBlockToggle">حجب الإعلانات</div><div class="setting-sub" data-i18n="adBlockSub">قائمة محلية من نطاقات إعلانية معروفة</div></div><button class="nexa-switch" data-action="toggle-privacy" data-key="adBlockEnabled" aria-label="Ad blocker"></button></div>
+        <div class="setting-row"><div class="setting-icon purple-icon"><span data-icon="radar"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="trackerToggle">منع المتعقبات</div><div class="setting-sub" data-i18n="trackerSub">طلبات الطرف الثالث ومعلمات UTM الشائعة</div></div><button class="nexa-switch" data-action="toggle-privacy" data-key="trackerBlockEnabled"></button></div>
+        <div class="setting-row"><div class="setting-icon green-icon"><span data-icon="cookie"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="thirdPartyCookies">حظر Cookies الطرف الثالث</div><div class="setting-sub" data-i18n="thirdPartyCookiesSub">يُطبّق عبر سياسة Android WebView</div></div><button class="nexa-switch" data-action="toggle-setting" data-key="blockThirdPartyCookies"></button></div>
+        <div class="setting-row"><div class="setting-icon amber-icon"><span data-icon="history"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="noHistory">عدم حفظ سجل التصفح</div><div class="setting-sub" data-i18n="noHistorySub">التبويبات الخاصة لا تُضاف للسجل المحلي</div></div><button class="nexa-switch" data-action="toggle-privacy" data-key="doNotSaveHistory"></button></div>
+        <div class="setting-row"><div class="setting-icon red-icon"><span data-icon="alert"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="safeBrowsing">فحص محلي محدود لعناوين URL</div><div class="setting-sub" data-i18n="safeBrowsingSub">لا توجد خدمة سمعة مواقع أو حماية تصيد سحابية متصلة</div></div><button class="nexa-switch" data-action="toggle-privacy" data-key="safeBrowsingEnabled"></button></div>
+      </div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="whitelistTitle">المواقع المستثناة</span></h2><button class="section-action-btn" data-action="add-whitelist">+ إضافة</button></div>
+      <div id="whitelist-list" class="chips-row whitelist-chips"></div>
+      <button class="danger-wide-btn" data-action="clear-browsing-data"><span data-icon="trash"></span><span data-i18n="clearBrowsingData">مسح بيانات التصفح</span></button>
+      <p class="fine-print" data-i18n="localBlocklistNote">قوائم الحجب مدمجة محليًا ومحدودة؛ لا تُغني عن خدمة Safe Browsing أو قاعدة قوائم تحديثية.</p>
+    </section>
+
+    <!-- VPN -->
+    <section id="screen-vpn" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">VPN SERVICE ARCHITECTURE</div><h1 data-i18n="vpnTitle">بوابة الخصوصية و VPN</h1><p data-i18n="vpnSubtitle">شفافية كاملة حول حالة النفق</p></div><div class="heading-icon"><span data-icon="globe"></span></div></div>
+      <div class="vpn-ring-wrap"><button id="vpn-power" class="vpn-power-btn" data-action="vpn-connect"><span data-icon="power"></span><strong data-i18n="vpnUnavailable">غير متصل</strong><small data-i18n="vpnTapDetails">عرض تفاصيل البنية</small></button><div class="vpn-status-caption" id="vpn-status-caption">لا يوجد مزود VPN مهيأ</div></div>
+      <div class="vpn-state-banner"><span data-icon="info"></span><div><strong data-i18n="vpnArchTitle">لا يوجد نفق VPN فعّال</strong><p data-i18n="vpnArchNotice">البنية جاهزة للربط؛ يلزم مزود وخادم VPN حقيقيان. لن يدّعي التطبيق إخفاء عنوان IP.</p></div></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="vpnServers">مناطق الخوادم</span></h2></div>
+      <div id="vpn-servers-list" class="server-list"></div>
+      <div class="glass-card doh-card"><div class="setting-icon cyan-icon"><span data-icon="lock"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="dohTitle">DNS مشفر (DoH)</div><div class="setting-sub" data-i18n="dohSub">إعداد محفوظ فقط؛ لا يُستخدم حتى تهيئة مزود</div></div><button class="text-action" data-action="configure-vpn" data-i18n="configure">تهيئة</button></div>
+    </section>
+
+    <!-- BOOKMARKS / HISTORY -->
+    <section id="screen-bookmarks" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">LOCAL LIBRARY</div><h1 data-i18n="bookmarksTitle">المحفوظات والسجل</h1><p data-i18n="bookmarksSubtitle">إشارات مرجعية وسجل محلي على الجهاز</p></div><button class="heading-icon heading-icon-button" data-action="bookmark-current"><span data-icon="bookmark"></span></button></div>
+      <div class="segmented-control library-segments"><button class="segment active" data-action="library-tab" data-tab="bookmarks" data-i18n="bookmarksTab">الإشارات المرجعية</button><button class="segment" data-action="library-tab" data-tab="history" data-i18n="historyTab">السجل</button><button class="segment" data-action="library-tab" data-tab="closed" data-i18n="closedTab">مغلقة</button></div>
+      <div id="bookmark-folders" class="chips-row"></div>
+      <div id="library-list" class="recent-list"></div>
+      <div class="library-export-row"><button class="secondary-btn" data-action="export-bookmarks"><span data-icon="download"></span><span data-i18n="exportBookmarks">تصدير JSON</span></button><button class="secondary-btn" data-action="import-bookmarks"><span data-icon="upload"></span><span data-i18n="importBookmarks">استيراد JSON</span></button></div>
+      <input type="file" id="bookmark-import-input" accept="application/json,.json" hidden>
+    </section>
+
+    <!-- PASSWORDS -->
+    <section id="screen-passwords" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">ANDROID KEYSTORE · AES-256-GCM</div><h1 data-i18n="passwordsTitle">خزنة كلمات المرور المشفرة</h1><p data-i18n="passwordsSubtitle">تُخزن مشفرة محليًا على هذا الجهاز</p></div><div class="heading-icon privacy-heading-icon"><span data-icon="key"></span></div></div>
+      <div id="vault-locked-panel" class="vault-locked-panel glass-card"><div class="vault-lock-emblem"><span data-icon="lock"></span></div><h2 data-i18n="vaultLocked">الخزنة مقفلة</h2><p data-i18n="vaultLockedSub">لا تُرسل بيانات الدخول إلى أي خادم.</p><button class="btn-neon vault-unlock-button" data-action="unlock-vault" data-i18n="unlockVaultBtn">فتح الخزنة المشفرة</button><div class="vault-security-caption"><span data-icon="shield-check"></span><span data-i18n="vaultCryptoNote">AES-256-GCM · Android KeyStore</span></div></div>
+      <div id="vault-open-panel" hidden><div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="savedCredentials">بيانات الدخول المحفوظة</span></h2><button class="section-action-btn" data-action="add-credential">+ إضافة</button></div><div id="credentials-list" class="recent-list"></div><button class="secondary-btn vault-lock-button" data-action="lock-vault"><span data-icon="lock"></span><span data-i18n="lockVault">قفل الخزنة</span></button></div>
+      <div class="security-info-card"><span data-icon="info"></span><span data-i18n="passwordManagerLimit">التعبئة التلقائية تتم فقط بعد تأكيدك. لا توجد مزامنة لكلمات المرور في هذا الإصدار.</span></div>
+    </section>
+
+    <!-- READING MODE -->
+    <section id="screen-reader" class="screen-view">
+      <div class="page-heading reader-heading"><div><div class="eyebrow">DISTRACTION-FREE READING</div><h1 data-i18n="readerTitle">وضع القراءة</h1><p id="reader-origin" data-i18n="readerOrigin">استخرج النص من الصفحة المفتوحة</p></div><button class="heading-icon" data-action="reader-save"><span data-icon="bookmark"></span></button></div>
+      <div class="reader-controls glass-card"><div class="reader-font-controls"><button class="reader-control-btn" data-action="reader-font" data-delta="-1">A−</button><span id="reader-font-size">18 px</span><button class="reader-control-btn" data-action="reader-font" data-delta="1">A+</button></div><select id="reader-font-family" aria-label="Font"><option value="system-ui">System UI</option><option value="serif">Serif</option><option value="sans-serif">Sans</option></select><div class="reader-theme-switch"><button class="reader-theme-dot active" data-action="reader-theme" data-theme="dark" aria-label="Dark"></button><button class="reader-theme-dot sepia" data-action="reader-theme" data-theme="sepia" aria-label="Sepia"></button><button class="reader-theme-dot light" data-action="reader-theme" data-theme="light" aria-label="Light"></button></div></div>
+      <article id="reader-article" class="reader-surface" data-theme="dark"></article>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="savedOfflineArticles">مقالات محفوظة Offline</span></h2></div><div id="saved-articles-list" class="recent-list"></div>
+    </section>
+
+    <!-- SYNC -->
+    <section id="screen-sync" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">OPTIONAL END-TO-END ENCRYPTED SYNC</div><h1 data-i18n="syncTitle">المزامنة والأجهزة</h1><p data-i18n="syncSubtitle">المزامنة السحابية متوقفة افتراضيًا</p></div><div class="heading-icon"><span data-icon="sync"></span></div></div>
+      <div class="sync-status-card glass-card"><div class="sync-orbit"><span data-icon="sync"></span></div><strong data-i18n="syncLocalOnly">بياناتك محلية فقط</strong><p data-i18n="syncNoBackend">لم يتم إعداد خادم مزامنة. لا يتم رفع بياناتك.</p><button class="btn-neon" data-action="configure-sync" data-i18n="configureSync">إعداد خادم مزامنة</button></div>
+      <div class="section-header"><h2 class="section-title"><span class="accent-dot"></span><span data-i18n="syncSelection">اختر ما ترغب بمزامنته لاحقًا</span></h2></div>
+      <div class="settings-card glass-card"><div class="setting-row"><div class="setting-copy"><div class="setting-title" data-i18n="syncTabs">التبويبات</div></div><button class="nexa-switch" data-action="toggle-sync" data-key="syncTabs"></button></div><div class="setting-row"><div class="setting-copy"><div class="setting-title" data-i18n="syncBookmarks">الإشارات المرجعية</div></div><button class="nexa-switch" data-action="toggle-sync" data-key="syncBookmarks"></button></div><div class="setting-row"><div class="setting-copy"><div class="setting-title" data-i18n="syncHistory">السجل</div></div><button class="nexa-switch" data-action="toggle-sync" data-key="syncHistory"></button></div><div class="setting-row"><div class="setting-copy"><div class="setting-title" data-i18n="syncPasswords">كلمات المرور — تشفير طرفي</div><div class="setting-sub" data-i18n="syncPasswordsSub">متوقف حتى إعداد خادم موثوق</div></div><button class="nexa-switch" data-action="toggle-sync" data-key="syncPasswordsE2EE"></button></div></div>
+      <div class="sync-devices-empty"><span data-icon="devices"></span><p data-i18n="syncDevicesEmpty">لا توجد أجهزة مرتبطة</p></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="screen-settings" class="screen-view">
+      <div class="page-heading"><div><div class="eyebrow">NEXABROWSER CONTROL CENTER</div><h1 data-i18n="settingsTitle">الإعدادات</h1><p data-i18n="settingsSubtitle">تحكم واضح ببياناتك وتجربتك</p></div><button class="heading-icon" data-action="about"><span data-icon="settings"></span></button></div>
+      <div class="settings-section-label" data-i18n="generalSection">عام</div>
+      <div class="settings-card glass-card">
+        <div class="setting-row"><div class="setting-icon blue-icon"><span data-icon="search"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="defaultSearchEngine">محرك البحث الافتراضي</div><div class="setting-sub" id="settings-engine-name">Google</div></div><button class="row-chevron" data-action="choose-engine"><span data-icon="chevron"></span></button></div>
+        <div class="setting-row"><div class="setting-icon purple-icon"><span data-icon="home"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="homepageSetting">الصفحة الرئيسية</div><div class="setting-sub" id="homepage-setting-value">NexaBrowser Home</div></div><button class="row-chevron" data-action="set-homepage"><span data-icon="chevron"></span></button></div>
+        <div class="setting-row"><div class="setting-icon green-icon"><span data-icon="globe"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="languageSetting">اللغة</div><div class="setting-sub" id="language-setting-name">العربية · English</div></div><button class="row-chevron" data-action="toggle-language"><span data-icon="chevron"></span></button></div>
+        <div class="setting-row"><div class="setting-icon amber-icon"><span data-icon="download"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="downloadLocation">مجلد التنزيلات</div><div class="setting-sub" data-i18n="androidDownloadFolder">مجلد Downloads العام في Android</div></div><span class="read-only-tag" data-i18n="systemManaged">يديره النظام</span></div>
+      </div>
+      <div class="settings-section-label" data-i18n="appearanceSection">المظهر</div>
+      <div class="settings-card glass-card">
+        <div class="setting-row"><div class="setting-icon purple-icon"><span data-icon="sparkles"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="wallpaperSetting">خلفية الصفحة الرئيسية</div><div class="setting-sub" data-i18n="wallpaperSettingSub">تدرجات Neon داكنة</div></div><button class="row-chevron" data-action="open-wallpaper"><span data-icon="chevron"></span></button></div>
+        <div class="setting-row"><div class="setting-icon cyan-icon"><span data-icon="text"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="fontSizeSetting">تكبير نص صفحات الويب</div><div class="setting-sub" id="font-size-setting-value">100%</div></div><div class="inline-stepper"><button data-action="font-scale" data-delta="-10">−</button><button data-action="font-scale" data-delta="10">+</button></div></div>
+      </div>
+      <div class="settings-section-label" data-i18n="tabsSection">التبويبات</div>
+      <div class="settings-card glass-card"><div class="setting-row"><div class="setting-icon blue-icon"><span data-icon="memory"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="autoHibernateSetting">تجميد التبويبات بالخلفية</div><div class="setting-sub" data-i18n="autoHibernateSub">الحد الأقصى خمسة WebView نشطة؛ البقية تنام</div></div><button class="nexa-switch" data-action="toggle-setting" data-key="autoHibernateTabs"></button></div><div class="setting-row"><div class="setting-icon red-icon"><span data-icon="trash"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="closeTabsExit">إغلاق التبويبات عند الخروج</div></div><button class="nexa-switch" data-action="toggle-setting" data-key="closeTabsOnExit"></button></div></div>
+      <div class="settings-section-label" data-i18n="downloadsSection">التنزيلات</div>
+      <div class="settings-card glass-card"><button class="settings-link-row" data-action="navigate" data-screen="downloads"><span class="setting-icon blue-icon"><span data-icon="download"></span></span><span><span data-i18n="downloadsTitle">مدير التنزيلات</span><small class="setting-sub" data-i18n="downloadControlNote">الإيقاف المؤقت غير مدعوم من Android DownloadManager</small></span><span class="row-chevron"><span data-icon="chevron"></span></span></button></div>
+      <div class="settings-section-label" data-i18n="extensionsSection">الإضافات</div>
+      <div class="settings-card glass-card"><button class="settings-link-row" data-action="navigate" data-screen="extensions"><span class="setting-icon cyan-icon"><span data-icon="puzzle"></span></span><span><span data-i18n="extensionsTitle">متجر ومدير الإضافات</span><small class="setting-sub" data-i18n="extensionCompatibility">Content Scripts مدمجة؛ CRX غير مدعوم</small></span><span class="row-chevron"><span data-icon="chevron"></span></span></button></div>
+      <div class="settings-section-label" data-i18n="notificationsSection">الإشعارات والصلاحيات</div>
+      <div class="settings-card glass-card"><button class="settings-link-row" data-action="open-app-settings"><span class="setting-icon amber-icon"><span data-icon="settings"></span></span><span><span data-i18n="androidAppPermissions">أذونات وإشعارات Android</span><small class="setting-sub" data-i18n="permissionsOnDemand">تُطلب الكاميرا والميكروفون عند الحاجة</small></span><span class="row-chevron"><span data-icon="chevron"></span></span></button><div class="setting-row"><div class="setting-icon purple-icon"><span data-icon="bell"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="webNotifications">إشعارات المواقع</div><div class="setting-sub" data-i18n="webNotificationsLimit">غير مفعلة في Android WebView لهذا الإصدار</div></div><span class="read-only-tag" data-i18n="unavailable">غير متاحة</span></div></div>
+      <div class="settings-section-label" data-i18n="syncSection">المزامنة</div>
+      <div class="settings-card glass-card"><button class="settings-link-row" data-action="navigate" data-screen="sync"><span class="setting-icon purple-icon"><span data-icon="sync"></span></span><span><span data-i18n="syncTitle">المزامنة والأجهزة</span><small class="setting-sub" data-i18n="syncLocalOnly">بياناتك محلية فقط</small></span><span class="row-chevron"><span data-icon="chevron"></span></span></button></div>
+      <div class="settings-section-label" data-i18n="securitySection">الأمان والخصوصية</div>
+      <div class="settings-card glass-card"><button class="settings-link-row" data-action="navigate" data-screen="privacy"><span class="setting-icon green-icon"><span data-icon="shield-check"></span></span><span data-i18n="privacyTitle">الخصوصية والأمان</span><span class="row-chevron"><span data-icon="chevron"></span></span></button><button class="settings-link-row" data-action="navigate" data-screen="passwords"><span class="setting-icon purple-icon"><span data-icon="key"></span></span><span data-i18n="passwordsShort">مدير كلمات المرور</span><span class="row-chevron"><span data-icon="chevron"></span></span></button><button class="settings-link-row" data-action="navigate" data-screen="extensions"><span class="setting-icon cyan-icon"><span data-icon="puzzle"></span></span><span data-i18n="extensionsTitle">الإضافات</span><span class="row-chevron"><span data-icon="chevron"></span></span></button></div>
+      <div class="settings-section-label" data-i18n="advancedSection">متقدم</div>
+      <div class="settings-card glass-card"><div class="setting-row"><div class="setting-icon amber-icon"><span data-icon="code"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="javascriptSetting">JavaScript</div><div class="setting-sub" data-i18n="javascriptSub">مفعّل لمواقع الويب · يمكن تعطيله</div></div><button class="nexa-switch" data-action="toggle-javascript"></button></div><div class="setting-row"><div class="setting-icon blue-icon"><span data-icon="desktop"></span></div><div class="setting-copy"><div class="setting-title" data-i18n="userAgentSetting">User-Agent</div><div class="setting-sub" data-i18n="userAgentMobile">Android Mobile</div></div><button class="row-chevron" data-action="toggle-user-agent"><span data-icon="chevron"></span></button></div><button class="settings-link-row" data-action="navigate" data-screen="sync"><span class="setting-icon purple-icon"><span data-icon="sync"></span></span><span data-i18n="syncTitle">المزامنة والأجهزة</span><span class="row-chevron"><span data-icon="chevron"></span></span></button><button class="settings-link-row" data-action="about"><span class="setting-icon blue-icon"><span data-icon="info"></span></span><span data-i18n="aboutApp">حول NexaBrowser · الإصدار 1.0.0</span><span class="row-chevron"><span data-icon="chevron"></span></span></button></div>
+    </section>
+
+    <!-- BROWSER CHROME: Real page contents are rendered by Native Android WebView below this top bar -->
+    <section id="screen-browser" class="screen-view browser-mode-view">
+      <div class="browser-top-bar">
+        <button class="icon-circle-btn compact-btn" data-action="browser-back" aria-label="Back"><span data-icon="back"></span></button>
+        <button class="icon-circle-btn compact-btn" data-action="browser-forward" aria-label="Forward"><span data-icon="forward"></span></button>
+        <div class="browser-url-pill"><span id="browser-security-icon" data-icon="lock"></span><input id="browser-url-input" class="browser-url-input" type="url" autocapitalize="off" autocomplete="off" spellcheck="false"><button class="url-clear-btn" data-action="browser-reload"><span data-icon="reload"></span></button></div>
+        <button class="icon-circle-btn compact-btn" data-action="bookmark-current"><span data-icon="bookmark"></span></button>
+        <button class="icon-circle-btn compact-btn" data-action="open-menu"><span data-icon="more"></span></button>
+        <div id="browser-progress-line" class="browser-progress-line" style="width:0%"></div>
+      </div>
+      <div id="browser-native-placeholder" class="browser-native-placeholder"><div class="placeholder-orbit"><img src="logo.png" alt=""></div><span id="browser-loading-label" data-i18n="pageLoading">جارٍ تحميل الصفحة…</span></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-item active" data-action="navigate" data-screen="home"><span class="nav-icon-box"><span data-icon="home"></span></span><span data-i18n="navHome">الرئيسية</span></button>
+    <button class="nav-item" data-action="navigate" data-screen="search"><span class="nav-icon-box"><span data-icon="search"></span></span><span data-i18n="navSearch">البحث</span></button>
+    <button class="nav-item" data-action="navigate" data-screen="tabs"><span class="nav-icon-box"><span data-icon="layers"></span><span id="nav-tabs-badge" class="nav-badge">1</span></span><span data-i18n="navTabs">التبويبات</span></button>
+    <button class="nav-item" data-action="navigate" data-screen="downloads"><span class="nav-icon-box"><span data-icon="download"></span></span><span data-i18n="navDownloads">التنزيلات</span></button>
+    <button class="nav-item" data-action="open-menu"><span class="nav-icon-box"><span data-icon="menu"></span></span><span data-i18n="navMenu">القائمة</span></button>
+  </nav>
+
+  <div id="sheet-backdrop" class="sheet-backdrop" role="presentation"><section id="bottom-sheet" class="bottom-sheet" role="dialog" aria-modal="true"><div class="sheet-handle"></div><div id="sheet-content"></div></section></div>
+  <div id="toast" class="nexa-toast" role="status" aria-live="polite"></div>
+  <input type="file" id="file-capture-input" accept="image/*" hidden>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/i18n-extra.js"></script>
+  <script src="js/extensions-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

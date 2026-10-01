@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.nexabrowser.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.nexabrowser.app"
+        minSdk 23
+        targetSdk 34
+        versionCode 100
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Pure Android Framework browser stack + the small ZXing core decoder for real QR scanning.
+    // No Play Services, ads, cloud telemetry, or WebExtension store dependencies.
+    implementation 'com.google.zxing:core:3.5.3'
+}

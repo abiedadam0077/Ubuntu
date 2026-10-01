@@ -1,0 +1,14 @@
+# Gradle / Android build outputs
+.gradle/
+build/
+app/build/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.jks
+*.keystore
+*.keystore.tmp
+captures/
+.externalNativeBuild/
+.cxx/
