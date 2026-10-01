@@ -17,7 +17,7 @@ cd nexa-browser
 
 ### تنزيل APK من GitHub Actions
 
-يدعم المشروع workflow باسم **Build NexaBrowser APK**. بعد دفع التغييرات إلى فرع جلسة Arena، يبدأ بناء APK تلقائيًا ويرفعه كـ Artifact. تشغيل workflow يدويًا ينشر كذلك إصدارًا باسم `nexa-v1.0.0` مع الملف `NexaBrowser.apk`.
+يدعم المشروع workflow باسم **Build NexaBrowser APK**. بعد دفع التغييرات إلى فرع جلسة Arena، يبدأ بناء APK تلقائيًا؛ وبعد نجاحه يُرفع كـ Artifact ويُنشر إصدار `nexa-v1.0.0` مع الملف `NexaBrowser.apk` على GitHub Releases. يمكن أيضًا تشغيل workflow يدويًا لإعادة البناء والتحديث.
 
 نسخة CI موقعة بمفتاح تطوير لتسهيل التثبيت والاختبار؛ ليست توقيع متجر Google Play أو مفتاح تحديث إنتاجي. لا تُعد استخدام مفتاح تطوير عام لإصدار تجاري.
 

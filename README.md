@@ -4,4 +4,4 @@
 
 - شرح VPS: [README-VPS.md](README-VPS.md)
 - تطبيق NexaBrowser وبناؤه وحدوده التقنية: [nexa-browser/README.md](nexa-browser/README.md)
-- APK: يُبنى عبر GitHub Actions workflow باسم **Build NexaBrowser APK** عند الدفع إلى فرع الجلسة، ويمكن تنزيله من Artifact أو إصدار `nexa-v1.0.0` بعد تشغيل workflow يدويًا.
+- APK: يُبنى عبر GitHub Actions workflow باسم **Build NexaBrowser APK** عند الدفع إلى فرع الجلسة. بعد نجاح البناء، يُرفع كـ Artifact ويُنشر إصدار `nexa-v1.0.0` على GitHub Releases.
